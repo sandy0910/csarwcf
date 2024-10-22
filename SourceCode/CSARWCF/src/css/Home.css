@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+
+/* Global styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Logo placed in the top-left corner */
+.logo {
+  position: absolute;
+  top: 20px; /* Adjust distance from the top */
+  left: 20px; /* Adjust distance from the left */
+  width: 150px; /* Adjust size of the logo */
+  height: auto;
+  z-index: 1000; /* Ensure logo appears on top */
+}
+
+.header-text img {
+  height: auto;
+  width: 50%;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 1.8rem;
+}
+
+/* Carousel Container */
+.carousel-container {
+  width: 100%;
+  margin: 0% auto;
+  position: relative; /* Set relative positioning for overlay and logo */
+}
+
+.carousel-container .carousel .slide img {
+  height: 600px; /* Adjust the height of the carousel images */
+  object-fit: cover;
+}
+
+/* Navbar */
+.navbar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar li {
+  display: inline;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+}
+
+.navbar a:hover {
+  background-color: #0056b3;
+}
+
+/* Search Bar Overlay */
+.search-bar-overlay {
+  background-color: white;
+  padding: 5%;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%; /* Adjust to position the search bar lower on the carousel */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.search-bar-overlay form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Container for From, To, Dates, Travelers, and Class */
+.search-bar-overlay .form-field {
+  display: flex;
+  flex-direction: column;
+  width: 20%; /* Adjust this width based on layout preferences */
+}
+
+.search-bar-overlay .form-field div {
+  margin-bottom: 15px;
+}
+
+.search-bar-overlay .form-field div select,
+.search-bar-overlay .form-field div input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.search-bar-overlay .form-field label {
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+/* One-way, Round-trip, Multi-city radio buttons */
+.search-options {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.search-options input[type="radio"] {
+  margin-right: 5px;
+}
+
+/* Travelers and Class Section */
+.travelers-class {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.travelers-class div select {
+  width: 100%; /* Ensure it takes full width inside the flex container */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Search Button */
+.search-bar-overlay button {
+  background-color: rgb(23, 159, 208);
+  color: white;
+  padding: 8px 20px;
+  max-height: 50px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.3rem;
+}
+
+.search-bar-overlay button:hover {
+  background-color: #0056b3;
+}
+
+/* Input Group Styling */
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.input-group span{
+  margin-top: 20%;
+  padding: 10px;
+}
+
+.input-group div input,
+.input-group div select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Special styling for dates */
+.input-group div input[type="date"] {
+  padding: 10px;
+  color: #555;
+}
+
+.input-group div input[type="number"] {
+  padding: 10px;
+  text-align: right; /* Makes number fields look cleaner */
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .search-bar-overlay form {
+    flex-direction: column;
+  }
+
+  .search-bar-overlay .form-field,
+  .search-bar-overlay select,
+  .search-bar-overlay input[type="date"],
+  .search-bar-overlay input[type="time"],
+  .travelers-class div select,
+  .search-bar-overlay button {
+    width: 100%;
+  }
+
+  .input-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
