@@ -205,8 +205,13 @@ h2 {
 
 /* Responsive design */
 @media (max-width: 768px) {
+  .search-bar-overlay{
+    margin-top: 20%;
+  }
+
   .search-bar-overlay form {
     flex-direction: column;
+    margin: 10% 0;
   }
 
   .search-bar-overlay .form-field,

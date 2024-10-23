@@ -27,22 +27,28 @@ router.get('/airDetails', (req, res) => {
 
 // Flight Search API
 router.get('/flight-search', (req, res) => {
-  const { from, to, date } = req.query;
+  const { from, to, departureDate, classID } = req.query;
 
   // Prepare SQL query
   const sql = `
-    SELECT * FROM flight
-    WHERE from = ?, to = ?, DATE(departure_dt) = ?
+    SELECT * FROM flight f, cabinclass c WHERE
+     f.depart_airport_id = ? 
+     AND f.arrival_airport_id = ? 
+     AND DATE(f.departure_dt) = ? 
+     AND c.class_id = ?
+     AND f.flight_id = c.flight_id
+     AND status = 1;
   `;
 
   // Execute SQL query
-  connection.query(sql, [from, to, date], (error, results) => {
+  connection.query(sql, [from, to, departureDate, classID], (error, results) => {
     if (error) {
       console.error('Error fetching flights:', error);
       return res.status(500).json({ message: 'Internal Server Error' });
     }
 
     if (results.length > 0) {
+      console.log(results);
       res.json(results);
     } else {
       res.status(404).json({ message: 'No flights found for the selected criteria.' });
@@ -52,7 +58,7 @@ router.get('/flight-search', (req, res) => {
 
 //Fetch Airport Details
 router.get('/fetch-airport', (req, res) =>{
-  const query = 'SELECT city from airport';
+  const query = 'SELECT * from airport';
   connection.query(query, (error, results) => {
     if (error) {
       console.error('Error fetching flights:', error);
@@ -64,6 +70,18 @@ router.get('/fetch-airport', (req, res) =>{
     } else {
       res.status(404).json({ message: 'No destination found for the selected criteria.' });
     }
+  });
+});
+
+//Fetch Cabin Class
+router.get('/fetch-cabin-classes', (req, res) => {
+  const query = 'SELECT * FROM flight_cabin';
+  
+  connection.query(query, (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: 'Database error occurred' });
+    }
+    res.json(results);
   });
 });
 

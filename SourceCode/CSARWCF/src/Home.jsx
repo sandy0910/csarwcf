@@ -7,6 +7,7 @@ import './css/Home.css';
 
 function Home() {
   const [airports, setAirports] = useState([]);  // State to hold the airport list
+  const [cabinClasses, setCabinClasses] = useState([]);  // State to hold cabin classes
   const [searchParams, setSearchParams] = useState({
     from: '',
     to: '',
@@ -15,21 +16,33 @@ function Home() {
     travellers: '1',
     tripType: 'one-way',
     specialFare: 'regular',
-    class: 'Economy',
+    classID: '', // initially empty
   });
 
   const navigate = useNavigate();
 
   // Fetch airport data when component mounts
   useEffect(() => {
+    // Fetch airports
     axios.get('http://localhost:3001/api/flights/fetch-airport')
       .then((response) => {
-        setAirports(response.data); // Set the fetched airport data
+        setAirports(response.data);
       })
       .catch((error) => {
         console.error('Error fetching airports:', error);
       });
   }, []);
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/api/flights/fetch-cabin-classes')
+      .then((response) => {
+        setCabinClasses(response.data); // Assuming response.data contains the cabin classes
+      })
+      .catch((error) => {
+        console.error('Error fetching cabin classes:', error);
+      });
+  }, []);
+  
 
   // Handle search inputs
   const handleSearchChange = (e) => {
@@ -39,6 +52,7 @@ function Home() {
       const updatedParams = {
         ...prevParams,
         [name]: value,
+        [name]: name === 'classID' ? parseInt(value, 10) : value, 
       };
 
       // If trip type is not "round-trip", reset returnDate
@@ -65,6 +79,7 @@ function Home() {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/airlines">Airlines</Link></li>
           <li><Link to="/scoreboard">Scoreboard</Link></li>
+          <li><Link to="/login">Login</Link></li>
         </ul>
       </nav>
 
@@ -168,13 +183,16 @@ function Home() {
               <div>
                 <span>Class</span>
                 <select
-                  name="class"
-                  value={searchParams.class}
+                  name="classID"
+                  value={searchParams.classID}
                   onChange={handleSearchChange}
                 >
-                  <option value="Economy">Economy</option>
-                  <option value="Premium Economy">Premium Economy</option>
-                  <option value="Business">Business</option>
+                  <option value="">Select Cabin Class</option>
+                  {cabinClasses.map((cabin) => (
+                    <option key={cabin.class_id} value={cabin.class_id}>
+                      {cabin.class_name}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
