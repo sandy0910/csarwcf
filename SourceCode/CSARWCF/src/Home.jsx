@@ -88,11 +88,15 @@ function Home() {
         <Carousel autoPlay infiniteLoop showThumbs={false}>
           <div>
             <img src="./chi1.jpg" alt="Flight 1" />
-            <p className="legend">Experience the Comfort of Modern Flights</p>
           </div>
           <div>
             <img src="./chi3.jpg" alt="Flight 2" />
-            <p className="legend">Travel Around the World with Ease</p>
+          </div>
+          <div>
+            <img src="./chi2.jpg" alt="Flight 2" />
+          </div>
+          <div>
+            <img src="./chi4.jpg" alt="Flight 2" />
           </div>
         </Carousel>
 
