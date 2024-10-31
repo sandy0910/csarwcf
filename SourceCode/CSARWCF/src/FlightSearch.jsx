@@ -37,6 +37,15 @@ function FlightSearch() {
       });
   }, [searchParams]);
 
+  const convertTo12HourFormat = (time) => {
+    const [hours, minutes] = time.split(':').map(Number);
+    const amPm = hours >= 12 ? 'PM' : 'AM';
+    const finalHours = hours % 12 === 0 ? 12 : hours % 12;
+    
+    return `${finalHours}:${String(minutes).padStart(2, '0')} ${amPm}`;
+  };
+  
+  
   // Function to get city name by airport ID
   const getCityByAirportId = (id) => {
     const airport = airports.find((airport) => airport.airport_id === id);
@@ -62,7 +71,7 @@ function FlightSearch() {
               <div className="flight-card__details">
                 <div className="flight-card__header">
                   <h3>{flight.name}</h3>
-                  <p className="flight-card__price">Price : ₹{flight.price}</p>
+                  <p className="flight-card__price">Price : ₹{flight.price_per_seat}/seat</p>
                 </div>
                 <div className="flight-card__info">
                   <div>
@@ -70,8 +79,8 @@ function FlightSearch() {
                     <p><strong>To:</strong> {getCityByAirportId(flight.arrival_airport_id)}</p>
                   </div>
                   <div>
-                    <p><strong>Departure:</strong> {new Date(flight.departure_dt).toLocaleString()}</p>
-                    <p><strong>Arrival:</strong> {new Date(flight.arrival_dt).toLocaleString()}</p>
+                  <p><strong>Departure:</strong> {convertTo12HourFormat(flight.scheduled_departure_time)}</p>
+                  <p><strong>Arrival:</strong> {convertTo12HourFormat(flight.scheduled_arrival_time)}</p>
                   </div>
                 </div>
                 <div className="flight-card__cta">

@@ -8,6 +8,9 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
+
 
 // Middleware 
 app.use(cors());
@@ -26,6 +29,10 @@ const query = util.promisify(connection.query).bind(connection);
 const guestRoute = require('./routes/guestRoute');
 app.use('/api/airlines', guestRoute);
 app.use('/api/flights', guestRoute);
+
+const loginRoute = require('./routes/loginRoute');
+app.use('/api/login-endpoint', loginRoute);
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

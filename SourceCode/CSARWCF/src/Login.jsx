@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import SHA1 from 'crypto-js/sha1'; // Import SHA1 for hashing
 import './css/Login.css'; // Import your CSS file for styling
 
 function Login() {
@@ -17,9 +18,12 @@ function Login() {
     setError(null);
 
     try {
-      const response = await axios.post('http://localhost:3001/api/auth/login', {
+      // Hash the password using SHA-1
+      const hashedPassword = SHA1(password).toString(); // Convert to string
+
+      const response = await axios.post('http://localhost:3001/api/login-endpoint/login', {
         email,
-        password,
+        password: hashedPassword, // Send the hashed password
       });
 
       // Assuming your API responds with a success message and user data

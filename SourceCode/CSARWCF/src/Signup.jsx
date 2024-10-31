@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './css/Signup.css'; // Import your CSS file for styling
+import './css/Signup.css';
+import SHA1 from 'crypto-js/sha1';
 
 function Signup() {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  
+
   const navigate = useNavigate();
 
   const handleSignupSubmit = async (e) => {
@@ -24,12 +26,20 @@ function Signup() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/api/auth/signup', {
+      // Hash the password with SHA-1
+      const hashedPassword = SHA1(password).toString();
+
+      // Send signup data to the updated API endpoint
+      const response = await axios.post(`http://localhost:3001/api/login-endpoint/signup`, {
+        username,
         email,
-        password,
+        password: hashedPassword,
       });
 
+      console.log(response.data);
+
       if (response.data.success) {
+        alert("New user created Succuessfully");
         navigate('/login'); // Redirect to login page after successful signup
       } else {
         setError(response.data.message); // Display error message from the server
@@ -46,6 +56,16 @@ function Signup() {
     <div className="signup-container">
       <h2 className="signup-title">Sign Up</h2>
       <form onSubmit={handleSignupSubmit} className="signup-form">
+        <div className="signup-input-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
         <div className="signup-input-group">
           <label htmlFor="email">Email:</label>
           <input
@@ -83,7 +103,7 @@ function Signup() {
       </form>
       <div className="signup-footer">
         <p>
-          Already have an account? 
+          Already have an account?
           <a href="/login" className="login-link"> Log in</a>
         </p>
       </div>

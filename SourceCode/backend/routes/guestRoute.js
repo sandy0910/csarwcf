@@ -27,28 +27,26 @@ router.get('/airDetails', (req, res) => {
 
 // Flight Search API
 router.get('/flight-search', (req, res) => {
-  const { from, to, departureDate, classID } = req.query;
+  const { from, to, classID } = req.query;
 
   // Prepare SQL query
   const sql = `
-    SELECT * FROM flight f, cabinclass c WHERE
-     f.depart_airport_id = ? 
-     AND f.arrival_airport_id = ? 
-     AND DATE(f.departure_dt) = ? 
+    SELECT * FROM cabinclass c, flight_schedule fs WHERE
+     fs.depart_airport_id = ?
+     AND fs.arrival_airport_id = ?
      AND c.class_id = ?
-     AND f.flight_id = c.flight_id
-     AND status = 1;
+     AND fs.flight_id = c.flight_id
+     AND fs.status = 1;
   `;
 
   // Execute SQL query
-  connection.query(sql, [from, to, departureDate, classID], (error, results) => {
+  connection.query(sql, [from, to, classID], (error, results) => {
     if (error) {
       console.error('Error fetching flights:', error);
       return res.status(500).json({ message: 'Internal Server Error' });
     }
 
     if (results.length > 0) {
-      console.log(results);
       res.json(results);
     } else {
       res.status(404).json({ message: 'No flights found for the selected criteria.' });
