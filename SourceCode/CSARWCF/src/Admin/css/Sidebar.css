@@ -1,0 +1,116 @@
+.drawer {
+    width: 0px;
+    flex-shrink: 0;
+}
+
+.MuiDrawer-paper {
+    width: 250px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #09203f, #537895) !important; /* Sleek blue gradient */
+    color: #ffffff !important; /* White text for contrast */
+    transition: width 0.3s ease-in-out;
+}
+
+.headerBox {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.adm {
+    margin-left: 10px;
+    color: #5cedd6 !important; /* Aqua accent for brand emphasis */
+    font-weight: bold;
+}
+
+.MuiListItem-root {
+    color: rgba(255, 255, 255, 0.9) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.MuiListItem-root:hover {
+    background-color: rgba(92, 204, 201, 0.2) !important; /* Subtle background on hover */
+    color: #00eaff !important; /* Vibrant text color on hover */
+}
+
+.MuiListItemIcon-root {
+    color: rgba(255, 255, 255, 0.7) !important; /* Consistent icon color */
+    transition: color 0.3s ease;
+}
+
+.MuiListItemIcon-root:hover {
+    color: #00eaff !important; /* Icon color change on hover */
+}
+
+.MuiListItemText-root {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.MuiListItemText-root:hover {
+    color: #00eaff !important; /* Text color on hover */
+}
+
+.toggleButtonContainer {
+    padding: 10px;
+}
+
+.toggleButton {
+    color: #ffffff !important;
+    transition: color 0.3s ease;
+}
+
+.toggleButton:hover {
+    color: #00eaff !important; /* Aqua on hover for toggle */
+}
+
+.MuiDivider-root {
+    background-color: rgba(255, 255, 255, 0.2) !important; /* Softened divider line */
+}
+
+.logoutItem {
+    color: #e57373 !important; /* Slight red accent for logout */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logoutItem:hover {
+    background-color: rgba(231, 99, 99, 0.2) !important;
+    color: #ff5252 !important;
+}
+
+/* AppBar Styles */
+.AppBar {
+    background: linear-gradient(135deg, #09203f, #537895) !important;
+    color: #ffffff !important;
+}
+
+.AppBar .Toolbar {
+    padding-left: 16px;
+}
+
+.AppBar .IconButton {
+    margin-right: 16px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .MuiDrawer-paper {
+        width: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .MuiDrawer-paper {
+        width: 200px;
+    }
+
+    .MuiListItemText-root {
+        font-size: 0.875rem;
+    }
+
+    .headerBox img {
+        width: 45px;
+        height: 45px;
+    }
+}
