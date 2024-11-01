@@ -24,17 +24,6 @@ const connection = mysql.createConnection({
   database: 'csarwcf' // Change this to your actual database name
 });
 
-// Set up session management
-app.use(
-  session({
-    store: new FileStore({}), // Stores session data in files
-    secret: 'your-secret-key', // Replace this with a strong secret in production
-    resave: false,             // Prevents resaving unchanged sessions
-    saveUninitialized: true,   // Saves a session that is new but not modified
-    cookie: { maxAge: 60 * 60 * 1000 } // Sets the session expiration to 1 hour
-  })
-);
-
 const query = util.promisify(connection.query).bind(connection);
 
 const guestRoute = require('./routes/guestRoute');

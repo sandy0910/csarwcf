@@ -66,17 +66,6 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-// Configure session middleware for this router
-router.use(
-    session({
-      store: new FileStore({}),
-      secret: 'your-secret-key', // Replace this with a strong secret in production
-      resave: false,
-      saveUninitialized: true,
-      cookie: { maxAge: 60 * 60 * 1000 } // 1-hour session expiry
-    })
-  );
-
 // Login route
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
@@ -89,37 +78,11 @@ router.post('/login', (req, res) => {
       }
   
       if (results.length > 0) {
-        // Save user data to session upon successful login
-        req.session.userId = results[0].user_id;
-        req.session.username = results[0].username;
-        req.session.email = results[0].email;
-
-        console.log(req.session.username);
-        
         return res.json({ success: true, message: 'Login successful' });
       } else {
         return res.status(401).json({ success: false, message: 'Invalid email or password.' });
       }
     });
   });
-  
-  // Logout route
-  router.post('/logout', (req, res) => {
-    req.session.destroy(err => {
-      if (err) {
-        return res.status(500).json({ error: 'Logout failed' });
-      }
-      res.json({ success: true, message: 'Logout successful' });
-    });
-  });
-
-router.get('/profile', (req, res) => {
-    console.log("User ID : ", req.session.userId);
-    if (req.session.userId) {
-        res.json({ success: true, user_id: req.session.userId, username: req.session.username });
-    } else {
-        res.status(401).json({ success: false, message: 'Not logged in.' });
-    }
-});
 
 module.exports = router;
