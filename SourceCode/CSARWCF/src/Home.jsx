@@ -25,6 +25,25 @@ function Home() {
   const fromInputRef = useRef(null);
   const toInputRef = useRef(null);
 
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    // Fetch session data on mount
+    const fetchSessionData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/api/login-endpoint/profile'); // Adjust endpoint as necessary
+        if (response.data.user) {
+          setUsername(response.data.user.email); // Adjust according to your user object
+        }
+      } catch (error) {
+        console.error('Error fetching session data:', error);
+      }
+    };
+
+    fetchSessionData();
+  }, []);
+
+
   useEffect(() => {
     axios.get('http://localhost:3001/api/flights/fetch-airport')
       .then((response) => {

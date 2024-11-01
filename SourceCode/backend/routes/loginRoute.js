@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const FileStore = require('session-file-store')(session);
 const mysql = require('mysql2');
 const app = express();
 
@@ -65,28 +66,57 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-// User login endpoint
+// Configure session middleware for this router
+router.use(
+    session({
+      store: new FileStore({}),
+      secret: 'your-secret-key', // Replace this with a strong secret in production
+      resave: false,
+      saveUninitialized: true,
+      cookie: { maxAge: 60 * 60 * 1000 } // 1-hour session expiry
+    })
+  );
+
+// Login route
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
-
+  
     const loginQuery = 'SELECT * FROM user WHERE email = ? AND password = ?';
     
     connection.query(loginQuery, [email, password], (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+  
+      if (results.length > 0) {
+        // Save user data to session upon successful login
+        req.session.userId = results[0].user_id;
+        req.session.username = results[0].username;
+        req.session.email = results[0].email;
 
-        if (results.length > 0) {
-            return res.json({ success: true, user: results[0] });
-        } else {
-            return res.status(401).json({ success: false, message: 'Invalid email or password.' });
-        }
+        console.log(req.session.username);
+        
+        return res.json({ success: true, message: 'Login successful' });
+      } else {
+        return res.status(401).json({ success: false, message: 'Invalid email or password.' });
+      }
     });
-});
+  });
+  
+  // Logout route
+  router.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+      if (err) {
+        return res.status(500).json({ error: 'Logout failed' });
+      }
+      res.json({ success: true, message: 'Logout successful' });
+    });
+  });
 
 router.get('/profile', (req, res) => {
-    if (req.session.user_id) {
-        res.json({ success: true, user_id: req.session.user_id, username: req.session.username });
+    console.log("User ID : ", req.session.userId);
+    if (req.session.userId) {
+        res.json({ success: true, user_id: req.session.userId, username: req.session.username });
     } else {
         res.status(401).json({ success: false, message: 'Not logged in.' });
     }

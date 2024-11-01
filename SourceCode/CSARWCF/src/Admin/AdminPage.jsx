@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Layout from './Layout';
 import Dashboard from './Dashboard';
+import ViewAirlines from './ViewAirlines';
 
 const AdminPage = () => {
   return (
@@ -10,6 +11,7 @@ const AdminPage = () => {
           {/* The Dashboard will render in the Layout component */}
           <Route index element={<Dashboard />} /> {/* Default to Dashboard */}
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="airlines" element={<ViewAirlines />} />
         </Route>
       </Routes>
   );
