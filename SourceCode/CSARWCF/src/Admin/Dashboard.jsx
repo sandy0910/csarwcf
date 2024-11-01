@@ -1,54 +1,76 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Grid, Paper, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Typography, Grid, Card, CardContent } from '@mui/material';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Dashboard = () => {
-  const [data, setData] = useState({
-    users: 0,
-    travel: 0,
-    artists: 0,
-    managers: 0,
-    agencies: 0,
+  const [stats, setStats] = useState({
+    totalAirlines: 0,
+    totalFlights: 0,
+    totalBookings: 0,
+    totalUsers: 0,
   });
 
   useEffect(() => {
-    // Fetch the data from the server
-    fetch('http://localhost:8080/api/stats/document-counts')
-      .then(response => response.json())
-      .then(data => setData({
-        users: data.users || 0,
-        travel: data.travel || 0,
-        managers: data.managers || 0,
-        agencies: data.agencies || 0,
-      }))
-      .catch(error => console.error('Error fetching data:', error));
+    const fetchStats = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/api/dashboard-stats/counts');
+        // console.log(response.data[0]);
+        setStats(response.data[0]);
+      } catch (error) {
+        console.error('Error fetching details:', error);
+      }
+    };
+
+    fetchStats();
   }, []);
 
+
   return (
-    <Box sx={{ flexGrow: 1, p: 3 }}>
+    <Box sx={{ p: 2 }}>
+      <Typography variant="h4" gutterBottom>
+        Admin Dashboard
+      </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper elevation={3} sx={{ padding: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Typography variant="h6">Total Users</Typography>
-            <Typography variant="h4">{data.users}</Typography>
-          </Paper>
+          <Card>
+            <CardContent>
+              <Typography variant="h5" component="div">
+                Airlines
+              </Typography>
+              <Typography variant="h4">{stats.totalAirlines}</Typography>
+            </CardContent>
+          </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper elevation={3} sx={{ padding: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Typography variant="h6">Total Travel</Typography>
-            <Typography variant="h4">{data.travel}</Typography>
-          </Paper>
+          <Card>
+            <CardContent>
+              <Typography variant="h5" component="div">
+                Total Flights
+              </Typography>
+              <Typography variant="h4">{stats.totalFlights}</Typography>
+            </CardContent>
+          </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper elevation={3} sx={{ padding: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Typography variant="h6">Total Managers</Typography>
-            <Typography variant="h4">{data.managers}</Typography>
-          </Paper>
+          <Card>
+            <CardContent>
+              <Typography variant="h5" component="div">
+                Total Bookings
+              </Typography>
+              <Typography variant="h4">{stats.totalBookings}</Typography>
+            </CardContent>
+          </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper elevation={3} sx={{ padding: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Typography variant="h6">Total Agencies</Typography>
-            <Typography variant="h4">{data.agencies}</Typography>
-          </Paper>
+          <Card>
+            <CardContent>
+              <Typography variant="h5" component="div">
+                Total Users
+              </Typography>
+              <Typography variant="h4">{stats.totalUsers}</Typography>
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     </Box>

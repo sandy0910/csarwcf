@@ -1,8 +1,10 @@
+// src/Sidebar.jsx
 import React from 'react';
 import { List, ListItem, ListItemIcon, ListItemText, Drawer, Box, Typography, IconButton, Divider, Collapse } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
-import BusinessIcon from '@mui/icons-material/Business';
+import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'; // Icon for flights
+import FlightLandIcon from '@mui/icons-material/FlightLand'; // Icon for flight landing
+import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive'; // Icon for airlines
 import PeopleIcon from '@mui/icons-material/People';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
@@ -11,27 +13,43 @@ import { Link } from 'react-router-dom';
 import './css/Sidebar.css';
 
 const Sidebar = ({ open, toggleSidebar }) => {
-  const [openSubMenu, setOpenSubMenu] = React.useState(false);
+  const [openFlightsSubMenu, setOpenFlightsSubMenu] = React.useState(false);
+  const [openAirlinesSubMenu, setOpenAirlinesSubMenu] = React.useState(false);
 
-  const handleSubMenuToggle = () => {
-    setOpenSubMenu(!openSubMenu);
+  const handleFlightsSubMenuToggle = () => {
+    setOpenFlightsSubMenu(!openFlightsSubMenu);
+  };
+
+  const handleAirlinesSubMenuToggle = () => {
+    setOpenAirlinesSubMenu(!openAirlinesSubMenu);
   };
 
   const menuItems = [
-    { text: 'Home', icon: <HomeIcon />, path: '/admin' },
+    { text: 'Dashboard', icon: <FlightTakeoffIcon />, path: '/admin/dashboard' },
     {
-      text: 'Travel Agencies', icon: <BusinessIcon />, subItems: [
-        { text: 'View Agencies', path: '/admin/travel-agencies' },
-        { text: 'View Managers', path: '/admin/travel-agencies/view-managers' },
-        { text: 'Add Agency', path: '/admin/travel-agencies/add-agency' }
-      ]
+      text: 'Flights', icon: <FlightLandIcon />, subItems: [
+        { text: 'View Flights', path: '/admin/flights' },
+        { text: 'Add Flight', path: '/admin/flights/add' },
+        { text: 'Manage Bookings', path: '/admin/flights/manage-bookings' }
+      ],
+      subMenuToggle: handleFlightsSubMenuToggle,
+      openSubMenu: openFlightsSubMenu,
     },
-    { text: 'User', icon: <PeopleIcon />, path: '/admin/user' },
+    {
+      text: 'Airlines', icon: <AirplanemodeActiveIcon />, subItems: [
+        { text: 'View Airlines', path: '/admin/airlines' },
+        { text: 'Add Airline', path: '/admin/airlines/add' }
+      ],
+      subMenuToggle: handleAirlinesSubMenuToggle,
+      openSubMenu: openAirlinesSubMenu,
+    },
+    { text: 'Users', icon: <PeopleIcon />, path: '/admin/users' },
   ];
 
   const handleLogout = () => {
-    // Perform logout actions here (e.g., clearing local storage, redirecting to login page)
     console.log('Logging out...');
+    // Example: localStorage.clear();
+    // Example: window.location.href = '/login';
   };
 
   return (
@@ -55,7 +73,7 @@ const Sidebar = ({ open, toggleSidebar }) => {
               <MenuIcon />
               <Box className='adm'>
                 <Typography variant="h6" noWrap>
-                  Admin Panel
+                  FB Admin
                 </Typography>
               </Box>
             </IconButton>
@@ -64,13 +82,13 @@ const Sidebar = ({ open, toggleSidebar }) => {
         <List>
           {menuItems.map((item) => (
             <React.Fragment key={item.text}>
-              <ListItem button component={Link} to={item.path || '#'} onClick={item.subItems ? handleSubMenuToggle : null} className="listItem">
+              <ListItem button onClick={item.subItems ? item.subMenuToggle : null} className="listItem">
                 <ListItemIcon className="listItemIcon">{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} className="listItemText" />
-                {item.subItems ? (openSubMenu ? <ExpandLessIcon /> : <ExpandMoreIcon />) : null}
+                {item.subItems ? (item.openSubMenu ? <ExpandLessIcon /> : <ExpandMoreIcon />) : null}
               </ListItem>
               {item.subItems && (
-                <Collapse in={openSubMenu} timeout="auto" unmountOnExit>
+                <Collapse in={item.openSubMenu} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
                     {item.subItems.map((subItem) => (
                       <ListItem button component={Link} to={subItem.path} key={subItem.text} className="listItem">

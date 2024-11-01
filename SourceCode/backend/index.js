@@ -33,6 +33,9 @@ app.use('/api/flights', guestRoute);
 const loginRoute = require('./routes/loginRoute');
 app.use('/api/login-endpoint', loginRoute);
 
+const dashRoute = require('./routes/admin/dashRoute');
+app.use('/api/dashboard-stats', dashRoute);
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

@@ -15,40 +15,40 @@ const Layout = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-        <>
-          <AppBar position="fixed" className="AppBar">
-            <Toolbar>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={toggleSidebar}
-                sx={{ mr: 2 }}
-              >
-                <MenuIcon />
-              </IconButton>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <img src="logoedit.jpg" alt="Logo" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
-                <Typography variant="h6" noWrap>
-                  ExTra Quest
-                </Typography>
-              </div>
-            </Toolbar>
-          </AppBar>
-          <Sidebar open={open} toggleSidebar={toggleSidebar} />
-          <Box
-            component="main"
-            sx={{
-              flexGrow: 1,
-              p: 3,
-              transition: 'margin 0.3s',
-              marginLeft: open ? '240px' : '0',
-            }}
-          >
-            <Toolbar />
-            <Outlet />
-          </Box>
-        </>
+      <>
+        <AppBar position="fixed" className="AppBar">
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={toggleSidebar}
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <img src="logoedit.jpg" alt="Logo" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+              <Typography variant="h6" noWrap>
+                ExTra Quest
+              </Typography>
+            </div>
+          </Toolbar>
+        </AppBar>
+        <Sidebar open={open} toggleSidebar={toggleSidebar} />
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            transition: 'margin 0.3s',
+            marginLeft: open ? '240px' : '0',
+          }}
+        >
+          <Toolbar />
+          <Outlet /> {/* This is where the nested routes will render */}
+        </Box>
+      </>
     </Box>
   );
 };
