@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './css/Signup.css';
 import SHA1 from 'crypto-js/sha1';
+import { fireauth } from './Firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 function Signup() {
   const [username, setUsername] = useState('');
@@ -26,10 +28,13 @@ function Signup() {
     }
 
     try {
+      // Create user with Firebase
+      await createUserWithEmailAndPassword(fireauth, email, password);
+
       // Hash the password with SHA-1
       const hashedPassword = SHA1(password).toString();
 
-      // Send signup data to the updated API endpoint
+      // Send signup data to your API endpoint
       const response = await axios.post(`http://localhost:3001/api/login-endpoint/signup`, {
         username,
         email,
@@ -39,14 +44,14 @@ function Signup() {
       console.log(response.data);
 
       if (response.data.success) {
-        alert("New user created Succuessfully");
+        alert("New user created successfully");
         navigate('/login'); // Redirect to login page after successful signup
       } else {
         setError(response.data.message); // Display error message from the server
       }
     } catch (error) {
       console.error('Signup error:', error);
-      setError('An error occurred. Please try again.');
+      setError(error.message); // Display Firebase error message
     } finally {
       setLoading(false);
     }

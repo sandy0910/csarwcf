@@ -11,13 +11,12 @@ body {
 }
 
 .navbar {
-  /* background-color: #004c99; */
-  background-image: linear-gradient(rgb(0, 78, 187), rgb(0, 140, 255));
+  background-image: linear-gradient(rgba(0, 78, 187, 0.864), rgb(0, 140, 255));
   padding: 1em;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between; /* Aligns items on the left and right */
+  align-items: center; /* Centers items vertically */
 }
-
 .navbar ul {
   list-style: none;
   display: flex;
@@ -25,6 +24,12 @@ body {
 }
 
 .navbar ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar a {
   color: white;
   text-decoration: none;
   font-weight: bold;
@@ -62,6 +67,16 @@ body {
   h1{
     color: white;
   }
+}
+
+.form-container {
+  background: rgba(255, 255, 255, 0.8); /* Light background with transparency */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Spacing inside the container */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  max-width: 600px; /* Limit maximum width */
+  margin: 0 auto; /* Center the container */  
+  margin-right: 0;
 }
 
 .search-section {

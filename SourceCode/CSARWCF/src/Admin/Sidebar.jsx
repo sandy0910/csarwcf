@@ -10,7 +10,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
-import './css/Sidebar.css';
+import './css/Sidebar.css'; // Ensure your styles are in this file
 
 const Sidebar = ({ open, toggleSidebar }) => {
   const [openFlightsSubMenu, setOpenFlightsSubMenu] = React.useState(false);
@@ -57,8 +57,8 @@ const Sidebar = ({ open, toggleSidebar }) => {
       variant="persistent"
       anchor="left"
       open={open}
-      className="drawer"
-      classes={{ paper: 'drawerPaper' }}
+      className="adminDrawer"
+      classes={{ paper: 'adminDrawerPaper' }} // Use your custom class here
     >
       <Box className="sidebarContent">
         <Box className="toggleButtonContainer">

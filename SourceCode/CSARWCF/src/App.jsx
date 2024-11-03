@@ -7,6 +7,8 @@ import Scoreboard from './Scoreboard';
 import Login from './Login';
 import Signup from './Signup';
 import AdminPage from './Admin/AdminPage';
+import ComplianceManager from './Compliance/ComplianceManager';
+import AirlineAdmin from './Airline/AirlineAdmin';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} /> {/* Route for Home page */}
         <Route path="/admin/*" element={<AdminPage />} />
+        <Route path="/compliance/*" element={<ComplianceManager />} />
+        <Route path="/airline/*" element={<AirlineAdmin />} />
         <Route path="/airlines" element={<AirlinesPage />} />  {/* AirlinesPage route */}
         <Route path="/search-results" element={<FlightSearch />} />
         <Route path='/scoreboard' element={<Scoreboard />} />

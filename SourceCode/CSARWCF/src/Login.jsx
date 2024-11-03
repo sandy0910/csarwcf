@@ -26,10 +26,12 @@ function Login() {
         password: hashedPassword, // Send the hashed password
       });
 
-      // Assuming your API responds with a success message and user data
-      if (response.data.success) {
-        // Save user data in local storage or context
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+      // Assuming your API returns the user's details correctly
+      if (response.data) {
+        console.log(response.data);
+        const user = response.data; // Access user from the response
+        sessionStorage.setItem('user', JSON.stringify({ uid: user.user_id, uname: user.username, email: user.email }));
+
         navigate('/'); // Redirect to home page or dashboard
       } else {
         setError(response.data.message); // Display error message from the server

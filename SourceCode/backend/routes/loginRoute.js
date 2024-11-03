@@ -78,7 +78,7 @@ router.post('/login', (req, res) => {
       }
   
       if (results.length > 0) {
-        return res.json({ success: true, message: 'Login successful' });
+        return res.json(results[0]);
       } else {
         return res.status(401).json({ success: false, message: 'Invalid email or password.' });
       }
