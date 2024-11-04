@@ -40,6 +40,17 @@ app.use('/api/dashboard-stats', dashRoute);
 const airRoute = require('./routes/admin/airRoute');
 app.use('/api/admin-airlines', airRoute);
 
+
+//Compliance Managing
+const yseatRoute = require('./routes/compliance/yseatRoute');
+app.use('/api/compliance-ys', yseatRoute);
+
+const lfRoute = require('./routes/compliance/lfRoute');
+app.use('/api/compliance-lf', lfRoute);
+
+const airlineRoute = require('./routes/compliance/airlineRoute');
+app.use('/api/compliance-air', airlineRoute);
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

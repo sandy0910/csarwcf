@@ -2,39 +2,25 @@
 import React from 'react';
 import { Box, Typography, AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, CssBaseline } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-
-// Dummy components for each section
-const DashboardContent = () => (
-  <Box>
-    <Typography variant="h4" gutterBottom>Welcome to the Compliance Management Dashboard</Typography>
-    <Typography variant="body1" gutterBottom>
-      Here you can manage compliance reports, regulations, and audits.
-    </Typography>
-  </Box>
-);
-
-const ComplianceReports = () => <Typography variant="h5">Compliance Reports</Typography>;
-const Regulations = () => <Typography variant="h5">Regulations</Typography>;
-const Audits = () => <Typography variant="h5">Audits</Typography>;
-const UserManagement = () => <Typography variant="h5">User Management</Typography>;
+import { useNavigate } from 'react-router-dom';
+import ComplianceRoute from './ComplianceRoute';
 
 const ComplianceManager = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const [currentContent, setCurrentContent] = React.useState(<DashboardContent />);
+  const navigate = useNavigate();
 
   const toggleDrawer = () => setDrawerOpen(!drawerOpen);
 
   const menuItems = [
-    { text: 'Dashboard', component: <DashboardContent /> },
-    { text: 'Compliance Reports', component: <ComplianceReports /> },
-    { text: 'Regulations', component: <Regulations /> },
-    { text: 'Audits', component: <Audits /> },
-    { text: 'User Management', component: <UserManagement /> },
-    { text: 'Logout', component: <Typography variant="h5">Logging out...</Typography> },
+    { text: 'Dashboard', path: '/compliance/dashboard' },
+    { text: 'Compliance Reports', path: '/compliance/compliance-reports' },
+    { text: 'Regulations', path: '/compliance/regulations' },
+    { text: 'Airlines', path:'/compliance/airlines'},
+    { text: 'Logout', path: '/logout' }
   ];
 
-  const handleMenuClick = (component) => {
-    setCurrentContent(component);
+  const handleMenuClick = (path) => {
+    navigate(path);
     toggleDrawer();
   };
 
@@ -66,8 +52,8 @@ const ComplianceManager = () => {
         }}
       >
         <List>
-          {menuItems.map((item, index) => (
-            <ListItem button key={item.text} onClick={() => handleMenuClick(item.component)}>
+          {menuItems.map((item) => (
+            <ListItem button key={item.text} onClick={() => handleMenuClick(item.path)}>
               <ListItemText primary={item.text} sx={{ color: '#FFFFFF' }} />
             </ListItem>
           ))}
@@ -75,7 +61,7 @@ const ComplianceManager = () => {
       </Drawer>
 
       <Box component="main" sx={{ flexGrow: 1, bgcolor: '#F1F8E9', p: 3, marginTop: '64px' }}>
-        {currentContent}
+        <ComplianceRoute /> {/* Render ComplianceRoute to handle sub-routes */}
       </Box>
     </Box>
   );

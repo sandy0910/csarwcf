@@ -1,0 +1,45 @@
+/* src/css/Regulations.css */
+
+.regulations-container {
+    padding: 20px;
+}
+  
+.yseat-factors-table, 
+.load-factors-table {
+width: 100%;
+margin-top: 20px;
+}
+
+.yseat-factors-table th,
+.yseat-factors-table td,
+.load-factors-table th,
+.load-factors-table td {
+border: 1px solid #ddd;
+padding: 8px;
+text-align: left;
+}
+  
+.yseat-factors-table th 
+.load-factors-table th{
+background-color: #4CAF50; /* Adjust for your theme */
+color: white;
+}
+
+.yseat-factors-table tr:nth-child(even),
+.load-factors-table tr:nth-child(even) {
+background-color: #f2f2f2;
+}
+
+.yseat-factors-table tr:hover,
+.load-factors-table tr:hover  {
+background-color: #ddd; /* Highlight on hover */
+}
+
+.calculation-container {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #e7ffd6;
+  }
+  

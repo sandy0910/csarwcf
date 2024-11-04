@@ -1,0 +1,170 @@
+/* General layout for airlines container */
+.airlines-container {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
+
+/* Styling for the list of airlines */
+.airlines-list {
+  flex: 1;
+  max-width: 300px;
+  padding: 20px;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.airlines-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.airline-item {
+  cursor: pointer;
+  padding: 12px;
+  border: 1px solid #ddd;
+  margin: 8px 0;
+  border-radius: 8px;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+
+.airline-item:hover {
+  background-color: #e6f7ff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+}
+
+/* Airline details container */
+.airline-details-container {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the airline card */
+.airline-card {
+  flex: 2;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+  transition: box-shadow 0.3s;
+}
+
+.airline-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Close button styling */
+.close-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.close-button:hover {
+  background-color: #d93636;
+  transform: scale(1.05);
+}
+
+/* Styling for the airline details section */
+.airline-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.airline-info {
+  flex: 1;
+}
+
+.airline-logo {
+  flex: 0 0 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.airline-logo img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Flights container styling */
+.flights-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.flight-card {
+  flex: 1 1 45%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, transform 0.2s;
+}
+
+.flight-card:hover {
+  transform: translateY(-2px);
+  border-color: #007bff;
+}
+
+.flight-card.operational {
+  border-color: green;
+}
+
+.flight-card p {
+  margin: 5px 0;
+}
+
+.flight-card p strong {
+  color: #333;
+}
+
+/* Carbon rating visual styles */
+.carbon-rating-container {
+  margin-top: 10px;
+}
+
+.carbon-rating-bar {
+  height: 10px;
+  border-radius: 5px;
+  background-color: #eee;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carbon-rating-fill {
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+}
+
+.carbon-rating-low {
+  background-color: #28a745;
+}
+
+.carbon-rating-medium {
+  background-color: #ffc107;
+}
+
+.carbon-rating-high {
+  background-color: #dc3545;
+}
