@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './css/Airlines.css';
+import { useNavigate } from 'react-router-dom';
 
 const Airlines = () => {
   const [airlines, setAirlines] = useState([]);
   const [selectedAirline, setSelectedAirline] = useState(null);
   const [flights, setFlights] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAirlines = async () => {
@@ -47,6 +49,10 @@ const Airlines = () => {
     if (rating <= 3) return 'carbon-rating-low';
     if (rating <= 6) return 'carbon-rating-medium';
     return 'carbon-rating-high';
+  };
+
+  const handleCalculatorRedirect = () => {
+    navigate('/co2-calculator');
   };
 
   return (
@@ -104,12 +110,21 @@ const Airlines = () => {
                   key={index}
                   className={`flight-card ${flight.status === 1 ? 'operational' : ''}`}
                 >
-                  <p><strong>Flight Number:</strong> {flight.flight_number}</p>
-                  <p><strong>Origin:</strong> {flight.origin_city}</p>
-                  <p><strong>Destination:</strong> {flight.destination_city}</p>
-                  <p><strong>Distance (km):</strong> {flight.gcd}</p>
-                  <p><strong>Fuel Consumption:</strong> {flight.fuel_consumption} (kg)</p>
-                  {flight.status === 1 && <p><strong>Status:</strong> Operational</p>}
+                  {/* Left side: flight details */}
+                  <div className="flight-details">
+                    <p><strong>Flight Number:</strong> {flight.flight_number}</p>
+                    <p><strong>Origin:</strong> {flight.origin_city}</p>
+                    <p><strong>Destination:</strong> {flight.destination_city}</p>
+                    <p><strong>Distance (km):</strong> {flight.gcd}</p>
+                    <p><strong>Fuel Consumption:</strong> {flight.fuel_consumption} (kg)</p>
+                    {flight.status === 1 && <p><strong>Status:</strong> Operational</p>}
+                  </div>
+
+                  {/* Right side: earth icon with tooltip */}
+                  <div className="calculator-link" onClick={handleCalculatorRedirect}>
+                    🌍
+                    <span className="tooltip">CO₂ Emissions</span>
+                  </div>
                 </div>
               ))
             ) : (

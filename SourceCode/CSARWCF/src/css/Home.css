@@ -75,21 +75,87 @@ body {
   padding: 20px; /* Spacing inside the container */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   max-width: 600px; /* Limit maximum width */
-  margin: 0 auto; /* Center the container */  
+  margin: auto; /* Center the container */  
   margin-right: 0;
 }
 
 .search-section {
+  display: flex;
+  gap: 2em;
   padding: 2em;
   background-color: #fff;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.related-content {
+  flex: 1;
+  color: #004c99;
+  animation: slideIn 1s ease forwards;
+}
+
+.related-content h2 {
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
+  color: #004c99;
+}
+
+.related-content p {
+  font-size: 1em;
+  margin-bottom: 1.5em;
+  color: #555;
+}
+
+.info-cards {
+  display: grid;
+  gap: 15px;
+}
+
+.info-card {
+  background-color: #f7f9fc;
+  border-left: 4px solid #004c99;
+  padding: 1em;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.info-card h3 {
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  color: #004c99;
+}
+
+.info-card p {
+  font-size: 0.9em;
+  color: #333;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .search-form {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* Adjusted to two columns for better responsiveness */
   gap: 20px;
   max-width: 1000px;
   margin: auto;
+  background-color: #f7f9fc; /* Light background color */
+  padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .input-group {
@@ -101,28 +167,61 @@ body {
 .input-group label {
   margin-bottom: 8px;
   font-weight: bold;
+  color: #004c99; /* Darker blue for consistency */
+}
+
+.input-group input,
+.input-group select {
+  padding: 0.6em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #004c99;
+  outline: none;
 }
 
 .trip-type {
   display: flex;
   gap: 10px;
   color: #333;
+  grid-column: 1 / -1; /* Spans the trip type across the full form width */
+  justify-content: space-evenly; /* Aligns trip types evenly */
+  margin-bottom: 1em;
+}
+
+.trip-type label {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #004c99;
+}
+
+.trip-type input[type="radio"] {
+  margin-right: 5px;
 }
 
 .search-button {
-  grid-column: 1 / -1;
+  grid-column: 1 / -1; /* Spans across full width of the form */
   background-color: #004c99;
   color: white;
   border: none;
   padding: 0.8em;
   font-size: 1.1em;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .search-button:hover {
   background-color: #002f5a;
+  transform: scale(1.02); /* Slight scaling effect on hover */
 }
+
 
 .footer {
   background-color: #004c99;
@@ -132,17 +231,11 @@ body {
   font-size: 0.9em;
 }
 
-.input-group {
-  position: relative; /* Make the parent container position-relative */
-}
-
 .suggestions {
-  position: absolute;
-  top: 100%; /* Aligns the dropdown just below the input box */
-  left: 0;
+  top: 100%;
   background-color: white;
   border: 1px solid #ccc;
-  max-height: 150px;
+  max-height: 100px;
   overflow-y: auto;
   width: 100%;
   z-index: 10;
@@ -158,3 +251,175 @@ body {
   background-color: #f0f0f0;
 }
 
+/* Section: Popular Destinations */
+/* Features Section */
+.features {
+  padding: 3em 0;
+  background-color: #f7f9fc;
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1.5em;
+  text-align: center;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.feature-card h3 {
+  font-size: 1.2em;
+  color: #004c99;
+  margin-top: 1em;
+}
+
+.feature-card p {
+  font-size: 0.9em;
+  color: #555;
+  line-height: 1.5;
+  margin-top: 0.5em;
+}
+
+/* Popular Destinations Section */
+.popular-destinations {
+  padding: 3em 0;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.popular-destinations h2 {
+  font-size: 2em;
+  color: #004c99;
+  margin-bottom: 1em;
+}
+
+.destination-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.destination-item {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.destination-item:hover {
+  transform: translateY(-5px);
+}
+
+.destination-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.destination-item h4 {
+  font-size: 1.2em;
+  color: #004c99;
+  margin-top: 0.8em;
+}
+
+.destination-item a {
+  display: inline-block;
+  margin-top: 0.5em;
+  padding: 0.5em 1em;
+  background-color: #004c99;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.destination-item a:hover {
+  background-color: #002f5a;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .navbar ul {
+    gap: 10px;
+  }
+
+  .form-container{
+    margin: auto;
+  }
+
+  .search-section {
+    flex-direction: column;
+    padding: 1em;
+  }
+
+  .search-form {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .features, .related-content, .destination-gallery {
+    padding: 1.5em 0;
+    max-width: 90%;
+    margin: auto;
+  }
+
+  .feature-card, .destination-item {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .form-container{
+    margin: auto;
+  }
+
+  .header-overlay h1 {
+    font-size: 1.8em;
+  }
+
+  .search-button {
+    font-size: 1em;
+    padding: 0.6em;
+  }
+
+  .footer {
+    font-size: 0.8em;
+    padding: 0.8em;
+  }
+
+  .feature-card p, .destination-item h4 {
+    font-size: 0.85em;
+  }
+
+  .popular-destinations h2, .related-content h2 {
+    font-size: 1.5em;
+  }
+}

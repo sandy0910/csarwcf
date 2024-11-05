@@ -1,150 +1,136 @@
-  import React, { useState, useEffect, useRef } from 'react';
-  import { useNavigate, Link } from 'react-router-dom';
-  import axios from 'axios';
-  import { Carousel } from 'react-responsive-carousel'; 
-  import 'react-responsive-carousel/lib/styles/carousel.min.css';
-  import './css/Home.css';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import './css/Home.css';
 
-  function Home() {
-    const [airports, setAirports] = useState([]);
-    const [filteredFromAirports, setFilteredFromAirports] = useState([]);
-    const [filteredToAirports, setFilteredToAirports] = useState([]);
-    const [cabinClasses, setCabinClasses] = useState([]);
-    const [searchParams, setSearchParams] = useState({
-      from: '', // This will now hold airport_id
-      to: '',
-      departureDate: '',
-      returnDate: '',
-      travellers: '1',
-      tripType: 'one-way',
-      specialFare: 'regular',
-      classID: '',
-    });
+function Home() {
+  const [airports, setAirports] = useState([]);
+  const [filteredFromAirports, setFilteredFromAirports] = useState([]);
+  const [filteredToAirports, setFilteredToAirports] = useState([]);
+  const [cabinClasses, setCabinClasses] = useState([]);
+  const [searchParams, setSearchParams] = useState({
+    from: '',
+    to: '',
+    departureDate: '',
+    returnDate: '',
+    travellers: '1',
+    tripType: 'one-way',
+    specialFare: 'regular',
+    classID: '',
+  });
 
-    const navigate = useNavigate();
-    const fromInputRef = useRef(null);
-    const toInputRef = useRef(null);
-      // Check if user is logged in
-    const userData = JSON.parse(sessionStorage.getItem('user'));
-    console.log(userData);
-    const isLoggedIn = userData !== null;
+  const navigate = useNavigate();
+  const fromInputRef = useRef(null);
+  const toInputRef = useRef(null);
+  const userData = JSON.parse(sessionStorage.getItem('user'));
+  const isLoggedIn = userData !== null;
 
-    useEffect(() => {
-      axios.get('http://localhost:3001/api/flights/fetch-airport')
-        .then((response) => {
-          setAirports(response.data);
-        })
-        .catch((error) => {
-          console.error('Error fetching airports:', error);
-        });
-    }, []);
+  useEffect(() => {
+    axios.get('http://localhost:3001/api/flights/fetch-airport')
+      .then((response) => setAirports(response.data))
+      .catch((error) => console.error('Error fetching airports:', error));
+  }, []);
 
-    useEffect(() => {
-      axios.get('  http://localhost:3001/api/flights/fetch-cabin-classes')
-        .then((response) => {
-          setCabinClasses(response.data);
-        })
-        .catch((error) => {
-          console.error('Error fetching cabin classes:', error);
-        });
-    }, []);
+  useEffect(() => {
+    axios.get('http://localhost:3001/api/flights/fetch-cabin-classes')
+      .then((response) => setCabinClasses(response.data))
+      .catch((error) => console.error('Error fetching cabin classes:', error));
+  }, []);
 
-    const handleSearchChange = (e) => {
-      const { name, value } = e.target;
-
-      setSearchParams((prevParams) => {
-        const updatedParams = {
-          ...prevParams,
-          [name]: name === 'classID' && value ? parseInt(value) : value, // Convert to integer
-        };
-
-        if (name === 'tripType' && value !== 'round-trip') {
-          updatedParams.returnDate = '';
-        }
-
-        return updatedParams;
-      });
-
-      // Filter suggestions for "From" and "To" fields
-      const filterAirports = (query) => airports.filter((airport) =>
+  const handleSearchChange = (e) => {
+    const { name, value } = e.target;
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      [name]: name === 'classID' && value ? parseInt(value) : value,
+      ...(name === 'tripType' && value !== 'round-trip' ? { returnDate: '' } : {}),
+    }));
+    const filterAirports = (query) =>
+      airports.filter((airport) =>
         airport.airport_name.toLowerCase().includes(query.toLowerCase()) ||
         airport.city.toLowerCase().includes(query.toLowerCase()) ||
         airport.country.toLowerCase().includes(query.toLowerCase())
       );
+    if (name === 'from') setFilteredFromAirports(filterAirports(value));
+    if (name === 'to') setFilteredToAirports(filterAirports(value));
+  };
 
-      if (name === 'from') {
-        setFilteredFromAirports(filterAirports(value));
-      } else if (name === 'to') {
-        setFilteredToAirports(filterAirports(value));
-      }
-    };
+  const handleAirportSelect = (field, airport) => {
+    setSearchParams((prevParams) => ({ ...prevParams, [field]: airport.airport_id }));
+    setFilteredFromAirports([]);
+    setFilteredToAirports([]);
+  };
 
-    const handleAirportSelect = (field, airport) => {
-      // Set the airport_id instead of the airport_name
-      setSearchParams((prevParams) => ({ ...prevParams, [field]: airport.airport_id }));
+  const handleClickOutside = (event) => {
+    if (!fromInputRef.current.contains(event.target) && !toInputRef.current.contains(event.target)) {
       setFilteredFromAirports([]);
       setFilteredToAirports([]);
-    };
+    }
+  };
 
-    const handleClickOutside = (event) => {
-      if (
-        fromInputRef.current && !fromInputRef.current.contains(event.target) &&
-        toInputRef.current && !toInputRef.current.contains(event.target)
-      ) {
-        setFilteredFromAirports([]);
-        setFilteredToAirports([]);
-      }
-    };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-    useEffect(() => {
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, []);
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    navigate('/search-results', { state: { searchParams } });
+  };
 
-    const handleSearchSubmit = (e) => {
-      e.preventDefault();
-      navigate('/search-results', { state: { searchParams } });
-    };
-
-    return (
-      <div className="home-container">
-        <nav className="navbar">
-          <ul className="nav-links">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/airlines">Airlines</Link></li>
-            <li><Link to="/scoreboard">Scoreboard</Link></li>
-          </ul>
-          <ul className='nav-links'>
-          {!isLoggedIn && 
-            <div className='login-btn'>
-              <li><Link to="/login">Login</Link></li>
-            </div>
-          }
-          {isLoggedIn && 
+  return (
+    <div className="home-container">
+      <nav className="navbar">
+        <ul className="nav-links">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/airlines">Airlines</Link></li>
+          <li><Link to="/scoreboard">Scoreboard</Link></li>
+        </ul>
+        <ul className="nav-links">
+          {!isLoggedIn ? (
+            <li><Link to="/login">Login</Link></li>
+          ) : (
             <ul>
-            <li>Welcome {userData.uname}</li>
-            <li><Link to="/logout">Logout</Link></li>
+              <li>Welcome {userData.uname}</li>
+              <li><Link to="/logout">Logout</Link></li>
             </ul>
-          }
-          </ul>
-        </nav>
+          )}
+        </ul>
+      </nav>
 
+      <header className="header-banner">
+        <Carousel autoPlay infiniteLoop showThumbs={false}>
+          <div><img src="chi4.jpg" alt="Flight 1" /></div>
+          <div><img src="chi2.jpg" alt="Flight 2" /></div>
+          <div><img src="chi3.jpg" alt="Flight 3" /></div>
+        </Carousel>
+      </header>
+      <div className="header-overlay">
+        <h1>Find Your Next Adventure</h1>
+        <p>Book flights, discover destinations, and explore new places.</p>
+      </div>
 
-        <header className="header-banner">
-          <Carousel autoPlay infiniteLoop showThumbs={false}>
-            <div><img src="chi4.jpg" alt="Flight 1" /></div>
-            <div><img src="chi2.jpg" alt="Flight 2" /></div>
-            <div><img src="chi3.jpg" alt="Flight 3" /></div>
-          </Carousel>
-        </header>
-        <div className="header-overlay">
-          <h1>Find Your Next Adventure</h1>
-          <p>Book flights, discover destinations, and explore new places.</p>
+      {/* Flight Search Section */}
+      <div className="search-section">
+        <div className="related-content">
+          <h2>Discover the Best Flight Deals</h2>
+          <p>Find the best prices on flights to popular destinations worldwide. Search and compare flights from top airlines to make your journey affordable and comfortable.</p>
+          <div className="info-cards">
+            <div className="info-card">
+              <h3>Special Discounts</h3>
+              <p>Get exclusive discounts on select destinations every month. Book early and save more!</p>
+            </div>
+            <div className="info-card">
+              <h3>Travel Tips</h3>
+              <p>Explore travel tips to make your journey smoother and more enjoyable. From packing hacks to airport guides.</p>
+            </div>
+            <div className="info-card">
+              <h3>Popular Destinations</h3>
+              <p>Check out our list of trending destinations and top-rated airlines.</p>
+            </div>
+          </div>
         </div>
-
-        <div className="search-section">
           <div className='form-container'>
             <form onSubmit={handleSearchSubmit} className="search-form">
               <div className="trip-type">
@@ -241,11 +227,51 @@
           </div>
         </div>
 
-        <footer className="footer">
-          <p>&copy; 2024 Flight Booking. All Rights Reserved.</p>
-        </footer>
-      </div>
-    );
-  }
+      {/* New Content Sections */}
+      <section className="features">
+        <div className="feature-card">
+          <img src="feature1.jpg" alt="Affordable Prices" />
+          <h3>Affordable Prices</h3>
+          <p>Discover the best deals on flights around the world. Affordable options for every budget.</p>
+        </div>
+        <div className="feature-card">
+          <img src="feature2.jpg" alt="Wide Coverage" />
+          <h3>Wide Coverage</h3>
+          <p>Book flights to over 500 destinations worldwide with top airlines.</p>
+        </div>
+        <div className="feature-card">
+          <img src="feature3.jpg" alt="Easy Booking" />
+          <h3>Easy Booking</h3>
+          <p>Enjoy a seamless booking experience, from selecting flights to choosing your seat.</p>
+        </div>
+      </section>
 
-  export default Home;
+      <section className="popular-destinations">
+        <h2>Popular Destinations</h2>
+        <div className="destination-gallery">
+          <div className="destination-item">
+            <img src="destination1.jpg" alt="Paris" />
+            <h4>Paris</h4>
+            <Link to="/destination/paris">Explore Flights</Link>
+          </div>
+          <div className="destination-item">
+            <img src="destination2.jpg" alt="New York" />
+            <h4>New York</h4>
+            <Link to="/destination/new-york">Explore Flights</Link>
+          </div>
+          <div className="destination-item">
+            <img src="destination3.jpg" alt="Tokyo" />
+            <h4>Tokyo</h4>
+            <Link to="/destination/tokyo">Explore Flights</Link>
+          </div>
+        </div>
+      </section>
+
+      <footer className="footer">
+        <p>&copy; 2024 Flight Booking. All Rights Reserved.</p>
+      </footer>
+    </div>
+  );
+}
+
+export default Home;

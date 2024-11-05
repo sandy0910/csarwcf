@@ -9,7 +9,6 @@ import Airlines from './Airlines';
 const ComplianceRoute = () => {
   return (
     <Routes>
-      {/* Set DashboardContent as the default and root component */}
       <Route path="/" element={<DashboardContent />} /> {/* Default dashboard page */}
       <Route path="/dashboard" element={<DashboardContent />} />
       <Route path="/airlines" element={<Airlines />} />
