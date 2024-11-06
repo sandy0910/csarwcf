@@ -51,6 +51,9 @@ app.use('/api/compliance-lf', lfRoute);
 const airlineRoute = require('./routes/compliance/airlineRoute');
 app.use('/api/compliance-air', airlineRoute);
 
+const estimateRoute = require('./routes/compliance/estimateRoute');
+app.use('/api/compliance/', estimateRoute);
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

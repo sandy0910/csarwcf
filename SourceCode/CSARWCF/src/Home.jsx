@@ -58,7 +58,7 @@ function Home() {
 
   const handleAirportSelect = (field, airport) => {
     setSearchParams((prevParams) => ({ ...prevParams, [field]: airport.airport_id }));
-    setFilteredFromAirports([]);
+    setFilteredFromAirports([]);  
     setFilteredToAirports([]);
   };
 
