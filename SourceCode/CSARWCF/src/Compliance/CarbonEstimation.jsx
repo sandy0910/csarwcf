@@ -8,6 +8,7 @@ function CarbonEstimation({ externalParams }) {
   const [filteredToAirports, setFilteredToAirports] = useState([]);
   const [cabinClasses, setCabinClasses] = useState([]);
   const [result, setResult] = useState(null);
+  const [selectedCard, setSelectedCard] = useState(null); // Track selected card for overlay
 
   // Use externalParams if provided; otherwise, default to internal state
   const [estimationParams, setEstimationParams] = useState({
@@ -76,110 +77,139 @@ function CarbonEstimation({ externalParams }) {
       .catch((error) => console.error('Error fetching estimation result:', error));
   };
 
+  const getCabinClassName = (classID) => {
+    const cabinClass = cabinClasses.find((cabin) => cabin.class_id === classID);
+    return cabinClass ? cabinClass.class_name : '-';
+  };
+
+  const handleCardClick = (item) => {
+    setSelectedCard(item); // Set the selected card to open overlay
+  };
+
+  const closeOverlay = () => {
+    setSelectedCard(null); // Close overlay by resetting selected card
+  };
+
   return (
-    <div className="carbon-estimation-container">
-      <h2>Estimate CO₂ Emissions for Your Flight</h2>
-      <form onSubmit={handleEstimationSubmit} className="estimation-form">
-
-        <div className="input-group" ref={fromInputRef}>
-          <label>From</label>
-          <input
-            type="text"
-            name="from"
-            value={estimationParams.from}
-            onChange={handleSearchChange}
-            placeholder="Search by airport, city, or country"
-            autoComplete="off"
-            required
-          />
-          {filteredFromAirports.length > 0 && (
-            <div className="suggestions">
-              {filteredFromAirports.map((airport) => (
-                <div
-                  key={airport.airport_id}
-                  onClick={() => handleAirportSelect('from', airport)}
-                  className="suggestion"
-                >
-                  <strong>{airport.airport_name}</strong> - {airport.city}, {airport.country}
+    <>
+      <div className="main-container">
+        <div className="carbon-estimation-container">
+          <h2>Estimate CO₂ Emissions for Flight</h2>
+          <form onSubmit={handleEstimationSubmit} className="estimation-form">
+            <div className="input-group" ref={fromInputRef}>
+              <label>From</label>
+              <input
+                type="text"
+                name="from"
+                value={estimationParams.from}
+                onChange={handleSearchChange}
+                placeholder="Search by airport, city, or country"
+                autoComplete="off"
+                required
+              />
+              {filteredFromAirports.length > 0 && (
+                <div className="suggestions">
+                  {filteredFromAirports.map((airport) => (
+                    <div
+                      key={airport.airport_id}
+                      onClick={() => handleAirportSelect('from', airport)}
+                      className="suggestion"
+                    >
+                      <strong>{airport.airport_name}</strong> - {airport.city}, {airport.country}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
-          )}
-        </div>
 
-        <div className="input-group" ref={toInputRef}>
-          <label>To</label>
-          <input
-            type="text"
-            name="to"
-            value={estimationParams.to}
-            onChange={handleSearchChange}
-            placeholder="Search by airport, city, or country"
-            autoComplete="off"
-            required
-          />
-          {filteredToAirports.length > 0 && (
-            <div className="suggestions">
-              {filteredToAirports.map((airport) => (
-                <div
-                  key={airport.airport_id}
-                  onClick={() => handleAirportSelect('to', airport)}
-                  className="suggestion"
-                >
-                  <strong>{airport.airport_name}</strong> - {airport.city}, {airport.country}
+            <div className="input-group" ref={toInputRef}>
+              <label>To</label>
+              <input
+                type="text"
+                name="to"
+                value={estimationParams.to}
+                onChange={handleSearchChange}
+                placeholder="Search by airport, city, or country"
+                autoComplete="off"
+                required
+              />
+              {filteredToAirports.length > 0 && (
+                <div className="suggestions">
+                  {filteredToAirports.map((airport) => (
+                    <div
+                      key={airport.airport_id}
+                      onClick={() => handleAirportSelect('to', airport)}
+                      className="suggestion"
+                    >
+                      <strong>{airport.airport_name}</strong> - {airport.city}, {airport.country}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
-          )}
+
+            <div className="input-group">
+              <label>Number of Passengers</label>
+              <input
+                type="number"
+                name="passengers"
+                value={estimationParams.passengers || ''}
+                onChange={(e) =>
+                  setEstimationParams((prevParams) => ({
+                    ...prevParams,
+                    passengers: parseInt(e.target.value, 10) || 1,
+                  }))
+                }
+                min="1"
+                placeholder="Enter number of passengers"
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label>Cabin Class</label>
+              <select name="classID" value={estimationParams.classID} onChange={handleSearchChange}>
+                <option value="">Select Cabin Class</option>
+                {cabinClasses.map((cabin) => (
+                  <option key={cabin.class_id} value={cabin.class_id}>{cabin.class_name}</option>
+                ))}
+              </select>
+            </div>
+
+            <button type="submit" className="estimation-button">Estimate CO₂</button>
+          </form>
         </div>
 
-        <div className="input-group">
-          <label>Number of Passengers</label>
-          <input
-            type="number"
-            name="passengers"
-            value={estimationParams.passengers || ''}
-            onChange={(e) =>
-              setEstimationParams((prevParams) => ({
-                ...prevParams,
-                passengers: parseInt(e.target.value, 10) || 1,
-              }))
-            }
-            min="1"
-            placeholder="Enter number of passengers"
-            required
-          />
-        </div>
-
-        <div className="input-group">
-          <label>Cabin Class</label>
-          <select name="classID" value={estimationParams.classID} onChange={handleSearchChange}>
-            <option value="">Select Cabin Class</option>
-            {cabinClasses.map((cabin) => (
-              <option key={cabin.class_id} value={cabin.class_id}>{cabin.class_name}</option>
-            ))}
-          </select>
-        </div>
-
-        <button type="submit" className="estimation-button">Estimate CO₂</button>
-      </form>
-
-      {result && result.length > 0 && (
-        <div className="carbon-estimation-result">
+        <div className='result-container'>
           <h3>CO₂ Emission Estimation Results</h3>
-          {result.map((item, index) => (
-            <div key={index} className="result-card">
-              <p><strong>From:</strong>{item.from}</p>
-              <p><strong>To:</strong>{item.to}</p>
-              <p><strong>Cabin Class:</strong> {item.cabinClass}</p>
-              <p><strong>Passengers:</strong> {item.passengers}</p>
-              <p><strong>Estimated CO₂ Emissions:</strong> {item.co2Estimate} kg</p>
+          <div>
+            <p><strong>Cabin Class:</strong> {getCabinClassName(estimationParams.classID)}</p>
+          </div>
+          {result && result.length > 0 && (
+            <div className="result-details">
+              {result.map((item, index) => (
+                <div key={index} className="result-card" onClick={() => handleCardClick(item)}>
+                  <p className="fancy-co2"><strong>{item.co2Estimate} kg</strong></p>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
-      )}
 
-    </div>
+        {selectedCard && (
+          <div className="overlay">
+            <div className="overlay-content">
+              <span className="overlay-close-button" onClick={closeOverlay}>X</span>
+              <p><strong>From:</strong> {selectedCard.from}</p>
+              <p><strong>To:</strong> {selectedCard.to}</p>
+              <p><strong>Passengers:</strong> {selectedCard.passengers}</p>
+              <p><strong>Estimated CO₂ Emissions:</strong> {selectedCard.co2Estimate} kg</p>
+              <p><strong>Cabin Class:</strong> {getCabinClassName(estimationParams.classID)}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 

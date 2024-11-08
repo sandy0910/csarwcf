@@ -30,6 +30,7 @@ const guestRoute = require('./routes/guestRoute');
 app.use('/api/airlines', guestRoute);
 app.use('/api/flights', guestRoute);
 
+//Login
 const loginRoute = require('./routes/loginRoute');
 app.use('/api/login-endpoint', loginRoute);
 

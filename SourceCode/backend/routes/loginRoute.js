@@ -1,6 +1,5 @@
 const express = require('express');
 const session = require('express-session');
-const FileStore = require('session-file-store')(session);
 const mysql = require('mysql2');
 const app = express();
 
@@ -66,6 +65,47 @@ router.post('/signup', async (req, res) => {
     }
 });
 
+//Airline Signup
+router.post('/signup-airline', async (req, res) => {
+  const { username, email, password } = req.body; // Extract parameters from the request body
+
+  try {
+      // SQL query to check if the user already exists
+      const checkUserQuery = 'SELECT * FROM user WHERE email = ? OR username = ? AND role = 1';
+      const [results] = await connection.promise().query(checkUserQuery, [email, username]);
+
+      if (results.length > 0) {
+          return res.status(409).json({ success: false, message: 'User already exists!' }); // User exists
+      }
+
+      let userId;
+      let userIdExists = true;
+
+      // Generate a unique user ID
+      while (userIdExists) {
+          userId = generateUserId(8);
+
+          // SQL query to check if the generated user ID already exists
+          const checkUserIdQuery = 'SELECT * FROM user WHERE user_id = ?';
+          const [userIdResults] = await connection.promise().query(checkUserIdQuery, [userId]);
+
+          // If the user ID exists, continue the loop to generate a new one
+          userIdExists = userIdResults.length > 0;
+      }
+
+      // SQL query to insert the new user into the database
+      const insertUserQuery = 'INSERT INTO user (user_id, username, email, password, role) VALUES (?, ?, ?, ?, 1)';
+      
+      // Execute the query to insert the new user
+      await connection.promise().query(insertUserQuery, [userId, username, email, password]);
+
+      res.status(201).json({ success: true, message: 'User created successfully!' }); // Send success response
+
+  } catch (err) {
+      return res.status(500).json({ error: err.message }); // Send error response
+  }
+});
+
 // Login route
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
@@ -84,5 +124,4 @@ router.post('/login', (req, res) => {
       }
     });
   });
-
 module.exports = router;

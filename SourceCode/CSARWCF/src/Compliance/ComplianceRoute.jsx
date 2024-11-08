@@ -5,7 +5,6 @@ import DashboardContent from './DashboardContent'; // Ensure you have this compo
 import Regulations from './Regulations'; // Ensure you have this component
 import Airlines from './Airlines';
 import CarbonEstimation from './CarbonEstimation';
-import CarbonEstimationResult from './CarbonEstimationResult';
 
 
 const ComplianceRoute = () => {
