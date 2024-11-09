@@ -32,8 +32,6 @@ const AirlineLogin = () => {
         airlineId: selectedAirline.id
       });
 
-      console.log(response.data);
-
       if (response.data) {
         sessionStorage.setItem('userSession', JSON.stringify(response.data));
         navigate('/airline/dashboard'); // Redirect to AirlineAdmin dashboard
@@ -54,16 +52,16 @@ const AirlineLogin = () => {
       </video>
 
       {!selectedAirline ? (
-        <div className="airline-selection">
+        <div className="login-airline-selection">
           <h2>Select an Airline</h2>
-          <div className="airline-grid">
+          <div className="login-airline-grid">
             {airlines.map((airline) => (
               <div
                 key={airline.id}
-                className="airline-card"
+                className="login-airline-card"
                 onClick={() => setSelectedAirline(airline)}
               >
-                <img src={`data:image/jpeg;base64,${airline.LOGO}`} alt={`${airline.name} logo`} className="airline-logo" />
+                <img src={`data:image/jpeg;base64,${airline.LOGO}`} alt={`${airline.name} logo`} className="login-airline-logo" />
                 <p>{airline.name}</p>
               </div>
             ))}
@@ -72,7 +70,7 @@ const AirlineLogin = () => {
       ) : (
         <div className="login-container">
           <form className="login-form" onSubmit={handleLogin}>
-            <img src={`data:image/jpeg;base64,${selectedAirline.LOGO}`} alt={`${selectedAirline.name} logo`} className="selected-airline-logo" />
+            <img src={`data:image/jpeg;base64,${selectedAirline.LOGO}`} alt={`${selectedAirline.name} logo`} className="login-selected-airline-logo" />
             <h2>{selectedAirline.name} Admin Login</h2>
             {error && <p className="error-message">{error}</p>}
 
