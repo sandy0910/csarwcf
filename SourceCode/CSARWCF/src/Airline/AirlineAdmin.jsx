@@ -11,13 +11,17 @@ import {
   ListItem,
   ListItemText,
   CssBaseline,
+  Collapse,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import AirlineRoute from './AirlineRoute';
 
 const AirlineAdmin = () => {
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [manageFlightsOpen, setManageFlightsOpen] = React.useState(false);
 
   useEffect(() => {
     // Check if session data exists; if not, redirect to login page
@@ -32,7 +36,10 @@ const AirlineAdmin = () => {
     setDrawerOpen(!drawerOpen);
   };
 
-  // Uniform function to handle navigation for all menu items
+  const handleManageFlightsClick = () => {
+    setManageFlightsOpen(!manageFlightsOpen);
+  };
+
   const handleMenuClick = (path) => {
     if (path === '/logout') {
       // Clear session and redirect to login page
@@ -47,11 +54,16 @@ const AirlineAdmin = () => {
 
   const menuItems = [
     { label: 'Dashboard', path: '/airline' },
-    { label: 'Manage Flights', path: '/manage-flights' },
-    { label: 'Manage Airlines', path: '/manage-airlines' },
-    { label: 'User Management', path: '/user-management' },
+    {
+      label: 'Manage Flights',
+      path: '/manage-flights',
+      subItems: [
+        { label: 'View Flights', path: '/view-flights' },
+        { label: 'Add Flights', path: '/add-flights' },
+      ],
+    },
     { label: 'Flight Bookings', path: '/flight-bookings' },
-    { label: 'Logout', path: '/logout' }, // Keep logout in the same format
+    { label: 'Logout', path: '/logout' },
   ];
 
   return (
@@ -83,13 +95,42 @@ const AirlineAdmin = () => {
       >
         <List>
           {menuItems.map((item) => (
-            <ListItem
-              button
-              key={item.label}
-              onClick={() => handleMenuClick(item.path)}
-            >
-              <ListItemText primary={item.label} sx={{ color: '#FFFFFF' }} />
-            </ListItem>
+            <React.Fragment key={item.label}>
+              <ListItem
+                button
+                onClick={() => {
+                  if (item.subItems) {
+                    handleManageFlightsClick(); // Toggle sub-menu
+                  } else {
+                    handleMenuClick(item.path); // Normal navigation
+                  }
+                }}
+              >
+                <ListItemText primary={item.label} sx={{ color: '#FFFFFF' }} />
+                {item.subItems && (
+                  <IconButton sx={{ color: '#FFFFFF' }}>
+                    {manageFlightsOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  </IconButton>
+                )}
+              </ListItem>
+              {/* If the item has subItems, render them as a collapsible list */}
+              {item.subItems && (
+                <Collapse in={manageFlightsOpen} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
+                    {item.subItems.map((subItem) => (
+                      <ListItem
+                        button
+                        key={subItem.label}
+                        sx={{ pl: 4 }} // Indentation for subitems
+                        onClick={() => handleMenuClick(subItem.path)}
+                      >
+                        <ListItemText primary={subItem.label} sx={{ color: '#FFFFFF' }} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Collapse>
+              )}
+            </React.Fragment>
           ))}
         </List>
       </Drawer>
