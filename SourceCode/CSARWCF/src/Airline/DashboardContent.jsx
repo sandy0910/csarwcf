@@ -1,6 +1,6 @@
 // src/DashboardContent.jsx
 import React from 'react';
-import { Box, Typography, Paper } from '@mui/material';
+import { useNavigate, Link } from 'react-router-dom';
 
 const DashboardContent = () => {
   return (

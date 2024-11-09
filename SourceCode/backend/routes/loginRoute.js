@@ -124,4 +124,25 @@ router.post('/login', (req, res) => {
       }
     });
   });
+
+
+// Airline Login route
+router.post('/airline-vlogin', (req, res) => {
+    const { email, password, airlineId } = req.body;
+  
+    const loginQuery = `SELECT * FROM user u, airline a WHERE u.email = ? AND u.password = ?
+    AND u.username = a.name AND a.airline_id = ?`;
+    
+    connection.query(loginQuery, [email, password, airlineId], (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+  
+      if (results.length > 0) {
+        return res.json(results[0]);
+      } else {
+        return res.status(401).json({ success: false, message: 'Invalid email or password.' });
+      }
+    });
+  });
 module.exports = router;

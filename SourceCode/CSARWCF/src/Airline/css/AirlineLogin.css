@@ -1,14 +1,4 @@
-/* src/AirlineLogin.css */
-/* body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    background-color: #4d1200;
-  }
-*/
+/* General page and video styling */
 .login-page {
   position: relative;
   display: flex;
@@ -24,11 +14,41 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the video covers the entire screen */
+  object-fit: cover;
   z-index: 0;
   opacity: 70%;
 }
 
+/* Keyframes for pop-out and flip animations */
+@keyframes popOut {
+  0% {
+    transform: scale(1) rotateY(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotateY(90deg);
+  }
+  100% {
+    transform: scale(1) rotateY(180deg);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Slow down the animations */
+.login-airline-card.active {
+  animation: popOut 1.5s ease forwards;
+}
+
+/* Styling for login container */
 .login-container {
   background: rgba(20, 20, 20, 0.85);
   border-radius: 8px;
@@ -37,9 +57,72 @@
   max-width: 400px;
   width: 100%;
   text-align: center;
-  z-index: 1; /* Keep it above the video */
+  z-index: 1;
+  opacity: 0;
+  transform: scale(0.9);
+  display: none;
 }
 
+/* When active, display and animate login container */
+.login-container.active {
+  display: block;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+/* Airline selection and grid styling */
+.login-airline-selection {
+  text-align: center;
+  color: rgb(0, 0, 0);
+  z-index: 1;
+}
+
+.login-airline-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/* Card styling and hover effects */
+.login-airline-card {
+  width: 120px;
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.3s ease;
+  backface-visibility: hidden; /* Needed for the flip effect */
+}
+
+.login-airline-card:hover {
+  transform: scale(1.05);
+}
+
+.login-airline-card.active {
+  animation: popOut 0.6s ease forwards; /* Apply the pop-out flip animation */
+  background: rgba(20, 20, 20, 0.85);
+  color: #f9f9f9;
+  z-index: 2;
+  position: relative;
+}
+
+/* Logo and text adjustments for active state */
+.login-airline-card.active .login-airline-logo {
+  width: 100px;
+  height: 100px;
+}
+
+.login-airline-card.active p {
+  display: none;
+}
+
+/* Styling for login form */
 .login-form h2 {
   margin-bottom: 20px;
   color: #f9f9f9;
@@ -89,38 +172,7 @@
   background-color: #ff5722;
 }
 
-.login-airline-selection {
-  text-align: center;
-  color: rgb(0, 0, 0);
-  z-index: 1;
-}
-
-.login-airline-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-  max-height: 600px; /* Set the max height for scrolling */
-  overflow-y: auto; /* Enables vertical scroll */
-  padding: 10px;
-}
-
-.login-airline-card {
-  width: 120px;
-  padding: 15px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.login-airline-card:hover {
-  transform: scale(1.05);
-}
-
+/* Logo styling */
 .login-airline-logo {
   width: 80px;
   height: 80px;
@@ -134,7 +186,7 @@
   margin: 0 auto 20px;
 }
 
-/* Optional: Add a scrollbar style for better appearance */
+/* Optional: Add scrollbar styling */
 .login-airline-grid::-webkit-scrollbar {
   width: 6px;
 }

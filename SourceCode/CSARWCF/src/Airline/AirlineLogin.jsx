@@ -13,8 +13,14 @@ const AirlineLogin = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch airlines from the database using axios
-    axios.get('http://localhost:3001/api/airlines/airDetails') // replace with your actual API endpoint
+    const userSession = sessionStorage.getItem('userSession');
+    if (userSession) {
+      navigate('/airline/dashboard');
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/api/airlines/airDetails')
       .then((response) => {
         setAirlines(response.data);
       })
@@ -25,16 +31,15 @@ const AirlineLogin = () => {
     e.preventDefault();
     try {
       const hashedPassword = SHA1(password).toString();
-      // Send login credentials to API
-      const response = await axios.post('http://localhost:3001/api/login-endpoint/login', {
+      const response = await axios.post('http://localhost:3001/api/login-endpoint/airline-vlogin', {
         email,
         password: hashedPassword,
-        airlineId: selectedAirline.id
+        airlineId: selectedAirline.airline_id
       });
 
       if (response.data) {
         sessionStorage.setItem('userSession', JSON.stringify(response.data));
-        navigate('/airline/dashboard'); // Redirect to AirlineAdmin dashboard
+        navigate('/airline/dashboard');
       } else {
         setError('Invalid email or password');
       }
@@ -57,8 +62,8 @@ const AirlineLogin = () => {
           <div className="login-airline-grid">
             {airlines.map((airline) => (
               <div
-                key={airline.id}
-                className="login-airline-card"
+                key={airline.airline_id}
+                className={`login-airline-card ${selectedAirline === airline ? 'active' : ''}`}
                 onClick={() => setSelectedAirline(airline)}
               >
                 <img src={`data:image/jpeg;base64,${airline.LOGO}`} alt={`${airline.name} logo`} className="login-airline-logo" />
@@ -68,7 +73,7 @@ const AirlineLogin = () => {
           </div>
         </div>
       ) : (
-        <div className="login-container">
+        <div className="login-container active">
           <form className="login-form" onSubmit={handleLogin}>
             <img src={`data:image/jpeg;base64,${selectedAirline.LOGO}`} alt={`${selectedAirline.name} logo`} className="login-selected-airline-logo" />
             <h2>{selectedAirline.name} Admin Login</h2>

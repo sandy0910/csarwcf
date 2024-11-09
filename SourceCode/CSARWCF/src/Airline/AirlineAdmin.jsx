@@ -1,9 +1,18 @@
-// src/AirlineAdmin.jsx
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Box, Typography, AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, CssBaseline } from '@mui/material';
+import { useNavigate, Link } from 'react-router-dom';
+import {
+  Box,
+  Typography,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  CssBaseline,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
 import AirlineRoute from './AirlineRoute';
 
 const AirlineAdmin = () => {
@@ -11,15 +20,29 @@ const AirlineAdmin = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   useEffect(() => {
-    // Check if session data exists
+    // Check if session data exists; if not, redirect to login page
     const sessionToken = sessionStorage.getItem('userSession');
     if (!sessionToken) {
-      navigate('/air-login'); // Redirect to login page if not authenticated
+      console.log("No session token, redirecting to login.");
+      navigate('/air-login');
     }
-  }, [navigate]);  
+  }, [navigate]);
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
+  };
+
+  // Uniform function to handle navigation for all menu items
+  const handleMenuClick = (path) => {
+    if (path === '/logout') {
+      // Clear session and redirect to login page
+      sessionStorage.removeItem('userSession');
+      navigate('/air-login');
+    } else {
+      // Navigate to the selected menu path
+      navigate(path);
+    }
+    toggleDrawer(); // Close drawer after each selection
   };
 
   const menuItems = [
@@ -28,7 +51,7 @@ const AirlineAdmin = () => {
     { label: 'Manage Airlines', path: '/manage-airlines' },
     { label: 'User Management', path: '/user-management' },
     { label: 'Flight Bookings', path: '/flight-bookings' },
-    { label: 'Logout', path: '/logout' },
+    { label: 'Logout', path: '/logout' }, // Keep logout in the same format
   ];
 
   return (
@@ -63,9 +86,7 @@ const AirlineAdmin = () => {
             <ListItem
               button
               key={item.label}
-              component={Link}
-              to={item.path}
-              onClick={toggleDrawer}
+              onClick={() => handleMenuClick(item.path)}
             >
               <ListItemText primary={item.label} sx={{ color: '#FFFFFF' }} />
             </ListItem>
