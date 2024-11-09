@@ -12,11 +12,11 @@ const AirlineAdmin = () => {
 
   useEffect(() => {
     // Check if session data exists
-    const sessionToken = localStorage.getItem('sessionToken');
+    const sessionToken = sessionStorage.getItem('userSession');
     if (!sessionToken) {
       navigate('/air-login'); // Redirect to login page if not authenticated
     }
-  }, [navigate]);
+  }, [navigate]);  
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
