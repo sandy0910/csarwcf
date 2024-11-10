@@ -58,7 +58,7 @@ const AirlineAdmin = () => {
       label: 'Manage Flights',
       path: '/manage-flights',
       subItems: [
-        { label: 'View Flights', path: '/view-flights' },
+        { label: 'View Flights', path: '/airline/view-flights' },
         { label: 'Add Flights', path: '/add-flights' },
       ],
     },
