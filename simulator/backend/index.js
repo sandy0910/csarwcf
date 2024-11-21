@@ -92,8 +92,11 @@ async function calculateEstimatedEmission(flights) {
 
         let totalCO2 = 0; // To store total CO2 for the flight
         let passengerCount = 0;
+<<<<<<< HEAD
         let totalPassengerWt = 0;
         let baggageWeight = 0;
+=======
+>>>>>>> 010491e19a9161b0d785ff14e6e934375baefa08
 
         const classEstimations = await Promise.all(
           cClasses.map(async (cClass) => {
@@ -123,6 +126,7 @@ async function calculateEstimatedEmission(flights) {
             // Generate a random number of passengers not exceeding the available seats
             const passengers = Math.floor(Math.random() * (availableSeats + 1));
 
+<<<<<<< HEAD
             // Estimate the range for the random weight of each passenger (e.g., between 50kg and 100kg)
             const minPassengerWeight = 50;
             const maxPassengerWeight = 100;
@@ -144,6 +148,8 @@ async function calculateEstimatedEmission(flights) {
             const totalPassengerWtForClass = passengers * randomPassengerWeight;
             totalPassengerWt += totalPassengerWtForClass;
 
+=======
+>>>>>>> 010491e19a9161b0d785ff14e6e934375baefa08
             // Fetch Pax load factor for the route
             const [paxFactorResult] = await db.promise().query(
               `SELECT * FROM load_factors WHERE origin = ? AND destination = ?`,
@@ -177,9 +183,13 @@ async function calculateEstimatedEmission(flights) {
         return {
           flight_id: flightID,
           totalCO2: totalCO2,
+<<<<<<< HEAD
           passengers_travelled: passengerCount,
           totalPassengerWeight: totalPassengerWt,
           totalBaggageWeight: baggageWeight
+=======
+          passengers_travelled: passengerCount  
+>>>>>>> 010491e19a9161b0d785ff14e6e934375baefa08
         };
       })
     );
@@ -197,23 +207,35 @@ function calculateActualEmission(estimatedEmission) {
   return estimatedEmission * variation;
 }
 
+<<<<<<< HEAD
 // Function to update emissions for flight+s that have arrived
+=======
+// Function to update emissions for flights that have arrived
+>>>>>>> 010491e19a9161b0d785ff14e6e934375baefa08
 app.post('/api/emissions/update', async (req, res) => {
   try {
     const currentTime = moment().format('YYYY-MM-DD HH:mm:ss');
     db.query('SELECT * FROM flight_schedule WHERE scheduled_arrival_time <= ?', [currentTime], async (err, results) => {
       if (err) return res.status(500).json({ error: 'Database error' });
 
+<<<<<<< HEAD
       const estimatedEmissions = await calculateEstimatedEmission(results); 
       const emissionsUpdatePromises = results.map((flight, i) => {
         const estimatedEmission = estimatedEmissions[i]?.totalCO2 || 0;
         const passengers_travelled = estimatedEmissions[i]?.passengers_travelled || 0;
         const passengers_weight = estimatedEmissions[i]?.totalPassengerWeight || 0;
         const baggage_weight = estimatedEmissions[i]?.totalBaggageWeight || 0;
+=======
+      const estimatedEmissions = await calculateEstimatedEmission(results);
+      const emissionsUpdatePromises = results.map((flight, i) => {
+        const estimatedEmission = estimatedEmissions[i]?.totalCO2 || 0;
+        const passengers_travelled = estimatedEmissions[i]?.passengerCount || 0;
+>>>>>>> 010491e19a9161b0d785ff14e6e934375baefa08
         const actualEmission = calculateActualEmission(estimatedEmission);
 
         return new Promise((resolve, reject) => {
           db.query(
+<<<<<<< HEAD
             `INSERT INTO emissions (flight_schedule_id, passengers_travelled, passengers_weight, baggage_weight, act_emission, estimated_emission) 
               VALUES (?, ?, ?, ?, ?, ?) 
               ON DUPLICATE KEY UPDATE 
@@ -235,6 +257,19 @@ app.post('/api/emissions/update', async (req, res) => {
                 estimated_emission: estimatedEmission,
                 actual_emission: actualEmission
               });
+=======
+            `INSERT INTO emissions (flight_schedule_id, passengers_travelled, act_emission, estimated_emission) 
+              VALUES (?, ?, ?, ?) 
+              ON DUPLICATE KEY UPDATE 
+                act_emission = VALUES(act_emission), 
+                passengers_travelled = VALUES(passengers_travelled),
+                estimated_emission = VALUES(estimated_emission);
+              `,
+            [flight.schedule_id, passengers_travelled, actualEmission, estimatedEmission, actualEmission, passengers_travelled],
+            (err, result) => {
+              if (err) reject(err);
+              resolve(`Updated emissions for flight ${flight.flight_id}`);
+>>>>>>> 010491e19a9161b0d785ff14e6e934375baefa08
             }
           );
         });
