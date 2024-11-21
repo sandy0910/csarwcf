@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -20,6 +20,7 @@ import AirlineRoute from './AirlineRoute';
 
 const AirlineAdmin = () => {
   const navigate = useNavigate();
+  const location = useLocation(); // Access the current location
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [manageFlightsOpen, setManageFlightsOpen] = React.useState(false);
 
@@ -139,12 +140,17 @@ const AirlineAdmin = () => {
         component="main"
         sx={{ flexGrow: 1, bgcolor: '#FFEBEE', p: 3, marginTop: '64px' }}
       >
-        <Typography variant="h4" gutterBottom>
-          Welcome to the Airline Administration Dashboard
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Use the menu to navigate to different sections.
-        </Typography>
+        {/* Conditionally render welcome message only on /airline route */}
+        {location.pathname === '/airline' && (
+          <>
+            <Typography variant="h4" gutterBottom>
+              Welcome to the Airline Administration Dashboard
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              Use the menu to navigate to different sections.
+            </Typography>
+          </>
+        )}
       </Box>
 
       <Box component="main" sx={{ flexGrow: 1, bgcolor: '#FFEBEE', p: 3, marginTop: '64px' }}>

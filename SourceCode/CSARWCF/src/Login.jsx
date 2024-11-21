@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SHA1 from 'crypto-js/sha1'; // Import SHA1 for hashing
 import './css/Login.css'; // Import your CSS file for styling
 
-function Login() {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -43,12 +43,16 @@ function Login() {
       setLoading(false);
     }
   };
+  
+  useEffect(()=>{
+    console.log("test");
+  })
 
   return (
-    <div className="login-container">
-      <h2 className="login-title">Login</h2>
-      <form onSubmit={handleLoginSubmit} className="login-form">
-        <div className="login-input-group">
+    <div className="glogin-container">
+      <h2 className="glogin-title">Login</h2>
+      <form onSubmit={handleLoginSubmit} className="glogin-form">
+        <div className="glogin-input-group">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -58,7 +62,7 @@ function Login() {
             required
           />
         </div>
-        <div className="login-input-group">
+        <div className="glogin-input-group">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -68,12 +72,12 @@ function Login() {
             required
           />
         </div>
-        {error && <div className="login-error">{error}</div>}
-        <button type="submit" disabled={loading} className="login-button">
+        {error && <div className="glogin-error">{error}</div>}
+        <button type="submit" disabled={loading} className="glogin-button">
           {loading ? 'Logging in...' : 'Login'}
         </button>
       </form>
-      <div className="login-footer">
+      <div className="glogin-footer">
         <p>
           Don't have an account? 
           <a href="/signup" className="signup-link"> Sign up</a>
@@ -82,5 +86,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

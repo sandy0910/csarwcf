@@ -30,7 +30,7 @@ const Layout = () => {
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <img src="logoedit.jpg" alt="Logo" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
               <Typography variant="h6" noWrap>
-                ExTra Quest
+                FB ADMIN
               </Typography>
             </div>
           </Toolbar>

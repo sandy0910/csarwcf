@@ -146,7 +146,7 @@ body {
   }
 }
 
-.search-form {
+.h-search-form {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Adjusted to two columns for better responsiveness */
   gap: 20px;
@@ -158,20 +158,20 @@ body {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-.input-group {
+.h-input-group {
   display: flex;
   flex-direction: column;
   color: #004c99;
 }
 
-.input-group label {
+.h-input-group label {
   margin-bottom: 8px;
   font-weight: bold;
   color: #004c99; /* Darker blue for consistency */
 }
 
-.input-group input,
-.input-group select {
+.h-input-group input,
+.h-input-group select {
   padding: 0.6em;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -179,13 +179,13 @@ body {
   transition: border-color 0.3s ease;
 }
 
-.input-group input:focus,
-.input-group select:focus {
+.h-input-group input:focus,
+.h-input-group select:focus {
   border-color: #004c99;
   outline: none;
 }
 
-.trip-type {
+.h-trip-type {
   display: flex;
   gap: 10px;
   color: #333;
@@ -194,18 +194,18 @@ body {
   margin-bottom: 1em;
 }
 
-.trip-type label {
+.h-trip-type label {
   display: flex;
   align-items: center;
   font-weight: bold;
   color: #004c99;
 }
 
-.trip-type input[type="radio"] {
+.h-trip-type input[type="radio"] {
   margin-right: 5px;
 }
 
-.search-button {
+.h-search-button {
   grid-column: 1 / -1; /* Spans across full width of the form */
   background-color: #004c99;
   color: white;
@@ -217,7 +217,7 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.search-button:hover {
+.h-search-button:hover {
   background-color: #002f5a;
   transform: scale(1.02); /* Slight scaling effect on hover */
 }
@@ -231,7 +231,7 @@ body {
   font-size: 0.9em;
 }
 
-.suggestions {
+.h-suggestions {
   top: 100%;
   background-color: white;
   border: 1px solid #ccc;
@@ -242,7 +242,7 @@ body {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
 }
 
-.suggestion {
+.h-suggestion {
   padding: 10px;
   cursor: pointer;
 }

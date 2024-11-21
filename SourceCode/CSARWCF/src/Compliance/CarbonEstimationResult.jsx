@@ -9,7 +9,10 @@ function CarbonEstimationResult({ estimationParams }) {
     if (estimationParams.from && estimationParams.to && estimationParams.classID && estimationParams.passengers) {
       // Fetch estimation result based on parameters
       axios.post('http://localhost:3001/api/compliance/estimate-carbon', estimationParams)
-        .then((response) => setResult(response.data))
+        .then((response) => {
+          setResult(response.data)
+        console.log(result.data);
+        })
         .catch((error) => console.error('Error fetching estimation result:', error));
     }
   }, [estimationParams]);

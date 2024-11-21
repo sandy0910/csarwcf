@@ -110,7 +110,7 @@ router.post('/signup-airline', async (req, res) => {
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
   
-    const loginQuery = 'SELECT * FROM user WHERE email = ? AND password = ?';
+    const loginQuery = 'SELECT * FROM user WHERE email = ? AND password = ? and role = 2';
     
     connection.query(loginQuery, [email, password], (err, results) => {
       if (err) {

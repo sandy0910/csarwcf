@@ -5,6 +5,7 @@ import DashboardContent from './DashboardContent'; // Ensure you have this compo
 import Regulations from './Regulations'; // Ensure you have this component
 import Airlines from './Airlines';
 import CarbonEstimation from './CarbonEstimation';
+import Deviations from './Deviations';
 
 
 const ComplianceRoute = () => {
@@ -15,6 +16,7 @@ const ComplianceRoute = () => {
       <Route path="/airlines" element={<Airlines />} />
       <Route path="/regulations" element={<Regulations />} />
       <Route path="/estimation" element={<CarbonEstimation />} />
+      <Route path='/deviations' element={<Deviations />} />
     </Routes>
   );
 };

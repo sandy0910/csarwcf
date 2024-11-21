@@ -44,6 +44,7 @@ const Sidebar = ({ open, toggleSidebar }) => {
       openSubMenu: openAirlinesSubMenu,
     },
     { text: 'Users', icon: <PeopleIcon />, path: '/admin/users' },
+    { text: 'Carbon Deviations', icon: <AirplanemodeActiveIcon />, path: '/admin/carbon-deviants'}
   ];
 
   const handleLogout = () => {

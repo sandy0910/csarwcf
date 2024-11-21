@@ -15,7 +15,7 @@ const AirlineLogin = () => {
   useEffect(() => {
     const userSession = sessionStorage.getItem('userSession');
     if (userSession) {
-      navigate('/airline/dashboard');
+      navigate('/airline');
     }
   }, [navigate]);
 
@@ -39,7 +39,7 @@ const AirlineLogin = () => {
 
       if (response.data) {
         sessionStorage.setItem('userSession', JSON.stringify(response.data));
-        navigate('/airline/dashboard');
+        navigate('/airline');
       } else {
         setError('Invalid email or password');
       }

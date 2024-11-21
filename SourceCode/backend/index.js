@@ -41,6 +41,10 @@ app.use('/api/dashboard-stats', dashRoute);
 const airRoute = require('./routes/admin/airRoute');
 app.use('/api/admin-airlines', airRoute);
 
+//Airline Side
+const airlineAdminRoute = require('./routes/airlines/airlineAdminRoute');
+app.use('/api/airlines-admin', airlineAdminRoute);
+
 
 //Compliance Managing
 const yseatRoute = require('./routes/compliance/yseatRoute');
@@ -54,6 +58,9 @@ app.use('/api/compliance-air', airlineRoute);
 
 const estimateRoute = require('./routes/compliance/estimateRoute');
 app.use('/api/compliance/', estimateRoute);
+
+const deviationsRoute = require('./routes/compliance/deviationsRoute');
+app.use('/api/compliance-ar/', deviationsRoute);
 
 // Start server
 app.listen(PORT, () => {

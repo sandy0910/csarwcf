@@ -17,6 +17,7 @@ const ComplianceManager = () => {
     { text: 'Regulations', path: '/compliance/regulations' },
     { text: 'Airlines', path:'/compliance/airlines'},
     { text: 'Carbon Estimation', path:'/compliance/estimation'},
+    { text: 'Deviations', path:'/compliance/deviations'},
     { text: 'Logout', path: '/logout' }
   ];
 

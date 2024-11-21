@@ -3,13 +3,14 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import DashboardContent from './DashboardContent';
 import AirlineLogin from './AirlineLogin';
+import ViewFlights from './ViewFlights';
 
 const AirlineRoute = () => {
   return (
       <Routes>
         <Route path="/" element={<DashboardContent />} /> {/* Default dashboard page */}
-        <Route path="/dashboard" element={<DashboardContent />} />
         <Route path='/air-login' element={<AirlineLogin />} />
+        <Route path='/view-flights' element={<ViewFlights />} />
       </Routes>
   );
 };

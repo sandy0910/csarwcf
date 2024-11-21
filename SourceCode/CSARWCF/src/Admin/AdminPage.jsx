@@ -4,6 +4,7 @@ import Layout from './Layout';
 import Dashboard from './Dashboard';
 import ViewAirlines from './ViewAirlines';
 import AddAirlines from './AddAirline';
+import CarbonDeviations from './CarbonDeviations';
 
 const AdminPage = () => {
   return (
@@ -14,6 +15,7 @@ const AdminPage = () => {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="airlines" element={<ViewAirlines />} />
           <Route path='airlines/add' element={<AddAirlines />} />
+          <Route path='carbon-deviants' element={<CarbonDeviations />} />
         </Route>
       </Routes>
   );

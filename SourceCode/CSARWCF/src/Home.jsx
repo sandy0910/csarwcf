@@ -132,8 +132,8 @@ function Home() {
           </div>
         </div>
           <div className='form-container'>
-            <form onSubmit={handleSearchSubmit} className="search-form">
-              <div className="trip-type">
+            <form onSubmit={handleSearchSubmit} className="h-search-form">
+              <div className="h-trip-type">
                 <label>
                   <input type="radio" name="tripType" value="one-way" onChange={handleSearchChange} checked={searchParams.tripType === 'one-way'} /> One Way
                 </label>
@@ -145,7 +145,7 @@ function Home() {
                 </label>
               </div>
 
-              <div className="input-group" ref={fromInputRef}>
+              <div className="h-input-group" ref={fromInputRef}>
                 <label>From</label>
                 <input
                   type="text"
@@ -157,7 +157,7 @@ function Home() {
                   required
                 />
                 {filteredFromAirports.length > 0 && (
-                  <div className="suggestions">
+                  <div className="h-suggestions">
                     {filteredFromAirports.map((airport) => (
                       <div
                         key={airport.airport_id}
@@ -171,7 +171,7 @@ function Home() {
                 )}
               </div>
 
-              <div className="input-group" ref={toInputRef}>
+              <div className="h-input-group" ref={toInputRef}>
                 <label>To</label>
                 <input
                   type="text"
@@ -183,7 +183,7 @@ function Home() {
                   required
                 />
                 {filteredToAirports.length > 0 && (
-                  <div className="suggestions">
+                  <div className="h-suggestions">
                     {filteredToAirports.map((airport) => (
                       <div
                         key={airport.airport_id}
@@ -197,22 +197,22 @@ function Home() {
                 )}
               </div>
 
-              <div className="input-group">
+              <div className="h-input-group">
                 <label>Departure Date</label>
                 <input type="date" name="departureDate" value={searchParams.departureDate} onChange={handleSearchChange} required />
               </div>
 
-              <div className="input-group">
+              <div className="h-input-group">
                 <label>Return Date</label>
                 <input type="date" name="returnDate" value={searchParams.returnDate} onChange={handleSearchChange} disabled={searchParams.tripType !== 'round-trip'} />
               </div>
 
-              <div className="input-group">
+              <div className="h-input-group">
                 <label>Travellers</label>
                 <input type="number" name="travellers" value={searchParams.travellers} onChange={handleSearchChange} min="1" max="10" required />
               </div>
 
-              <div className="input-group">
+              <div className="h-input-group">
                 <label>Class</label>
                 <select name="classID" value={searchParams.classID} onChange={handleSearchChange}>
                   <option value="">Select Cabin Class</option>
@@ -222,7 +222,7 @@ function Home() {
                 </select>
               </div>
 
-              <button type="submit" className="search-button">Search</button>
+              <button type="submit" className="h-search-button">Search</button>
             </form>
           </div>
         </div>

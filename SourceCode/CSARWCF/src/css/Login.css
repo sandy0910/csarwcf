@@ -1,4 +1,4 @@
-.login-container {
+.glogin-container {
     max-width: 400px; /* Set maximum width of the container */
     margin: 50px auto; /* Center the container with automatic margins */
     padding: 20px; /* Add padding inside the container */
@@ -8,34 +8,34 @@
     background-color: #fff; /* White background for the container */
   }
   
-  .login-title {
+  .glogin-title {
     text-align: center; /* Center-align the title */
     margin-bottom: 20px; /* Space below the title */
   }
   
-  .login-input-group {
+  .glogin-input-group {
     margin-bottom: 15px; /* Space below each input group */
   }
   
-  .login-input-group label {
+  .glogin-input-group label {
     display: block; /* Block display for label */
     margin-bottom: 5px; /* Space below the label */
   }
   
-  .login-input-group input {
+  .glogin-input-group input {
     width: 100%; /* Full width for inputs */
     padding: 8px; /* Padding inside inputs */
     border: 1px solid #ccc; /* Light gray border */
     border-radius: 4px; /* Rounded corners for inputs */
   }
   
-  .login-error {
+  .glogin-error {
     color: red; /* Red color for error messages */
     margin-bottom: 15px; /* Space below error message */
     text-align: center; /* Center-align error message */
   }
   
-  .login-button {
+  .glogin-button {
     width: 100%; /* Full width for the button */
     padding: 10px; /* Padding inside button */
     background-color: #007bff; /* Bootstrap primary color for button */
@@ -46,21 +46,21 @@
     transition: background-color 0.3s; /* Smooth transition for background color */
   }
   
-  .login-button:hover {
+  .glogin-button:hover {
     background-color: #0056b3; /* Darker blue on hover */
   }
   
-  .login-footer {
+  .glogin-footer {
     text-align: center; /* Center-align footer content */
     margin-top: 20px; /* Space above footer */
   }
   
-  .login-footer a {
+  .glogin-footer a {
     color: #007bff; /* Link color */
     text-decoration: none; /* Remove underline */
   }
   
-  .login-footer a:hover {
+  .glogin-footer a:hover {
     text-decoration: underline; /* Underline on hover */
   }
   

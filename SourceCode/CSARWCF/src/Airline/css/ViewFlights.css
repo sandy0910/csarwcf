@@ -1,0 +1,89 @@
+/*FLight Contatiner*/
+.aa-flight-container{
+  margin-right: 1000px;
+}
+
+/* Styles for flight cards */
+.aa-flight-cards {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr); /* Adjust number of columns as needed */
+  grid-auto-rows: auto; /* Automatic row height based on content */
+  gap: 16px;
+  max-width: 800px;
+}
+
+.aa-flight-card {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.aa-flight-card:hover {
+  background-color: #eaeaea;
+  transform: scale(1.05);
+}
+
+  
+  /* Overlay styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-content {
+  background: rgba(255, 255, 255, 0.9); /* Slightly opaque white background for content */
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: left;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+
+  /* Buttons in the modal */
+.edit-btn, .delete-btn, .save-btn {
+  margin: 10px 5px;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.save-btn {
+  background-color: #008CBA;
+  color: white;
+}
