@@ -16,7 +16,9 @@ function Deviations() {
         console.log(deviationResponse.data);
         
         // Store the fetched data
-        setDeviationData(deviationResponse.data);
+        if(deviationResponse.data.deviation_percentage != null){
+          setDeviationData(deviationResponse.data);
+        }
       } catch (error) {
         console.error('Error fetching deviation data:', error);
       }
