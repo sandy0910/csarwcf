@@ -12,7 +12,8 @@ function CO2Emissions() {
 
     try {
       const response = await axios.post('http://localhost:3000/api/emissions/update');
-      setEmissionData(response.data);
+      console.log(response.data.details);
+      setEmissionData(response.data.details);
     } catch (err) {
       setError(err.response ? err.response.data.error : 'Failed to update emissions');
     } finally {
@@ -31,8 +32,8 @@ function CO2Emissions() {
         <div>
           <h2>Update Results:</h2>
           <ul>
-            {emissionData.details.map((detail, index) => (
-              <li key={index}>{detail}</li>
+            {emissionData.map((detail) => (
+              <li key={detail.flight_id}>{detail.flight_id}</li>
             ))}
           </ul>
         </div>

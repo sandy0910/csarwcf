@@ -11,7 +11,6 @@ const util = require('util');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
-
 // Middleware 
 app.use(cors());
 app.use(express.json({ limit: '50mb' })); 
@@ -25,6 +24,15 @@ const connection = mysql.createConnection({
 });
 
 const query = util.promisify(connection.query).bind(connection);
+
+const runComparisonLogic  = require('./routes/compliance/comparisonLogic');
+
+runComparisonLogic();
+
+setInterval(() => {
+    console.log("Running scheduled comparison logic...");
+    runComparisonLogic();
+}, 60 * 60 * 1000);
 
 const guestRoute = require('./routes/guestRoute');
 app.use('/api/airlines', guestRoute);
