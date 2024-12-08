@@ -31,11 +31,16 @@ router.get('/flight-search', (req, res) => {
 
   // Prepare SQL query
   const sql = `
-    SELECT * FROM cabinclass c, flight_schedule fs WHERE
+    SELECT * FROM cabinclass c, flight_cabin fc, flight_schedule fs, airline a, airport air1, airport air2, flight f WHERE
      fs.depart_airport_id = ?
      AND fs.arrival_airport_id = ?
      AND c.class_id = ?
      AND fs.flight_id = c.flight_id
+     AND f.flight_id = fs.flight_id
+     AND air1.airport_id = fs.depart_airport_id
+     AND air2.airport_id = fs.arrival_airport_id
+     AND fs.airline_id = a.airline_id
+     AND fc.class_id = c.class_id
      AND fs.status = 1;
   `;
 
@@ -80,6 +85,15 @@ router.get('/fetch-cabin-classes', (req, res) => {
       return res.status(500).json({ error: 'Database error occurred' });
     }
     res.json(results);
+  });
+});
+
+router.get('/user-details', async (req, res) => {
+  const {userId} = req.query;
+  const userQuery = `SELECT * from user u, passenger p where u.user_id = p.passenger_id AND u.user_id = ?`;
+  connection.query(userQuery, [userId], (err, results) => {
+    if(err) console.error("Error in fetching user detials");
+    return res.send(results);
   });
 });
 

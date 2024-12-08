@@ -37,6 +37,13 @@ setInterval(() => {
 const guestRoute = require('./routes/guestRoute');
 app.use('/api/airlines', guestRoute);
 app.use('/api/flights', guestRoute);
+app.use('/api/users/', guestRoute);
+
+const paymentRoute = require('./routes/paymentRoute');
+app.use('/api/razor-payments/', paymentRoute);
+
+const ticketRoute = require('./routes/ticketRoute');
+app.use('/api/ticket-generation', ticketRoute);
 
 //Login
 const loginRoute = require('./routes/loginRoute');

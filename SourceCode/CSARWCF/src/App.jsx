@@ -10,6 +10,8 @@ import AdminPage from './Admin/AdminPage';
 import ComplianceManager from './Compliance/ComplianceManager';
 import AirlineAdmin from './Airline/AirlineAdmin';
 import AirlineLogin from './Airline/AirlineLogin';
+import Booking from './Booking';
+import TicketGeneration from './TicketGeneration';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path='/scoreboard' element={<Scoreboard />} />
         <Route path='/login' element={<Login/>} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/booking' element={<Booking />} />
+        <Route path='/ticket-generation' element={<TicketGeneration />} />
       </Routes>
     </Router>
   );

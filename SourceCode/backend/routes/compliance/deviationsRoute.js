@@ -55,8 +55,6 @@ function handleDeviations(flightID, deviation_percentage, estimated_emission, ac
 
     // Helper function to process count-based logic
     function processCount(count) {
-        // console.log("Count:", count);
-
         if (count >= 3 && count < 5) {
             // Moderate level: Add fine
             const addFineQuery = `
@@ -222,11 +220,12 @@ router.post('/comparisonEstimate', async (req, res) => {
 
 
 router.get('/deviationsData', (req, res) => {
-  const deviationDataQuery = `SELECT * FROM deviations;`;
+  const deviationDataQuery = `SELECT * FROM deviations d, flight_schedule fs,
+  flight f where fs.schedule_id = d.flight_schedule_id and f.flight_id = fs.flight_id;`;
 
   connection.query(deviationDataQuery, (err, results) => {
     if (err) {
-      console.log("Error in fetching Deviations data", err);
+      console.error("Error in fetching Deviations data", err);
       return res.status(500).json({ error: "Error fetching deviations data" });
     }
 

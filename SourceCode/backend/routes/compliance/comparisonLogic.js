@@ -3,8 +3,6 @@ const mysql = require('mysql2/promise'); // Use promise-based MySQL client
 const axios = require('axios');
 const moment = require('moment');
 
-const router = express.Router();
-
 // MySQL Connection
 const connection = mysql.createPool({
     host: 'localhost',
@@ -56,13 +54,17 @@ async function handleDeviations(flightID, deviation_percentage, estimated_emissi
              WHERE flight_id = ? AND flight_schedule_id = ? AND DATE(timestamp) = ?`,
             [flightID, flight_schedule_id, currentDate]
         );
-
-        const [selectCountResults] = await connection.execute(
-            `SELECT COUNT(*) as count FROM deviations WHERE flight_id = ?`,
-            [flightID]
-        );
-        const count = selectCountResults[0].count;
-
+        let count = 0;
+        if(results.length > 0){
+            count = -1;
+        }else{
+            const [selectCountResults] = await connection.execute(
+                `SELECT COUNT(*) as count FROM deviations WHERE flight_id = ?`,
+                [flightID]
+            );
+            count = selectCountResults[0].count;
+        }
+        
         if (count >= 3 && count < 5) {
             await connection.execute(
                 `INSERT INTO penalty (flight_id, fine_charges, status, timestamp)
@@ -91,8 +93,13 @@ async function handleDeviations(flightID, deviation_percentage, estimated_emissi
 // Comparison Logic
 async function runComparisonLogic() {
     try {
-        const emissionsData = await axios.get('http://localhost:3000/api/emissions/fetchSimulation');
-        console.log(emissionsData);
+        const emissionDataResponse = await axios.get('http://localhost:3000/api/emissions/fetchSimulation');
+        const emissionsData = emissionDataResponse.data.details;
+
+        if (!Array.isArray(emissionsData)) {
+            console.error("Invalid emission data format");
+            return;
+        }
 
         const [results] = await connection.execute(`SELECT * FROM flight_schedule`);
 
@@ -127,8 +134,6 @@ async function runComparisonLogic() {
                 );
             }
         }
-
-        console.log('Comparison Results:', comparisonResults);
     } catch (error) {
         console.error('Error in runComparisonLogic:', error);
     }

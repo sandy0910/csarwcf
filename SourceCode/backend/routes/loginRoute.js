@@ -24,12 +24,19 @@ const generateUserId = (length) => {
     return result;
 };
 
-// User signup endpoint
+//Signup for Login Route
 router.post('/signup', async (req, res) => {
-    const { username, email, password } = req.body; // Extract parameters from the request body
-
+  const {
+    username,
+    email,
+    password,
+    name,
+    dob,
+    gender,
+    phoneNumber,
+    address: { doorNumber, street, city, postalCode, country },
+  } = req.body;
     try {
-        // SQL query to check if the user already exists
         const checkUserQuery = 'SELECT * FROM user WHERE email = ? OR username = ?';
         const [results] = await connection.promise().query(checkUserQuery, [email, username]);
 
@@ -54,11 +61,17 @@ router.post('/signup', async (req, res) => {
 
         // SQL query to insert the new user into the database
         const insertUserQuery = 'INSERT INTO user (user_id, username, email, password, role) VALUES (?, ?, ?, ?, 2)';
-        
-        // Execute the query to insert the new user
-        await connection.promise().query(insertUserQuery, [userId, username, email, password]);
-
-        res.status(201).json({ success: true, message: 'User created successfully!' }); // Send success response
+        const insertPassengerQuery = `INSERT INTO passenger(passenger_id, name, dob, gender, email, mobile, house_no, street, city, pincode, country)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+        connection.query(insertPassengerQuery, [userId, name, dob, gender, email, phoneNumber, doorNumber, street, city, postalCode, country], (err, passResults) => {
+          if(err) console.error("Error in inserting passenger data", err);
+          else{
+            connection.query(insertUserQuery, [userId, username, email, password], (err) => {
+              if(err) console.error("Error inserting user data");
+              res.status(201).json({ success: true, message: 'User created successfully!' }); // Send success response
+            });
+          }
+        });
 
     } catch (err) {
         return res.status(500).json({ error: err.message }); // Send error response
@@ -145,4 +158,5 @@ router.post('/airline-vlogin', (req, res) => {
       }
     });
   });
+
 module.exports = router;
