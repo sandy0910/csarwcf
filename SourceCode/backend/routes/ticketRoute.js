@@ -99,7 +99,7 @@ router.get('/reserve-details/:reserve_id', async (req, res) => {
 
 
 router.post("/send-ticket", async (req, res) => {
-  const reservationData  = req.body;
+  const {reservationData, reserve_id}  = req.body;
   console.log(reservationData);
 
   try {
@@ -110,7 +110,7 @@ router.post("/send-ticket", async (req, res) => {
     }
 
     // Generate the ticket
-    const filePath = path.join(ticketsDir, `ticket_${reservationData.bookingId}.pdf`);
+    const filePath = path.join(ticketsDir, `ticket_${reserve_id}.pdf`);
     const doc = new PDFDocument();
     const stream = fs.createWriteStream(filePath);
 
@@ -119,7 +119,7 @@ router.post("/send-ticket", async (req, res) => {
     // Add content to the PDF
     doc.fontSize(16).text("Flight Ticket", { align: "center" });
     doc.moveDown();
-    doc.fontSize(12).text(`Booking ID: ${reservationData.bookingId}`);
+    doc.fontSize(12).text(`Booking ID: ${reserve_id}`);
     doc.text(`Name: ${reservationData.passenger_name}`);
     doc.text(`Email: ${reservationData.passenger_email}`);
     doc.text(`Phone: ${reservationData.passenger_mobile}`);
@@ -139,9 +139,12 @@ router.post("/send-ticket", async (req, res) => {
       // Step 2: Send Email
       const transporter = nodemailer.createTransport({
         service: "gmail", // Use your email service
+        host: 'smtp.gmail.com',
+        port : 587,
+        secure: false,
         auth: {
-          user: "your_email@gmail.com",
-          pass: "your_password", // Use app-specific password or environment variables
+          user: "santhoshsantho024@gmail.com",
+          pass: "zpqm gcjg iucn fmhd", // Use app-specific password or environment variables
         },
       });
 
@@ -150,7 +153,7 @@ router.post("/send-ticket", async (req, res) => {
         to: "ksantosh@ptuniv.edu.in",
         subject: "Your Flight Ticket",
         text: "Please find your flight ticket attached.",
-        attachments: [{ filename: `ticket_${reservationData.bookingId}.pdf`, path: filePath }],
+        attachments: [{ filename: `ticket_${reserve_id}.pdf`, path: filePath }],
       };
 
       await transporter.sendMail(mailOptions);

@@ -1,61 +1,115 @@
+/* TicketGeneration.css */
+
+/* General styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
 .ticket-page {
-  font-family: Arial, sans-serif;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
 }
 
 .ticket-header {
-  font-size: 24px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Ticket container styling */
+.ticket-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
   margin-bottom: 20px;
 }
 
-.ticket-container {
-  width: 70%;
-  margin: 0 auto;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.ticket-title {
+  font-size: 1.5rem;
+  color: #2980b9;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-.ticket-title {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 15px;
+/* Airline logo styling */
+.airline-logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.airline-logo {
+  max-height: 80px;
+  object-fit: contain;
+}
+
+/* Ticket details */
+.ticket-details {
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .ticket-details p {
-  font-size: 16px;
   margin: 5px 0;
 }
 
 .ticket-details strong {
-  color: #333;
+  color: #2c3e50;
 }
 
-.download-btn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #3399cc;
-  color: white;
+/* Divider styling */
+hr {
   border: none;
-  border-radius: 5px;
+  border-top: 1px solid #dcdcdc;
+  margin: 15px 0;
+}
+
+/* Button styling */
+.download-btn {
+  background-color: #2980b9;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .download-btn:hover {
-  background-color: #287ba6;
+  background-color: #1a5276;
 }
 
-.airline-logo-container {
-  text-align: center;
-  margin: 20px 0;
+.download-btn:disabled {
+  background-color: #dcdcdc;
+  cursor: not-allowed;
 }
 
-.airline-logo {
-  max-width: 150px;
-  height: auto;
-}
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .ticket-container {
+    padding: 15px;
+  }
 
+  .ticket-header {
+    font-size: 1.5rem;
+  }
+
+  .ticket-details {
+    font-size: 0.9rem;
+  }
+}

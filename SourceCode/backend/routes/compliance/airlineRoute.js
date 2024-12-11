@@ -25,8 +25,7 @@ router.get('/airline-fetch', (req, res) => {
 // API endpoint to fetch flights for a specific airline
 router.get('/flights-fetch/:airlineId', (req, res) => {
     const airlineId = req.params.airlineId; // Get airline ID from request parameters
-    const query = `SELECT 
-    f.depart_airport_id AS origin_id, 
+    const query = `SELECT f.depart_airport_id AS origin_id,
     a1.city AS origin_city, 
     f.arrival_airport_id AS destination_id, 
     a2.city AS destination_city,
@@ -39,9 +38,9 @@ router.get('/flights-fetch/:airlineId', (req, res) => {
     JOIN 
         airport a2 ON f.arrival_airport_id = a2.airport_id
 	JOIN 
-		flight_icao fi ON fi.flight_id = f.flight_id
+		flight_icao fi ON fi.flight_schedule_id = f.schedule_id
     JOIN 
-        flight ff ON f.flight_id = ff.flight_id
+      flight ff ON f.flight_id = ff.flight_id
 	WHERE ff.airline_id = ? ;`; 
   
     connection.query(query, [airlineId], (err, results) => {

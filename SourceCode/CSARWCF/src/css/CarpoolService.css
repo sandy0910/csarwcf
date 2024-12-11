@@ -1,0 +1,82 @@
+/* Container styling */
+.carpool-service-container {
+  font-family: Arial, sans-serif;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.carpool-service-container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Messages */
+.success-message {
+  color: #4caf50;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.error-message {
+  color: #f44336;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Form styling */
+.carpool-form .form-group {
+  margin-bottom: 15px;
+}
+
+.carpool-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.carpool-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.carpool-form input::placeholder {
+  color: #aaa;
+}
+
+/* Button styling */
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #2196f3;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}

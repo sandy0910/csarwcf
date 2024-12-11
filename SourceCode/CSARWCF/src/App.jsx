@@ -12,6 +12,9 @@ import AirlineAdmin from './Airline/AirlineAdmin';
 import AirlineLogin from './Airline/AirlineLogin';
 import Booking from './Booking';
 import TicketGeneration from './TicketGeneration';
+import Carpool from './Carpool';
+import UserProfile from './UserProfile';
+import CarpoolService from './CarpoolService';
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/booking' element={<Booking />} />
         <Route path='/ticket-generation' element={<TicketGeneration />} />
+        <Route path='/carpool' element={<Carpool />} />
+        <Route path='/profile' element={<UserProfile />} />
+        <Route path='/offer-service' element={<CarpoolService />} />
       </Routes>
     </Router>
   );

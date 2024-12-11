@@ -1,11 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import axios from "axios";
 import './css/TicketGeneration.css'; // Include CSS for styling
 
 function TicketGeneration() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { reserve_id } = location.state; // Fetch reserve_id from state
 
   // State to hold reservation details
@@ -35,9 +36,14 @@ function TicketGeneration() {
   // Send ticket to email
   const sendTicketToEmail = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/api/ticket-generation/send-ticket", reservationData);
+      const response = await axios.post("http://localhost:3001/api/ticket-generation/send-ticket",{
+        reservationData,
+        reserve_id
+      });
 
       alert("Ticket sent successfully!");
+      console.log("Reservation: ", reservationData);
+      navigate('/carpool', { state: { reserve_id, reservationData } });
     } catch (err) {
       console.error("Error sending ticket:", err);
       alert("Failed to send ticket.");
@@ -66,7 +72,7 @@ function TicketGeneration() {
 
         {/* Ticket Details */}
         <div className="ticket-details">
-          <p><strong>Booking ID:</strong> {reservationData.bookingId}</p>
+          <p><strong>Booking ID:</strong> {reserve_id}</p>
           <p><strong>Name:</strong> {reservationData.passenger_name}</p>
           <p><strong>Email:</strong> {reservationData.passenger_email}</p>
           <p><strong>Phone:</strong> {reservationData.passenger_mobile}</p>
@@ -80,7 +86,7 @@ function TicketGeneration() {
           <p><strong>Cabin Baggage:</strong> 7 Kgs</p>
           <p><strong>Check-in Baggage:</strong> 15 Kgs</p>
           <hr />
-          <p><strong>Total Paid:</strong> ₹{reservationData.totalAmount}</p>
+          <p><strong>Total Paid:</strong> ₹{reservationData.amount}</p>
         </div>
       </div>
 

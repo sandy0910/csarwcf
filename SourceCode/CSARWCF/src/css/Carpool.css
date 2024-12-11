@@ -1,0 +1,148 @@
+/* General container styling */
+.carpool-container {
+  font-family: Arial, sans-serif;
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Header styling */
+.carpool-container h1 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+/* Options buttons styling */
+.options {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.options button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.offer-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.request-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+.options button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.options button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Loading and error messages */
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.service-details {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.service-details h2 {
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.service-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.service-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.service-item p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.service-item strong {
+  color: #333;
+}
+
+/* Profile navigation button */
+.profile-navigation {
+  margin-top: 20px;
+}
+
+.profile-btn {
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  background-color: #ff9800;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.profile-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+
+/* Mobile responsive styling */
+@media (max-width: 600px) {
+  .carpool-container {
+    padding: 15px;
+  }
+
+  .options {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .options button {
+    width: 100%;
+  }
+
+  .service-item {
+    padding: 10px;
+  }
+}
+

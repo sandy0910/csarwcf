@@ -130,8 +130,8 @@ router.post('/estimate-carbon', async (req, res) => {
         const occupiedYSeat = totalYseat * paxFactor;
 
         const [fuelConRes] = await connection.query(
-          `SELECT * from flight_icao where flight_id = ?`, 
-          [flightID]
+          `SELECT * from flight_icao where flight_schedule_id = ?`, 
+          [flight.schedule_id]
         );
         const fuelConsumption = fuelConRes[0]?.fuel_consumption; //Total fuel consumption in kg
 

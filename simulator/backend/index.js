@@ -267,6 +267,15 @@ app.get('/api/emissions/fetchSimulation', (req, res) => {
   });
 });
 
+app.get('/api/emissions/scoring-data', (req, res) => {
+  const query = `SELECT * FROM emissions, flight_icao, flight_schedule where emissions.flight_schedule_id = flight_schedule.schedule_id
+AND flight_icao.flight_schedule_id = emissions.flight_schedule_id;`;
+  db.query(query, (err, results) => {
+    if(err) console.error("Error fetching the emission details", err);
+    return res.status(200).send(results);
+  });
+});
+
 app.listen(3000, () => {
   console.log('Server running on port 3000');
 });

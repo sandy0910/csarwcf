@@ -34,6 +34,15 @@ setInterval(() => {
     runComparisonLogic();
 }, 60 * 60 * 1000);
 
+const computeAndSaveScores  = require('./routes/scoringRoute');
+
+computeAndSaveScores();
+
+// setInterval(() => {
+//     console.log("Running scheduled comparison logic...");
+//     computeAndSaveScores();
+// }, 60 * 60 * 1000);
+
 const guestRoute = require('./routes/guestRoute');
 app.use('/api/airlines', guestRoute);
 app.use('/api/flights', guestRoute);
@@ -44,6 +53,9 @@ app.use('/api/razor-payments/', paymentRoute);
 
 const ticketRoute = require('./routes/ticketRoute');
 app.use('/api/ticket-generation', ticketRoute);
+
+const carpoolRoute = require('./routes/carpoolRoute');
+app.use('/api/carpool/', carpoolRoute);
 
 //Login
 const loginRoute = require('./routes/loginRoute');
@@ -76,6 +88,7 @@ app.use('/api/compliance/', estimateRoute);
 
 const deviationsRoute = require('./routes/compliance/deviationsRoute');
 app.use('/api/compliance-ar/', deviationsRoute);
+
 
 // Start server
 app.listen(PORT, () => {
