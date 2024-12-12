@@ -10,13 +10,29 @@ function CarpoolService() {
     totalSeats: "",
     availableSeats: "",
     pickupLocation: "",
-    arrivalTime: "",
+    arrivalTime: ""
   });
 
   const location = useLocation();
   const { reserve_id, reservationData } = location.state || {};
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  
+
+  // List of vehicle types for the dropdown
+  const vehicleTypes = [
+    "Sedan",
+    "SUV",
+    "Hatchback",
+    "Van",
+    "Minivan",
+    "Electric Vehicle",
+    "Hybrid Vehicle",
+    "Motorcycle",
+    "Pickup Truck",
+    "Luxury Car",
+    "Bus/Shuttle"
+  ];
 
   // Handle form input changes
   const handleChange = (e) => {
@@ -30,8 +46,13 @@ function CarpoolService() {
     setSuccessMessage("");
     setErrorMessage("");
 
+    const requestData = {
+      ...formData,
+      reservationData // Include reservationData in the request payload
+    };
+
     try {
-      await axios.post("http://localhost:3001/api/carpool/offer-service", formData);
+      await axios.post("http://localhost:3001/api/carpool/offer-service", requestData);
       setSuccessMessage("Carpool service offered successfully!");
       setFormData({
         vehicleType: "",
@@ -56,25 +77,28 @@ function CarpoolService() {
       <form className="carpool-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="airportId">Airport ID:</label>
-              <input
-                type="text"
-                id="airportId"
-                name="airportId"
-                value={reservationData?.airport_id || ""}
-                readOnly
-              />
+          <input
+            type="text"
+            id="airportId"
+            name="airportId"
+            value={reservationData?.depart_airport_id || ""}
+            readOnly
+          />
         </div>
         <div className="form-group">
           <label htmlFor="vehicleType">Vehicle Type:</label>
-          <input
-            type="text"
+          <select
             id="vehicleType"
             name="vehicleType"
             value={formData.vehicleType}
             onChange={handleChange}
-            placeholder="e.g., Sedan, SUV"
             required
-          />
+          >
+            <option value="" disabled>Select Vehicle Type</option>
+            {vehicleTypes.map((type, index) => (
+              <option key={index} value={type}>{type}</option>
+            ))}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="vehicleNumber">Vehicle Number:</label>
@@ -125,7 +149,7 @@ function CarpoolService() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="arrivalTime">Arrival Time:</label>
+          <label htmlFor="arrivalTime">Departure Time:</label>
           <input
             type="time"
             id="arrivalTime"

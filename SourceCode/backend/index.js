@@ -15,6 +15,34 @@ const FileStore = require('session-file-store')(session);
 app.use(cors());
 app.use(express.json({ limit: '50mb' })); 
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Middleware to parse request bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Route to render the EJS template
+app.get('/boarding-pass', (req, res) => {
+  const passengerDetails = {
+    airline_name: 'Airline Name',
+    passenger_name: 'John Doe',
+    depart_airport_city: 'New York',
+    arrival_airport_city: 'Los Angeles',
+    travel_date: '2024-12-12',
+    departure_time: '10:00 AM',
+    flight_number: 'AA1234',
+    seat: '12A',
+    gate: 'G5',
+    group: req.query.group || 'B', // Default to 'B' if group is not provided
+    barcode_url: 'path_to_barcode_image'
+  };
+
+  res.render('boarding-pass', passengerDetails);
+});
+
+
+
 // MySQL Connection
 const connection = mysql.createConnection({
   host: 'localhost',
