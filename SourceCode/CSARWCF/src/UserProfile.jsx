@@ -15,11 +15,21 @@ function UserProfile() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  // Fetch user data on component mount
+  // Fetch user data from session storage
   useEffect(() => {
+    const sessionUserData = JSON.parse(sessionStorage.getItem("user"));
+    console.log(sessionUserData);
+
+    if (!sessionUserData) {
+      setError("User is not logged in.");
+      setLoading(false);
+      return;
+    }
+
+    // Fetch user profile data using the user ID from session storage
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/user-profile");
+        const response = await axios.get(`http://localhost:3001/api/user-profile/all-details/${sessionUserData.uid}`);
         setUserData(response.data);
         setFormData(response.data); // Set initial form data
       } catch (err) {
@@ -44,8 +54,14 @@ function UserProfile() {
     setError(null);
     setSuccess(null);
 
+    const sessionUserData = JSON.parse(sessionStorage.getItem("userData"));
+    if (!sessionUserData) {
+      setError("User is not logged in.");
+      return;
+    }
+
     try {
-      const response = await axios.put("http://localhost:3001/api/user-profile", formData);
+      const response = await axios.put(`http://localhost:3001/api/user-profile/${sessionUserData.id}`, formData);
       setUserData(response.data);
       setEditing(false);
       setSuccess("Profile updated successfully!");

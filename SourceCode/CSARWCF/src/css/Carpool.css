@@ -1,148 +1,172 @@
-/* General container styling */
+/* Carpool.css */
 .carpool-container {
-  font-family: Arial, sans-serif;
-  margin: 20px auto;
-  max-width: 800px;
-  padding: 20px;
-  border: 1px solid #ddd;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f9;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
   border-radius: 8px;
-  background-color: #f9f9f9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
 }
 
-/* Header styling */
-.carpool-container h1 {
+h1 {
+  font-size: 36px;
   color: #333;
+  text-align: center;
   margin-bottom: 20px;
-  font-size: 2rem;
 }
 
-/* Options buttons styling */
+p {
+  font-size: 18px;
+  color: #555;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
 .options {
-  margin: 20px 0;
   display: flex;
   justify-content: center;
   gap: 20px;
+  margin-bottom: 30px;
 }
 
-.options button {
-  padding: 12px 20px;
-  font-size: 1rem;
-  font-weight: bold;
+button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
 }
 
 .offer-btn {
-  background-color: #4caf50;
-  color: white;
+  background-color: #007bff;
+}
+
+.offer-btn:hover {
+  background-color: #0056b3;
 }
 
 .request-btn {
-  background-color: #2196f3;
-  color: white;
+  background-color: #f0ad4e;
 }
 
-.options button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.request-btn:hover {
+  background-color: #ec971f;
 }
 
-.options button:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-/* Loading and error messages */
 .error {
   color: red;
-  font-weight: bold;
+  font-size: 16px;
   margin-top: 20px;
+  text-align: center;
 }
 
 .service-details {
-  margin-top: 30px;
-  text-align: left;
-}
-
-.service-details h2 {
-  color: #555;
-  margin-bottom: 15px;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
 }
 
 .service-item {
   background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 15px;
-  margin-bottom: 15px;
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s, transform 0.2s;
+  padding: 20px;
+  color: #333;
+  transition: transform 0.3s ease;
 }
 
 .service-item:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
+  transform: translateY(-5px);
 }
 
 .service-item p {
-  margin: 5px 0;
-  font-size: 0.95rem;
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.service-item p strong {
   color: #444;
 }
 
-.service-item strong {
-  color: #333;
+hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin-top: 15px;
 }
 
-/* Profile navigation button */
 .profile-navigation {
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 }
 
 .profile-btn {
-  padding: 10px 15px;
-  font-size: 1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  background-color: #ff9800;
+  background-color: #dc3545;
   color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: background-color 0.3s ease;
 }
 
 .profile-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #c82333;
 }
 
-.profile-btn:active {
-  transform: translateY(0);
-  box-shadow: none;
+/* New button style for each service */
+.request-carpool-btn, .cancel-carpool-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-
-/* Mobile responsive styling */
-@media (max-width: 600px) {
-  .carpool-container {
-    padding: 15px;
-  }
-
-  .options {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .options button {
-    width: 100%;
-  }
-
-  .service-item {
-    padding: 10px;
-  }
+/* Styling for the "Request Carpooling" button */
+.request-carpool-btn {
+  background-color: #4caf50; /* Green color for requesting carpool */
+  color: white;
 }
 
+.request-carpool-btn:disabled {
+  background-color: #9e9e9e; /* Gray color when button is disabled */
+  cursor: not-allowed;
+}
+
+.request-carpool-btn:hover {
+  background-color: #45a049; /* Slightly darker green on hover */
+}
+
+/* Styling for the "Cancel Carpool Request" button */
+.cancel-carpool-btn {
+  background-color: #f44336; /* Red color for canceling */
+  color: white;
+  margin-left: 10px;
+  padding: 10px;
+}
+
+.cancel-carpool-btn:hover {
+  background-color: #e53935; /* Slightly darker red on hover */
+}
+
+.cancel-carpool-btn:focus {
+  outline: none; /* Remove focus outline */
+}
+
+.cancel-carpool-btn:disabled {
+  background-color: #f1f1f1; /* Light gray color when disabled */
+  color: #aaa; /* Light gray text */
+  cursor: not-allowed;
+}

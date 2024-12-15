@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carpool Pass</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f3f3f3;">
+  <div class="carpool-pass" style="width: 700px; margin: 20px auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <div class="header" style="background-color: #007bff; color: #fff; padding: 20px; text-align: center;">
+      <h1 id="serviceName" style="margin: 0; font-size: 24px;">{{service_name}}</h1>
+      <p style="margin: 0;">Carpool Pass - {{reservationData.class}}</p>
+    </div>
+    <div class="main-content" style="display: flex; padding: 20px; background-color: #fff;">
+      <div class="left" style="flex: 1; padding: 0 20px; border-right: 1px dashed #ccc;">
+        <div class="section" style="margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; color: #333;">Passenger Name</h3>
+          <p class="bold" style="font-weight: bold;">{{user_name}}</p>
+        </div>
+        <div class="section" style="margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; color: #333;">Pickup Location</h3>
+          <p class="bold" style="font-weight: bold;">{{pickup_location}}</p>
+        </div>
+        <div class="section" style="margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; color: #333;">Drop-off Location</h3>
+          <p class="bold" style="font-weight: bold;">{{dropoff_location}}</p>
+        </div>
+        <div class="section" style="margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; color: #333;">Pickup Time</h3>
+          <p class="bold" style="font-weight: bold;">{{pickup_time}}</p>
+        </div>
+        <div class="section" style="margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; color: #333;">Estimated Drop-off Time</h3>
+          <p class="bold" style="font-weight: bold;">{{dropoff_time}}</p>
+        </div>
+      </div>
+      <div class="right" style="flex: 1; padding: 0 20px;">
+        <div class="section" style="margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; color: #333;">Carpool ID</h3>
+          <p class="bold" style="font-weight: bold;">{{reservationData.carpool_id}}</p>
+        </div>
+        <div class="section" style="margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; color: #333;">Seat/Slot</h3>
+          <p class="bold" style="font-weight: bold;">{{reservationData.seat}}</p>
+        </div>
+        <div class="section" style="margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; color: #333;">Vehicle Number</h3>
+          <p class="bold" style="font-weight: bold;">{{reservationData.vehicle_number}}</p>
+        </div>
+        <div class="section" style="margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; color: #333;">Board Till</h3>
+          <p class="bold" style="font-weight: bold;">{{reservationData.boardTill}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="barcode" style="text-align: center; margin-top: 20px;">
+      <img src="{{reservationData.barcodeUrl}}" alt="Barcode" style="width: 60%;">
+    </div>
+    <div class="footer" style="background-color: #007bff; color: #fff; text-align: center; padding: 10px; font-size: 12px;">
+      <p style="margin: 0;">Thank you for using our carpool service!</p>
+    </div>
+  </div>
+</body>
+</html>

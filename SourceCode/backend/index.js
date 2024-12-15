@@ -85,6 +85,9 @@ app.use('/api/ticket-generation', ticketRoute);
 const carpoolRoute = require('./routes/carpoolRoute');
 app.use('/api/carpool/', carpoolRoute);
 
+const profileRoute = require('./routes/profileRoute');
+app.use('/api/user-profile', profileRoute);
+
 //Login
 const loginRoute = require('./routes/loginRoute');
 app.use('/api/login-endpoint', loginRoute);

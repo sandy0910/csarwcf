@@ -26,7 +26,8 @@ router.get('/reserve-details/:reserve_id', async (req, res) => {
         r.passenger_id, 
         r.flight_id, 
         r.flight_schedule_id, 
-        r.reserve_date, 
+        r.reserve_date,
+        r.date_of_flight, 
         
         pr.name AS passenger_name, 
         pr.gender AS passenger_gender, 

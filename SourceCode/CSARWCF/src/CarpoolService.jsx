@@ -62,6 +62,8 @@ function CarpoolService() {
         pickupLocation: "",
         arrivalTime: "",
       });
+
+      navigate('/profile');
     } catch (err) {
       setErrorMessage("Failed to offer carpool service. Please try again.");
     }

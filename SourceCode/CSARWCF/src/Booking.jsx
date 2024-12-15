@@ -59,7 +59,6 @@ function Booking() {
             paymentDetails: paymentData.data,
             userData
           });
-          console.log("Reservation: ",reservationResponse);
           setReservationData(reservationResponse.data); // Corrected to handle reservation response
           const reserve_id = reservationResponse.data.reservation_id;
           const pay = await axios.post(`http://localhost:3001/api/razor-payments/payment-details?userId=${userId}&reserve_id=${reserve_id}`,paymentData);

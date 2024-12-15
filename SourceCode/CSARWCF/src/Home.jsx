@@ -93,6 +93,7 @@ function Home() {
           ) : (
             <ul>
               <li>Welcome {userData.uname}</li>
+              <li><Link to="/profile">Profile</Link></li>
               <li><Link to="/logout">Logout</Link></li>
             </ul>
           )}
