@@ -54,18 +54,8 @@ function CarpoolService() {
     try {
       await axios.post("http://localhost:3001/api/carpool/offer-service", requestData);
       setSuccessMessage("Carpool service offered successfully!");
-      setFormData({
-        vehicleType: "",
-        vehicleNumber: "",
-        totalSeats: "",
-        availableSeats: "",
-        pickupLocation: "",
-        arrivalTime: "",
-      });
-
       navigate('/profile');
     } catch (err) {
-      setErrorMessage("Failed to offer carpool service. Please try again.");
     }
   };
 

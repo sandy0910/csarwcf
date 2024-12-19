@@ -9,9 +9,13 @@
 
 /* Section Titles */
 .user-profile-container h1, .user-profile-container h2 {
-  color: #ffffff;
+  color: #000000;
   font-size: 2rem;
   margin-bottom: 20px;
+}
+
+.user-profile-container h2{
+  color: #ffffff;
 }
 
 /* User Details Section */

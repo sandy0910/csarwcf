@@ -252,11 +252,11 @@ body {
 }
 
 .home-logout-button{
-  border: none;
-  border-radius: 5px;
-  bottom: 0;
-  right: 0;
-  background-color: rgb(226, 61, 20);
+  border: transparent;
+  background-color: transparent;
+  color:white;
+  font-weight: bold;
+  font-size: medium;
 }
 
 /* Section: Popular Destinations */
