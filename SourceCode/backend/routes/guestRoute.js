@@ -31,7 +31,7 @@ router.get('/flight-search', (req, res) => {
 
   // Prepare SQL query
   const sql = `
-    SELECT * FROM cabinclass c, flight_cabin fc, flight_schedule fs, airline a, airport air1, airport air2, flight f WHERE
+    SELECT *, TO_BASE64(a.logo) as LOGO FROM cabinclass c, flight_cabin fc, flight_schedule fs, airline a, airport air1, airport air2, flight f WHERE
      fs.depart_airport_id = ?
      AND fs.arrival_airport_id = ?
      AND c.class_id = ?

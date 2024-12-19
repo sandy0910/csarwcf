@@ -128,11 +128,6 @@ function Booking() {
         </div>
       </div>
 
-      <div className="promo-code-section">
-        <input type="text" placeholder="Enter promo code here" />
-        <button onClick={handlePromoCodeApply}>Apply</button>
-      </div>
-
       <button className="proceed-btn" onClick={handleProceedToPayment}>
         Proceed to Payment
       </button>

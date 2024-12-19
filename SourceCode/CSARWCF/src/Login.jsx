@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import SHA1 from 'crypto-js/sha1'; // Import SHA1 for hashing
 import './css/Login.css'; // Import your CSS file for styling
@@ -9,7 +9,9 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const searchParams = location.state?.searchParams || {};
   const navigate = useNavigate();
 
   const handleLoginSubmit = async (e) => {
@@ -30,9 +32,10 @@ export default function Login() {
       if (response.data) {
         console.log(response.data);
         const user = response.data; // Access user from the response
-        sessionStorage.setItem('user', JSON.stringify({ uid: user.user_id, uname: user.username, email: user.email }));
+        sessionStorage.setItem('user', JSON.stringify({ uid: user.user_id, uname: user.username, email: user.email, upassword: user.password, role: user.role }));
 
-        navigate('/'); // Redirect to home page or dashboard
+        // Redirect back to the previous page (flight search) with searchParams
+        navigate(from, { state: { searchParams } });
       } else {
         setError(response.data.message); // Display error message from the server
       }

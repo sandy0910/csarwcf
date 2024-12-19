@@ -1,12 +1,12 @@
 /* General layout for airlines container */
-.airlines-container {
+.cm-airlines-container {
   display: flex;
   padding: 20px;
   gap: 20px;
 }
 
 /* Styling for the list of airlines */
-.airlines-list {
+.cm-airlines-list {
   flex: 1;
   max-width: 300px;
   padding: 20px;
@@ -16,12 +16,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.airlines-list ul {
+.cm-airlines-list ul {
   list-style-type: none;
   padding: 0;
 }
 
-.airline-item {
+.cm-airline-item {
   cursor: pointer;
   padding: 12px;
   border: 1px solid #ddd;
@@ -30,14 +30,14 @@
   transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
 }
 
-.airline-item:hover {
+.cm-airline-item:hover {
   background-color: #e6f7ff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transform: translateY(-3px);
 }
 
 /* Airline details container */
-.airline-details-container {
+.cm-airline-details-container {
   background-color: #f9f9f9;
   border-radius: 10px;
   padding: 20px;
@@ -46,7 +46,7 @@
 }
 
 /* Styling for the airline card */
-.airline-card {
+.cm-airline-card {
   flex: 2;
   background-color: white;
   border: 1px solid #ddd;
@@ -57,7 +57,7 @@
   transition: box-shadow 0.3s;
 }
 
-.airline-card:hover {
+.cm-airline-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -79,25 +79,25 @@
 }
 
 /* Styling for the airline details section */
-.airline-details {
+.cm-airline-details {
   display: flex;
   justify-content: space-between;
   gap: 20px;
   align-items: flex-start;
 }
 
-.airline-info {
+.cm-airline-info {
   flex: 1;
 }
 
-.airline-logo {
+.cm-airline-logo {
   flex: 0 0 150px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.airline-logo img {
+.cm-airline-logo img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;

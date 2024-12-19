@@ -1,102 +1,128 @@
+/* Booking.css */
+
 .booking-page {
-  max-width: 900px;
-  margin: 20px auto;
+  font-family: 'Arial', sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
-  background: #fff;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .booking-header {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
   text-align: center;
   color: #333;
-}
-
-.flight-summary {
+  font-size: 24px;
   margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
 }
 
-.flight-details, .baggage-info {
-  margin-bottom: 10px;
+.flight-summary,
+.fare-summary,
+.promo-code-section {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
 }
 
 .flight-details h2 {
-  font-size: 1.4rem;
+  color: #007bff;
   margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.flight-details p,
+.baggage-info p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.baggage-info p {
   color: #555;
 }
 
-.fare-summary {
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background: #f9f9f9;
-}
-
 .fare-summary h3 {
+  font-size: 18px;
   margin-bottom: 10px;
-  font-size: 1.2rem;
+  color: #333;
 }
 
-.fare-item {
-  display: flex;
-  justify-content: space-between;
-  margin: 5px 0;
-  font-size: 1rem;
-}
-
+.fare-item,
 .fare-total {
   display: flex;
   justify-content: space-between;
-  font-size: 1.2rem;
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.fare-total {
   font-weight: bold;
+  font-size: 18px;
+  color: #000;
 }
 
 .promo-code-section {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  gap: 10px;
 }
 
 .promo-code-section input {
-  width: 70%;
+  flex: 1;
   padding: 10px;
+  font-size: 14px;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .promo-code-section button {
-  padding: 10px 20px;
-  background: #007bff;
-  color: white;
+  padding: 10px 15px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
 .promo-code-section button:hover {
-  background: #0056b3;
+  background-color: #0056b3;
 }
 
 .proceed-btn {
   display: block;
   width: 100%;
-  padding: 15px;
-  background: #28a745;
-  color: white;
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #28a745;
   border: none;
-  border-radius: 5px;
-  font-size: 1.2rem;
+  border-radius: 4px;
   cursor: pointer;
 }
 
 .proceed-btn:hover {
-  background: #218838;
+  background-color: #218838;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 15px 0;
+}
+
+@media (max-width: 600px) {
+  .booking-page {
+    padding: 15px;
+  }
+
+  .promo-code-section {
+    flex-direction: column;
+  }
+
+  .promo-code-section input {
+    margin-bottom: 10px;
+  }
 }

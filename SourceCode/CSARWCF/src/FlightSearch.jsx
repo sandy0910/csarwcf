@@ -5,7 +5,7 @@ import './css/FlightSearch.css';
 
 function FlightSearch() {
   const location = useLocation();
-  const { searchParams } = location.state;
+  const { searchParams } = location.state || {};  // Destructure to handle undefined
   const [flights, setFlights] = useState([]);
   const [airports, setAirports] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,17 +13,19 @@ function FlightSearch() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/api/flights/flight-search', { params: searchParams })
-      .then((response) => {
-        setFlights(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching flights:', error);
-        setError('Failed to fetch flight data.');
-        setLoading(false);
-      });
+    if (searchParams) {
+      axios
+        .get('http://localhost:3001/api/flights/flight-search', { params: searchParams })
+        .then((response) => {
+          setFlights(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching flights:', error);
+          setError('Failed to fetch flight data.');
+          setLoading(false);
+        });
+    }
 
     // Fetch airport data
     axios
@@ -34,7 +36,7 @@ function FlightSearch() {
       .catch((error) => {
         console.error('Error fetching airports:', error);
       });
-  }, [searchParams]);
+  }, [searchParams]);  // Depend on searchParams so it updates when the params change
 
   const convertTo12HourFormat = (time) => {
     const [hours, minutes] = time.split(':').map(Number);
@@ -50,18 +52,15 @@ function FlightSearch() {
   };
 
   const handleBookNow = (flight) => {
-    //Check sessionData
     const userData = JSON.parse(sessionStorage.getItem('user'));
-    console.log(userData);  
-    if(userData != null){
-      console.log("true");
+    if (userData != null) {
       navigate('/booking', { state: { flight, searchParams } });
+    } else {
+      alert('Login before booking');
+      // Pass the current location and searchParams to the login page
+      navigate('/login', { state: { from: location, searchParams } });
     }
-    else{
-      alert("Login before booking");
-      navigate('/login');
-    }
-  };  
+  };
 
   if (loading) {
     return <div className="flight-search__loading">Loading flights...</div>;
@@ -77,8 +76,16 @@ function FlightSearch() {
       {flights.length > 0 ? (
         <div className="flight-search__list">
           {flights.map((flight, index) => (
-            <div key={`${flight.id || index}-${flight.departure_dt || index}`} className="flight-search__list-item">
+            <div
+              key={`${flight.id || index}-${flight.departure_dt || index}`}
+              className="flight-search__list-item"
+            >
               <div className="flight-search__list-item-header">
+                <img
+                  src={`data:image/jpeg;base64,${flight.LOGO}`} // Render the airline logo
+                  alt="Airline Logo"
+                  className="flight-search__logo"
+                />
                 <h3>{flight.flight_number}</h3>
                 <p className="flight-search__price">₹{flight.price_per_seat}/seat</p>
               </div>

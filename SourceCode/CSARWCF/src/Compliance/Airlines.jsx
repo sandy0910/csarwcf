@@ -56,13 +56,13 @@ const Airlines = () => {
   };
 
   return (
-    <div className="airlines-container">
-      <div className="airlines-list">
+    <div className="cm-airlines-container">
+      <div className="cm-airlines-list">
         <h2>Airlines</h2>
         <ul>
           {airlines.length > 0 ? (
             airlines.map((airline, index) => (
-              <li key={index} className="airline-item" onClick={() => handleAirlineClick(airline)}>
+              <li key={index} className="cm-airline-item" onClick={() => handleAirlineClick(airline)}>
                 {airline.name}
               </li>
             ))
@@ -73,12 +73,12 @@ const Airlines = () => {
       </div>
 
       {selectedAirline && (
-        <div className="airline-card">
+        <div className="cm-airline-card">
           <button className="close-button" onClick={handleCloseCard}>Close</button>
 
-          <div className="airline-details-container">
-            <div className="airline-details">
-              <div className="airline-info">
+          <div className="cm-airline-details-container">
+            <div className="cm-airline-details">
+              <div className="cm-airline-info">
                 <h3>{selectedAirline.name}</h3>
                 <p><strong>Code:</strong> {selectedAirline.airline_id}</p>
                 <p><strong>Country:</strong> {selectedAirline.location}</p>
@@ -94,7 +94,7 @@ const Airlines = () => {
                   </div>
                 </div>
               </div>
-              <div className="airline-logo">
+              <div className="cm-airline-logo">
                 {selectedAirline.LOGO && (
                   <img src={`data:image/jpeg;base64,${selectedAirline.LOGO}`} alt="LOGO" />
                 )}
