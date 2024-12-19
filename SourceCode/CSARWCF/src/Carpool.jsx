@@ -34,10 +34,9 @@ function Carpool() {
 
       const statusResponse = await axios.get(`http://localhost:3001/api/carpool/verify-status/${reserve_id}`);
       
-      // Convert carpool_id to an integer and update the state
       const updatedStatus = statusResponse.data.map((status) => ({
         ...status,
-        carpool_id: parseInt(status.carpool_id, 10), // Convert carpool_id to an integer
+        carpool_id: parseInt(status.carpool_id, 10),
       }));
 
       setReserveStatus(updatedStatus);
@@ -76,10 +75,9 @@ function Carpool() {
 
       console.log(`Carpool request for service ${serviceId} response:`, response.data);
 
-      // Update reserve status after successful request
       setReserveStatus((prevStatus) => ({
         ...prevStatus,
-        [serviceId]: 0, // Assume 0 indicates "Requested"
+        [serviceId]: 0,
       }));
 
       window.location.reload();
@@ -96,7 +94,6 @@ function Carpool() {
     setError(null);
 
     try {
-      // Call the API to cancel the carpool request
       const response = await axios.post(
         `http://localhost:3001/api/carpool/cancel-request`,
         { reserve_id, serviceId },
@@ -107,10 +104,9 @@ function Carpool() {
 
       console.log(`Carpool cancellation for service ${serviceId}:`, response.data);
 
-      // Update reserveStatus to reflect cancellation
       setReserveStatus((prevStatus) => {
         const updatedStatus = { ...prevStatus };
-        delete updatedStatus[serviceId]; // Remove the canceled carpool from the status object
+        delete updatedStatus[serviceId];
         return updatedStatus;
       });
       window.location.reload();
@@ -128,67 +124,60 @@ function Carpool() {
 
   return (
     <div className="carpool-container">
-      <h1>Carpool Options</h1>
-      <p>Do you have a car? Or want to request a car ride to the airport?</p>
-      <div className="options">
+      <aside className="carpool-sidebar">
         <button className="offer-btn" onClick={handleOfferService}>
           Offer Service
         </button>
         <button className="request-btn" onClick={handleRequestService}>
           Request Service
         </button>
-      </div>
+      </aside>
+      <main className="carpool-main">
+        <h1>Carpool Services</h1>
+        <p>Select a carpool option or offer your own service!</p>
+        {loading && <div>Loading carpool details...</div>}
+        {error && <div className="error">{error}</div>}
+        {!loading && !error && serviceDetails.length > 0 && (
+          <div className="service-details">
+            {serviceDetails.map((service, index) => {
+              const matchingStatus = reserveStatus.find(
+                status => status.carpool_id === service.carpool_id
+              );
+              const currentStatus = matchingStatus ? matchingStatus.accept_status : null;
 
-      {/* Display carpool details */}
-      {loading && <div>Loading carpool details...</div>}
-      {error && <div className="error">{error}</div>}
-      {!loading && !error && serviceDetails.length > 0 && (
-        <div className="service-details">
-          {serviceDetails.map((service, index) => {
-            // Find the corresponding status for the current service's carpool_id
-            const matchingStatus = reserveStatus.find(status => status.carpool_id === service.carpool_id);
-            const currentStatus = matchingStatus ? matchingStatus.accept_status : null;
-
-            return (
-              <div key={index} className="service-item">
-                <p><strong>Driver:</strong> {service.name}</p>
-                <p><strong>Contact:</strong> {service.mobile}</p>
-                <p><strong>PickUp Location:</strong> {service.pickup_loc}</p>
-                <p><strong>To:</strong> {service.airport_name}</p>
-                <p><strong>Time:</strong> {service.departure_time}</p>
-                <button
-                  className="request-carpool-btn"
-                  onClick={() => handleCarpoolRequest(service.carpool_id)}
-                  disabled={currentStatus === 0 || currentStatus === 1}
-                >
-                  {currentStatus === 0
-                    ? "Requested"
-                    : currentStatus === 1
-                    ? "Accepted"
-                    : "Request Carpooling"}
-                </button>
-                {/* Display Cancel button if the status is Requested or Accepted */}
-                {(currentStatus === 0 || currentStatus === 1) && (
+              return (
+                <div key={index} className="service-item">
+                  <p><strong>Driver:</strong> {service.name}</p>
+                  <p><strong>Contact:</strong> {service.mobile}</p>
+                  <p><strong>PickUp Location:</strong> {service.pickup_loc}</p>
+                  <p><strong>To:</strong> {service.airport_name}</p>
+                  <p><strong>Time:</strong> {service.departure_time}</p>
                   <button
-                    className="cancel-carpool-btn"
-                    onClick={() => handleCancelCarpoolRequest(service.carpool_id)}
+                    className="request-carpool-btn"
+                    onClick={() => handleCarpoolRequest(service.carpool_id)}
+                    disabled={currentStatus === 0 || currentStatus === 1}
                   >
-                    Cancel
+                    {currentStatus === 0
+                      ? "Requested"
+                      : currentStatus === 1
+                      ? "Accepted"
+                      : "Request Carpooling"}
                   </button>
-                )}
-                <hr />
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {/* Go to Profile Page */}
-      <div className="profile-navigation">
-        <button className="profile-btn" onClick={handleGoToProfile}>
-          Not interested
-        </button>
-      </div>
+                  {(currentStatus === 0 || currentStatus === 1) && (
+                    <button
+                      className="cancel-carpool-btn"
+                      onClick={() => handleCancelCarpoolRequest(service.carpool_id)}
+                    >
+                      Cancel
+                    </button>
+                  )}
+                  <hr />
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </main>
     </div>
   );
 }

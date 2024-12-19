@@ -61,8 +61,8 @@ router.get('/flight-search', (req, res) => {
 
 //Fetch Airport Details
 router.get('/fetch-airport', (req, res) =>{
-  const query = 'SELECT * from airport';
-  connection.query(query, (error, results) => {
+  const squery = 'SELECT * from airport';
+  connection.query(squery, (error, results) => {
     if (error) {
       console.error('Error fetching flights:', error);
       return res.status(500).json({ message: 'Internal Server Error' });

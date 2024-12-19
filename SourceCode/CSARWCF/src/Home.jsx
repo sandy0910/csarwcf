@@ -79,6 +79,11 @@ function Home() {
     navigate('/search-results', { state: { searchParams } });
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('user'); // Clear user data from session storage
+    navigate('/'); // Redirect to the login page
+  };
+
   return (
     <div className="home-container">
       <nav className="navbar">
@@ -94,7 +99,7 @@ function Home() {
             <ul>
               <li>Welcome {userData.uname}</li>
               <li><Link to="/profile">Profile</Link></li>
-              <li><Link to="/logout">Logout</Link></li>
+              <li><button onClick={handleLogout} className="home-logout-button">Logout</button></li>
             </ul>
           )}
         </ul>
@@ -140,9 +145,6 @@ function Home() {
                 </label>
                 <label>
                   <input type="radio" name="tripType" value="round-trip" onChange={handleSearchChange} checked={searchParams.tripType === 'round-trip'} /> Round Trip
-                </label>
-                <label>
-                  <input type="radio" name="tripType" value="multi-city" onChange={handleSearchChange} /> Multi City
                 </label>
               </div>
 

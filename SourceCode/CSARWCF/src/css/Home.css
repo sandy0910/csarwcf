@@ -251,6 +251,14 @@ body {
   background-color: #f0f0f0;
 }
 
+.home-logout-button{
+  border: none;
+  border-radius: 5px;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(226, 61, 20);
+}
+
 /* Section: Popular Destinations */
 /* Features Section */
 .features {

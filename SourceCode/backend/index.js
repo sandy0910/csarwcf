@@ -66,11 +66,6 @@ const computeAndSaveScores  = require('./routes/scoringRoute');
 
 computeAndSaveScores();
 
-// setInterval(() => {
-//     console.log("Running scheduled comparison logic...");
-//     computeAndSaveScores();
-// }, 60 * 60 * 1000);
-
 const guestRoute = require('./routes/guestRoute');
 app.use('/api/airlines', guestRoute);
 app.use('/api/flights', guestRoute);
@@ -102,7 +97,6 @@ app.use('/api/admin-airlines', airRoute);
 //Airline Side
 const airlineAdminRoute = require('./routes/airlines/airlineAdminRoute');
 app.use('/api/airlines-admin', airlineAdminRoute);
-
 
 //Compliance Managing
 const yseatRoute = require('./routes/compliance/yseatRoute');
