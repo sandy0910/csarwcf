@@ -57,7 +57,7 @@ router.post('/request-service', (req, res) => {
         return res.status(404).json({ message: 'No matching carpool services found.' });
       }
   
-      res.status(200).send(results[0]);
+      res.status(200).send(results);
     });
 });
   
@@ -218,6 +218,7 @@ router.get("/verify-status/:reserve_id", (req, res) => {
 // API to cancel the carpool request
 router.post('/cancel-request', async (req, res) => {
   const { reserve_id, serviceId } = req.body;
+  console.log(serviceId, reserve_id )
   const carpool_id = serviceId;
 
   if (!reserve_id || !carpool_id) {

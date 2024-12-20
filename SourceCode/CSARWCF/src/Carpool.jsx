@@ -35,8 +35,13 @@ function Carpool() {
           headers: { "Content-Type": "application/json" },
         }
       );
-      setServiceDetails(response.data);
-      console.log(response.data);
+        // Check if response data is returned and update state
+        if (response.data) {
+          console.log(response.data);
+          setServiceDetails(response.data);
+        }
+
+      // console.log(response.data);
 
       const statusResponse = await axios.get(`http://localhost:3001/api/carpool/verify-status/${finalReservation.reserve_id}`);
       
@@ -59,6 +64,8 @@ function Carpool() {
     setError(null);
 
     try {
+
+      
       const selectedService = serviceDetails.find(
         (service) => service.carpool_id === serviceId
       );
@@ -70,7 +77,7 @@ function Carpool() {
       const response = await axios.post(
         `http://localhost:3001/api/carpool/crequest`,
         {
-          reserve_id: reservationData.reserve_id,
+          reserve_id: finalReservation.reserve_id,
           reservationData: finalReservation,
           serviceDetails: selectedService,
         },
@@ -100,9 +107,11 @@ function Carpool() {
     setError(null);
 
     try {
+
+      console.log(serviceId, finalReservation.reserve_id);
       const response = await axios.post(
         `http://localhost:3001/api/carpool/cancel-request`,
-        { reserve_id: finalReservation.reserve_id, service_id: serviceId },
+        { reserve_id: finalReservation.reserve_id, serviceId },
         {
           headers: { "Content-Type": "application/json" },
         }
