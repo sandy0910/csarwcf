@@ -143,9 +143,9 @@ function Home() {
                 <label>
                   <input type="radio" name="tripType" value="one-way" onChange={handleSearchChange} checked={searchParams.tripType === 'one-way'} /> One Way
                 </label>
-                <label>
+                {/* <label>
                   <input type="radio" name="tripType" value="round-trip" onChange={handleSearchChange} checked={searchParams.tripType === 'round-trip'} /> Round Trip
-                </label>
+                </label> */}  
               </div>
 
               <div className="h-input-group" ref={fromInputRef}>

@@ -43,7 +43,7 @@ function TicketGeneration() {
 
       alert("Ticket sent successfully!");
       console.log("Reservation: ", reservationData);
-      navigate('/carpool', { state: { reserve_id, reservationData } });
+      navigate('/carpool', { state: { reservationData } });
     } catch (err) {
       console.error("Error sending ticket:", err);
       alert("Failed to send ticket.");

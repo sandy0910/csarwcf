@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // For navigation
 import './css/UserProfile.css'; // Include CSS for styling
 
 function UserProfile() {
@@ -11,6 +12,7 @@ function UserProfile() {
   const [error, setError] = useState(null);
   const [overlayContent, setOverlayContent] = useState(null);
   const isFetched = useRef(false);
+  const navigate = useNavigate(); // Initialize navigation
 
   useEffect(() => {
     const sessionUserData = JSON.parse(sessionStorage.getItem("user"));
@@ -61,6 +63,29 @@ function UserProfile() {
     setOverlayContent(null);
   };
 
+  const handleCarpoolAction = (actionType) => {
+    openOverlay(
+      <div>
+        <h3>Select a Reservation</h3>
+        {reservationData.length > 0 ? (
+          reservationData.map((reservation, index) => (
+            <div key={index} className="card" onClick={() => {
+              navigate(`/carpool`, { state: { reservation, userData } });
+            }}>
+              <p><strong>Reservation ID:</strong> {reservation.reserve_id}</p>
+              <p><strong>Flight:</strong> {reservation.flight_number}</p>
+              <p><strong>Status:</strong> {reservation.reserve_status === 1 ? "Current" : reservation.reserve_status === 0 ? "Expired" : reservation.reserve_status === 2 ? "Cancelled" : "Unknown"}</p>
+            </div>
+          ))
+        ) : (
+          <div className="card">
+            <p>No reservations available for carpooling.</p>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   if (loading) return <div>Loading profile...</div>;
   if (error) return <div className="error">{error}</div>;
 
@@ -77,6 +102,12 @@ function UserProfile() {
         </div>
       )}
 
+      {/* Carpool Action Buttons */}
+      <div className="carpool-action-buttons">
+        <button onClick={() => handleCarpoolAction("offer")}>Offer Carpool</button>
+        <button onClick={() => handleCarpoolAction("request")}>Request Carpool</button>
+      </div>
+
       {/* User Details Section */}
       <section className="user-details-section">
         <h2>Personal Details</h2>
@@ -90,19 +121,12 @@ function UserProfile() {
         )}
       </section>
 
-      {/* Reservation Details Section with Card and Overlay */}
+      {/* Reservation Details Section */}
       <section className="reservation-details-section">
         <h2>Reservation Details</h2>
         {reservationData.length > 0 ? (
           reservationData.map((reservation, index) => (
-            <div key={index} className="card" onClick={() => openOverlay(
-              <div>
-                <p><strong>Reservation ID:</strong> {reservation.reserve_id}</p>
-                <p><strong>Flight:</strong> {reservation.flight_number}</p>
-                <p><strong>Booking Date:</strong> {reservation.reserve_date}</p>
-                <p><strong>Status:</strong> {reservation.reserve_status === 1 ? "Current" : reservation.reserve_status === 0 ? "Expired" : reservation.reserve_status === 2 ? "Cancelled" : "Unknown"}</p>
-              </div>
-            )}>
+            <div key={index} className="card">
               <p><strong>Flight:</strong> {reservation.flight_number}</p>
               <p><strong>Status:</strong> {reservation.reserve_status === 1 ? "Current" : reservation.reserve_status === 0 ? "Expired" : reservation.reserve_status === 2 ? "Cancelled" : "Unknown"}</p>
             </div>

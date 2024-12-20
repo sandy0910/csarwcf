@@ -17,16 +17,16 @@ const connection = mysql.createConnection({
 router.post('/request-service', (req, res) => {
     const { reserve_id, reservationData } = req.body;
 
+    // Parse the UTC date from reservationData
     const utcDate = new Date(reservationData.date_of_flight);
 
-    // Get the timezone offset in minutes for the system's local timezone
-    const timezoneOffset = utcDate.getTimezoneOffset(); // In minutes
-    
-    // Adjust the UTC time to the local time zone
-    const localDate = new Date(utcDate.getTime() - timezoneOffset * 60000); // Offset by the timezone
-    
-    // Format the local date as 'YYYY-MM-DD'
-    const formattedLocalDate = localDate.toISOString().split('T')[0];
+    // Adjust the UTC date to the local timezone (Asia/Kolkata)
+    const options = { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' };
+    const formatter = new Intl.DateTimeFormat('en-GB', options);
+    const parts = formatter.formatToParts(utcDate);
+
+    // Extract parts and format as YYYY-MM-DD
+    const formattedLocalDate = `${parts.find(p => p.type === 'year').value}-${parts.find(p => p.type === 'month').value}-${parts.find(p => p.type === 'day').value}`;
 
     
     // SQL query to find carpool services that match the user's address (e.g., start or end location matches)
@@ -44,7 +44,7 @@ router.post('/request-service', (req, res) => {
         and fs.scheduled_departure_time = ?
         and r.date_of_flight = ?;`;
   
-    connection.query(sql, [reservationData.street, reservationData.depart_airport_city, reservationData.pincode,
+    connection.query(sql, [reservationData.street, reservationData.city, reservationData.pincode,
         reservationData.depart_airport_id, reservationData.arrival_airport_id, reservationData.scheduled_departure_time,
         formattedLocalDate
     ], (err, results) => {
@@ -80,11 +80,11 @@ router.post('/offer-service', (req, res) => {
   }
 
   // SQL query to insert data into the carpool table
-  const sql = `INSERT INTO carpool (reserve_id, vehicle_type, vehicle_num, airport_id, available_seats, total_seats, 
+  const sql = `INSERT INTO carpool (reserve_id, user_id, vehicle_type, vehicle_num, airport_id, available_seats, total_seats, 
   pickup_loc, departure_time, status) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)`;
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)`;
 
-  const values = [reservationData.reserve_id, vehicleType, vehicleNumber, reservationData.depart_airport_id,
+  const values = [reservationData.reserve_id, reservationData.passenger_id, vehicleType, vehicleNumber, reservationData.depart_airport_id,
     availableSeats, totalSeats, pickupLocation, arrivalTime];
 
   connection.query(sql, values, (err, result) => {
@@ -107,8 +107,8 @@ router.post("/crequest", async (req, res) => {
     return res.status(404).json({ error: "Service not found" });
   }
 
-  const insertQuery = `INSERT INTO carpoolreserve(carpool_id, reserve_id, accept_status) VALUES(?, ?, 0);`;
-  connection.query(insertQuery, [serviceId, reserve_id], (err, insertResults) => {
+  const insertQuery = `INSERT INTO carpoolreserve(carpool_id, user_id, reserve_id, accept_status) VALUES(?, ?, ?, 0);`;
+  connection.query(insertQuery, [serviceId, reservationData.passenger_id, reserve_id], (err, insertResults) => {
     if(err) console.error("Error inserting the carpool reserve data", err);
   });
   try {

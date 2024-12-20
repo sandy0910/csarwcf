@@ -54,7 +54,6 @@ function CarpoolService() {
     try {
       await axios.post("http://localhost:3001/api/carpool/offer-service", requestData);
       setSuccessMessage("Carpool service offered successfully!");
-      navigate('/profile');
     } catch (err) {
     }
   };

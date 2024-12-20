@@ -162,6 +162,26 @@ section {
   color: #e74c3c;
 }
 
+.carpool-action-buttons {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.carpool-action-buttons button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.carpool-action-buttons button:hover {
+  background-color: #0056b3;
+}
+
+
 /* Responsive Design */
 @media screen and (max-width: 768px) {
   .user-profile-container {

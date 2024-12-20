@@ -10,11 +10,16 @@ function Carpool() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [reserveStatus, setReserveStatus] = useState({});
-  const { reserve_id, reservationData } = location.state || {};
+  const { reservationData } = location.state || {};
+  const {reservation, userData } = location.state || {}
+
+  const finalReservation = reservationData || reservation? { ...reservation, ...userData } : reservation;
+
+  console.log(finalReservation);
 
   // Handle Offer Service button click
   const handleOfferService = () => {
-    navigate("/offer-service", { state: { reserve_id, reservationData } });
+    navigate("/offer-service", { state: { reservationData:finalReservation } });
   };
 
   // Handle Request Service button click
@@ -25,14 +30,16 @@ function Carpool() {
     try {
       const response = await axios.post(
         "http://localhost:3001/api/carpool/request-service",
-        { reserve_id, reservationData },
+        { reserve_id: finalReservation.reserve_id, 
+          reservationData: finalReservation
+        },
         {
           headers: { "Content-Type": "application/json" },
         }
       );
       setServiceDetails(response.data);
 
-      const statusResponse = await axios.get(`http://localhost:3001/api/carpool/verify-status/${reserve_id}`);
+      const statusResponse = await axios.get(`http://localhost:3001/api/carpool/verify-status/${reservationData.reserve_id}`);
       
       const updatedStatus = statusResponse.data.map((status) => ({
         ...status,
@@ -64,8 +71,8 @@ function Carpool() {
       const response = await axios.post(
         `http://localhost:3001/api/carpool/crequest`,
         {
-          reserve_id,
-          reservationData,
+          reserve_id: reservationData.reserve_id,
+          reservationData: finalReservation,
           serviceDetails: selectedService,
         },
         {
@@ -96,7 +103,7 @@ function Carpool() {
     try {
       const response = await axios.post(
         `http://localhost:3001/api/carpool/cancel-request`,
-        { reserve_id, serviceId },
+        { reserve_id: finalReservation.reserve_id, service_id: serviceId },
         {
           headers: { "Content-Type": "application/json" },
         }
