@@ -15,8 +15,6 @@ function Carpool() {
 
   const finalReservation = reservationData || reservation? { ...reservation, ...userData } : reservation;
 
-  console.log(finalReservation);
-
   // Handle Offer Service button click
   const handleOfferService = () => {
     navigate("/offer-service", { state: { reservationData:finalReservation } });
@@ -38,8 +36,9 @@ function Carpool() {
         }
       );
       setServiceDetails(response.data);
+      console.log(response.data);
 
-      const statusResponse = await axios.get(`http://localhost:3001/api/carpool/verify-status/${reservationData.reserve_id}`);
+      const statusResponse = await axios.get(`http://localhost:3001/api/carpool/verify-status/${finalReservation.reserve_id}`);
       
       const updatedStatus = statusResponse.data.map((status) => ({
         ...status,

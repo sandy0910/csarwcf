@@ -57,7 +57,7 @@ router.post('/request-service', (req, res) => {
         return res.status(404).json({ message: 'No matching carpool services found.' });
       }
   
-      res.status(200).send(results);
+      res.status(200).send(results[0]);
     });
 });
   
