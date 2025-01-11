@@ -64,6 +64,7 @@ const AirlineAdmin = () => {
       ],
     },
     { label: 'Flight Bookings', path: '/flight-bookings' },
+    { label: 'Aircraft Configuration', path: '/airline/aircraft-config' },
     { label: 'Logout', path: '/logout' },
   ];
 

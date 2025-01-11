@@ -1,0 +1,142 @@
+/* General Layout */
+.seat-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    position: relative;
+    width: 700px;
+    background: #f4f4f4;
+    border-radius: 300px / 50px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid #ccc;
+    overflow: hidden;
+}
+
+/* Flight Structure Styling */
+.fuselage {
+    background: linear-gradient(to bottom, #d4d4d4 0%, #f9f9f9 100%);
+    border-radius: 300px / 50px;
+    padding: 20px 10px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.window {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #d4e3f5;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.window.left {
+    top: 20px;
+    left: 5%;
+}
+
+.window.right {
+    top: 20px;
+    right: 5%;
+}
+
+/* Cabin Section Styling */
+.cabin-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.cabin-class-label {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Row Styling */
+.row {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    padding: 5px 0;
+}
+
+/* Seat Styling */
+.seats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.seat {
+    width: 50px;
+    height: 50px;
+    background-color: #e6e6e6;
+    border: 2px solid #aaa;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 48px; /* Center text vertically */
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.seat:hover {
+    transform: scale(1.1);
+    border-color: #555;
+}
+
+/* Seat Status Colors */
+.seat.available {
+    background-color: #d4f5d4; /* Light green */
+    color: #2d7f2d;
+}
+
+.seat.reserved {
+    background-color: #f5d4d4; /* Light red */
+    color: #8f2d2d;
+    cursor: not-allowed;
+}
+
+.seat.occupied {
+    background-color: #f0c987; /* Light orange */
+    color: #7f4b12;
+}
+
+/* Window Alignment */
+.row:first-child .seats {
+    margin-left: 30px; /* Align seats closer to the center in the first row */
+}
+
+.row:last-child .seats {
+    margin-right: 30px; /* Adjust alignment for the last row */
+}
+
+/* Responsiveness */
+@media (max-width: 600px) {
+    .seat {
+        width: 40px;
+        height: 40px;
+        font-size: 0.8em;
+        line-height: 38px;
+    }
+
+    .seats {
+        gap: 10px;
+    }
+
+    .seat-map {
+        width: 90%;
+        padding: 15px;
+    }
+}

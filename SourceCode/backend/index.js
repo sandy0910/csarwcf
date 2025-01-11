@@ -115,6 +115,11 @@ const deviationsRoute = require('./routes/compliance/deviationsRoute');
 app.use('/api/compliance-ar/', deviationsRoute);
 
 
+//Aircraft Routing
+const aircraftRoute = require('./routes/airlines/aircraftRoute');
+app.use('/api/aircraft', aircraftRoute);
+
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
