@@ -1,768 +1,2212 @@
 
 {
-    "1": {
-      "cabinClass": "First",
-      "seats": [
-        {
-          "id": "1A",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": ["Power port", "Crew seat"],
-          "comments": ""
-        },
-        {
-          "id": "1D",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Cafeteria"],
-          "comments": ""
-        },
-        {
-          "id": "1F",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Cafeteria"],
-          "comments": ""
-        },
-        {
-          "id": "1K",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Power port", "Crew seat"],
-          "comments": ""
-        }
-      ]
-    },
+  "1": {
+    "cabinClass": "First",
+    "columns": 3,
+    "distanceFromCG": 14.72,
+    "weightFactor": 0.274,
+    "seats": [
+      {
+        "id": "1A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Power port", "Crew seat"],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "1D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "1F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "1K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Power port", "Crew seat"],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
 
-    "2": {
-      "cabinClass": "First",
-      "seats": [
-        {
-          "id": "2A",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "2D",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "2F",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "2K",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        }
-      ]
-    },
+  "2": {
+    "cabinClass": "First",
+    "columns": 3,
+    "distanceFromCG": 13.44,
+    "weightFactor": 0.250,
+    "seats": [
+      {
+        "id": "2A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "2D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "2F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "2K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
 
-    "8": {
-      "cabinClass": "Business",
-      "seats": [
-        {
-          "id": "8A",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "8C",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "8D",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "8E",
-          "status": "available",
-          "seatType": "Good Seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "8F",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "8H",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "8K",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        }
-      ]
-    },
+  "8": {
+    "cabinClass": "Business",
+    "columns": 3,
+    "distanceFromCG": 5.76,
+    "weightFactor": 0.107,
+    "seats": [
+      {
+        "id": "8A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "8C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "8D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "8E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "8F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "8H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "8K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
 
-    "9": {
-      "cabinClass": "Business",
-      "seats": [
-        {
-          "id": "9A",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "9C",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "9D",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "9E",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "9F",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "9H",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "9K",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        }
-      ]
-    },
-    "11": {
-      "cabinClass": "Business",
-      "seats": [
-        {
-          "id": "11A",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "11C",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "11D",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "11E",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "11F",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "11H",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "11K",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        }
-      ]
-    },
-
-    "12": {
-      "cabinClass": "Business",
-      "seats": [
-        {
-          "id": "12A",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "12C",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "12D",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "12E",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "12F",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "12H",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "12K",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        }
-      ]
-    },
-
-    "14": {
-      "cabinClass": "Business",
-      "seats": [
-        {
-          "id": "14A",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "14C",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "14D",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "14E",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "14F",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "14H",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "14K",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        }
-      ]
-    },
-    "17": {
-      "cabinClass": "Economy",
-      "seats": [
-        {
-          "id": "17A",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "17C",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "17D",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "17E",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "17F",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "17H",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "17J",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        },
-        {
-          "id": "17K",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": ["Galley", "Lavatory"],
-          "comments": ""
-        }
-      ]
-    },
-    "18": {
-      "cabinClass": "Economy",
-      "seats": [
-        {
-          "id": "18A",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "18C",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "18D",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "18E",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "18F",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "18H",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "18J",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "18K",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": [],
-          "comments": ""
-        }
-      ]
-    },
-    "26": {
-      "cabinClass": "Economy",
-      "seats": [
-        {
-          "id": "26A",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "26C",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "26D",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "26E",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "26F",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "26H",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "26J",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "26K",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": [],
-          "comments": ""
-        }
-      ]
-    },
-    "27": {
-      "cabinClass": "Economy",
-      "seats": [
-        {
-          "id": "27D",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "27E",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "27F",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        }
-      ]
-    },
-    "30": {
-      "cabinClass": "Economy",
-      "seats": [
-        {
-          "id": "30A",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "30C",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "30H",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "30K",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": [],
-          "comments": ""
-        }
-      ]
-    },
-    "31": {
-      "cabinClass": "Economy",
-      "seats": [
-        {
-          "id": "31A",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "31C",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "31H",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "31K",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": [],
-          "comments": ""
-        }
-      ]
-    },
-    "32": {
-      "cabinClass": "Economy",
-      "seats": [
-        {
-          "id": "32A",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "32C",
-          "status": "available",
-          "seatType": "Premium seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "32D",
-          "status": "available",
-          "seatType": "Be Aware",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "32E",
-          "status": "available",
-          "seatType": "Be Aware",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "32F",
-          "status": "available",
-          "seatType": "Be Aware",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "32H",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "32J",
-          "status": "available",
-          "seatType": "Mixed Review",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "32K",
-          "status": "available",
-          "seatType": "Good seat",
-          "facilities": [],
-          "comments": ""
-        }
-      ]
-    },
-    "41": {
-      "cabinClass": "Economy",
-      "seats": [
-        {
-          "id": "41A",
-          "status": "available",
-          "seatType": "Bad seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "41C",
-          "status": "available",
-          "seatType": "Bad seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "41D",
-          "status": "available",
-          "seatType": "Bad seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "41E",
-          "status": "available",
-          "seatType": "Bad seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "41F",
-          "status": "available",
-          "seatType": "Bad seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "41H",
-          "status": "available",
-          "seatType": "Bad seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "41J",
-          "status": "available",
-          "seatType": "Bad seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "41K",
-          "status": "available",
-          "seatType": "Bad seat",
-          "facilities": [],
-          "comments": ""
-        }
-      ]
-    },
-    "42": {
-      "cabinClass": "Business",
-      "seats": [
-        
-        {
-          "id": "42D",
-          "status": "available",
-          "seatType": "Bad seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "42E",
-          "status": "available",
-          "seatType": "Bad seat",
-          "facilities": [],
-          "comments": ""
-        },
-        {
-          "id": "42F",
-          "status": "available",
-          "seatType": "Bad Seat",
-          "facilities": [],
-          "comments": ""
-        }
-      ]
+  "9": {
+    "cabinClass": "Business",
+    "distanceFromCG": 4.48,
+    "weightFactor": 0.083,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "9A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "9C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "9D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "9E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "9F",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "9H",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "9K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 3
+      }
+    ],
+    "facilities":{
+      "column": "all",
+      "position": "below",
+      "Lavatory": 2,
+      "Galley": 1,
+      "Closet": 1
     }
+  },
+  "11": {
+    "cabinClass": "Business",
+    "distanceFromCG": 1.92,
+    "weightFactor": 0.036,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "11A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "Bassinet": "above",
+        "column": 1
+      },
+      {
+        "id": "11C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "11D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "11E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "Bassinet": "above",
+        "column": 2
+      },
+      {
+        "id": "11F",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "Bassinet": "above",
+        "column": 2
+      },
+      {
+        "id": "11H",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "Bassinet": "above",
+        "column": 3
+      },
+      {
+        "id": "11K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+
+  "12": {
+    "cabinClass": "Business",
+    "distanceFromCG": 0.64,
+    "weightFactor": 0.012,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "12A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "12C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "12D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "12E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "12F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "12H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "12K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+
+  "14": {
+    "cabinClass": "Business",
+    "distanceFromCG": 1.92,
+    "weightFactor": 0.036,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "14A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "14C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "14D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "14E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "14F",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "14H",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "14K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "17": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 5.76,
+    "weightFactor": 0.107,       
+    "columns": 3,
+    "seats": [
+      {
+        "id": "17A",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "17B",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "17C",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "17D",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "17E",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "17F",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "17H",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "17J",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "17K",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": ["Galley", "Lavatory"],
+        "comments": "",
+        "column": 3
+      }
+    ],
+    "facilities":{
+      "column": "all",
+      "position": "below",
+      "bassinet": 3
+    }
+  },
+  "18": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 7.04,
+    "weightFactor": 0.131, 
+    "columns": 3,
+    "seats": [
+      {
+        "id": "18A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "18B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "18C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "18D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "18E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "18F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "18H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "18J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "18K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "19": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 8.32,
+    "weightFactor": 0.155, 
+    "columns": 3,
+    "seats": [
+      {
+        "id": "19A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "19B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "19C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "19D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "19E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "19F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "19H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "19J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "19K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "20": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 9.60,
+    "weightFactor": 0.179, 
+    "columns": 3,
+    "seats": [
+      {
+        "id": "20A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "20B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "20C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "20D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "20E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "20F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "20H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "20J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "20K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "21": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 10.88,
+    "weightFactor": 0.202, 
+    "columns": 3,
+    "seats": [
+      {
+        "id": "21A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "21B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "21C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "21D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "21E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "21F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "21H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "21J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "21K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "22": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 12.16,
+    "weightFactor": 0.226, 
+    "columns": 3,
+    "seats": [
+      {
+        "id": "22A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "22B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "22C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "22D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "22E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "22F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "22H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "22J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "22K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "23": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 13.44,
+    "weightFactor": 0.250, 
+    "columns": 3,
+    "seats": [
+      {
+        "id": "23A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "23B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "23C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "23D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "23E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "23F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "23H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "23J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "23K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "24": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 14.72,
+    "weightFactor": 0.274, 
+    "columns": 3,
+    "seats": [
+      {
+        "id": "24A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "24B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "24C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "24D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "24E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "24F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "24H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "24J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "24K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "25": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 16.00,
+    "weightFactor": 0.298, 
+    "columns": 3,
+    "seats": [
+      {
+        "id": "25A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "25B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "25C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "25D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "25E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "25F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "25H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "25J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "25K",
+        "status": "available",
+        "seatType": "Standard seat" ,
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "26": {
+    "cabinClass": "Economy",
+    "columns": 3,
+    "distanceFromCG": 17.28,
+    "weightFactor": 0.322, 
+    "seats": [
+      {
+        "id": "26A",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "26B",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "26C",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "26D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "26E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "26F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "26H",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "26J",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "26K",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "27": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 18.56,
+    "weightFactor": 0.345, 
+    "columns": 3,
+    "seats": [
+      {
+        "id": "27D",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "27E",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "27F",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      }
+    ]
+  },
+  "30": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 22.40,
+    "weightFactor": 0.417,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "30A",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "30B",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "30C",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "30H",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "30J",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "30K",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ],
+    "facilities":{
+      "column": 2,
+      "Galley": 1
+    }
+  },
+  "31": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 23.68,
+    "weightFactor": 0.441,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "31A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "31B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "31C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "31H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "31J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "31K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ],
+    "facilities":{
+      "column": 2,
+      "Bassinet": 2
+    }
+  },
+  "32": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 24.96,
+    "weightFactor": 0.465,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "32A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "32B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "32C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "32D",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "32E",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "32F",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "32H",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "32J",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "32K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "33": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 26.24,
+    "weightFactor": 0.488,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "33A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "33B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "33C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "33D",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "33E",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "33F",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "33H",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "33J",
+        "status": "available",
+        "seatType": "Mixed Review",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "33K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "34": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 27.52,
+    "weightFactor": 0.512,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "34A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "34B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "34C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "34D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "34E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "34F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "34H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "34J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "34K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "35": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 28.80,
+    "weightFactor": 0.536,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "35A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "35B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "35C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "35D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "35E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "35F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "35H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "35J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "35K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "36": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 30.08,
+    "weightFactor": 0.560,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "36A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "36B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "36C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "36D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "36E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "36F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "36H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "36J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "36K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "37": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 31.36,
+    "weightFactor": 0.584,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "37A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "37B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "37C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "37D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "37E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "37F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "37H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "37J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "37K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "38": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 32.64,
+    "weightFactor": 0.607,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "38A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "38B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "38C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "38D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "38E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "38F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "38H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "38J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "38K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "39": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 33.92,
+    "weightFactor": 0.631,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "39A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "39B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "39C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "39D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "39E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "39F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "39H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "39J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "39K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "40": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 35.20,
+    "weightFactor": 0.655,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "40A",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "40B",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "40C",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "40D",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "40E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "40F",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "40H",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "40J",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "40K",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "41": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 36.48,
+    "weightFactor": 0.679,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "41A",
+        "status": "available",
+        "seatType": "Bad seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "41B",
+        "status": "available",
+        "seatType": "Bad seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "41C",
+        "status": "available",
+        "seatType": "Bad seat",
+        "facilities": [],
+        "comments": "",
+        "column": 1
+      },
+      {
+        "id": "41D",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "41E",
+        "status": "available",
+        "seatType": "Standard seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "41F",
+        "status": "available",
+        "seatType": "Be Aware",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "41H",
+        "status": "available",
+        "seatType": "Bad seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "41J",
+        "status": "available",
+        "seatType": "Bad seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      },
+      {
+        "id": "41K",
+        "status": "available",
+        "seatType": "Bad seat",
+        "facilities": [],
+        "comments": "",
+        "column": 3
+      }
+    ]
+  },
+  "42": {
+    "cabinClass": "Economy",
+    "distanceFromCG": 37.76,
+    "weightFactor": 0.703,
+    "columns": 3,
+    "seats": [
+      {
+        "id": "42D",
+        "status": "available",
+        "seatType": "Bad seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "42E",
+        "status": "available",
+        "seatType": "Bad seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      },
+      {
+        "id": "42F",
+        "status": "available",
+        "seatType": "Bad Seat",
+        "facilities": [],
+        "comments": "",
+        "column": 2
+      }
+    ],
+    "facilities":{
+      "column": "1",
+      "Lavatory": 1
+    }
+  }
 }

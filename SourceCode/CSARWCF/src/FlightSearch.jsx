@@ -5,7 +5,7 @@ import './css/FlightSearch.css';
 
 function FlightSearch() {
   const location = useLocation();
-  const { searchParams } = location.state || {};  // Destructure to handle undefined
+  const { searchParams } = location.state || {};
   const [flights, setFlights] = useState([]);
   const [airports, setAirports] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -54,7 +54,7 @@ function FlightSearch() {
   const handleBookNow = (flight) => {
     const userData = JSON.parse(sessionStorage.getItem('user'));
     if (userData != null) {
-      navigate('/booking', { state: { flight, searchParams } });
+      navigate('/passenger-weight', { state: { flight, searchParams } });
     } else {
       alert('Login before booking');
       // Pass the current location and searchParams to the login page

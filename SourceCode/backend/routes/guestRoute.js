@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
     user: 'root',
     password: 'password',
     database: 'csarwcf' 
-  });
+});
 
 
 router.get('/airDetails', (req, res) => {
@@ -95,6 +95,31 @@ router.get('/user-details', async (req, res) => {
     if(err) console.error("Error in fetching user detials");
     return res.send(results);
   });
+});
+
+
+router.post('/traveller-details', async (req, res) => {
+  const { flight, travelers, uid } = req.body;
+  if (!flight || !travelers || !uid) {
+    return res.status(400).json({ message: "Missing required fields" });
+  }
+  try {
+    for (const traveler of travelers) {
+      const { name, weight } = traveler;
+      const query = `
+        INSERT INTO travel_passengers (passenger_id, name, weight)
+        VALUES ( ?, ?, ?);
+      `;
+      const values = [uid, name, weight];
+
+      await connection.execute(query, values); // Execute each query sequentially
+    }
+
+    res.status(200).json({ message: "Traveler details saved successfully" });
+  } catch (err) {
+    console.error("Error inserting traveler details:", err);
+    res.status(500).json({ message: "Failed to save traveler details", error: err.message });
+  }
 });
 
 module.exports = router;

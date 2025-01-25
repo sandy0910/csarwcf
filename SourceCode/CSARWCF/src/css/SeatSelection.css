@@ -1,0 +1,346 @@
+/* General container styles */
+.seat-selection-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+/* Cabin Class Display */
+.cabin-classes {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.cabin-class {
+    background-color: #f0f0f0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Seat map styles */
+.seat-map {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center; /* Center the rows */
+    width: fit-content; /* Adjust the width to fit the seats */
+    max-width: 100%;
+    padding: 0 20px;
+    position: relative;
+}
+
+/* Windows on the side */
+.seat-map::before, .seat-map::after {
+    content: "🪟"; /* Window symbol */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    font-size: 30px;
+    text-align: center;
+    z-index: 10;
+}
+
+.seat-map::before {
+    left: 0;
+}
+
+.seat-map::after {
+    right: 0;
+}
+
+/* Pilot Seats Section */
+.pilot-seats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.pilot-seat .seat {
+    background-color: #2196f3;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    cursor: not-allowed;
+}
+
+.pilot-seats h3 {
+    margin-bottom: 10px;
+}
+
+/* Facilities Section */
+.facilities {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.facility {
+    background-color: #f1f1f1;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 30px; /* Adjust icon size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+}
+
+.facility-icon {
+    font-size: 30px;
+}
+
+.row-facilities {
+    display: flex;
+    flex-wrap: wrap; /* Ensures proper layout if there are too many images */
+    gap: 10px; /* Adds space between images */
+    align-items: center; /* Vertically centers the images */
+}
+
+.facility-image img {
+    width: 34px; /* Adjust size */
+    height: 34px;
+    margin: 0; /* Remove vertical spacing */
+    display: inline-block; /* Ensures horizontal alignment */
+    margin-bottom: 20px;
+}
+
+
+/* Crew Seats */
+.crew-seats {
+    display: flex;
+    justify-content: space-between; /* Place crew seats at corners */
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.crew-seat {
+    background-color: #4caf50;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+}
+
+/* Row and Seat Layout */
+.row {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the row contents */
+    margin-bottom: 10px;
+}
+
+.row-label {
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: none; /* Hide row labels as cabin class is shown separately */
+}
+
+.columns {
+    display: flex;
+    gap: 50px; /* Space between the columns */
+}
+
+.column {
+    display: flex;
+    gap: 5px; /* Space between seats in the same column */
+}
+
+.doors {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.door {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.left-door {
+    align-self: flex-start;
+}
+
+.right-door {
+    align-self: flex-end;
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    background-color: #ddd;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.seat.standard-seat {
+    background-color: #ffe9f5;
+    color: rgb(72, 0, 63);
+}
+
+.seat.be-aware {
+    background-color: #ffff8e;
+    color: rgb(0, 84, 27);
+}
+
+.seat.mixed-review {
+    background-color: #b9f5ab;
+    color: rgb(0, 56, 18);
+}
+
+.seat.bad-seat {
+    background-color: #ff3232;
+    color: rgb(255, 228, 228);
+}
+
+.seat:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease-in-out;
+}
+
+.traveler-details-container {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.traveler-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.traveler-card {
+    flex: 1 1 calc(30% - 15px);
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.traveler-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.allocated-seat {
+    transform: scale(1.1); /* Slightly larger size */
+    box-shadow: 0 0 10px rgb(255, 2, 53), 0 0 5px rgb(255, 0, 51);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.seat:hover {
+    transform: scale(1.3); /* Slight hover effect for all seats */
+}
+
+/* General Overlay Style */
+.seat-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* Overlay Content Style */
+.seat-overlay-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Header Style */
+.seat-overlay-content h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* Traveler Buttons */
+.overlay-traveler-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.overlay-traveler-button:hover {
+    background-color: #0056b3;
+}
+
+/* Close Button */
+.close-overlay {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.close-overlay:hover {
+    background-color: #c82333;
+}
+
+.floating-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 1000;
+}

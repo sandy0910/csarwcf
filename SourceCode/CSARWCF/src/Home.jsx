@@ -110,6 +110,7 @@ function Home() {
           <div><img src="chi4.jpg" alt="Flight 1" /></div>
           <div><img src="chi2.jpg" alt="Flight 2" /></div>
           <div><img src="chi3.jpg" alt="Flight 3" /></div>
+          <div><img src="chi1.jpg" alt="Flight 3" /></div>
         </Carousel>
       </header>
       <div className="header-overlay">
@@ -249,20 +250,20 @@ function Home() {
         </div>
       </section>
 
-      <section className="popular-destinations">
+      <section className="h-popular-destinations">
         <h2>Popular Destinations</h2>
-        <div className="destination-gallery">
-          <div className="destination-item">
+        <div className="h-destination-gallery">
+          <div className="h-destination-item">
             <img src="destination1.jpg" alt="Paris" />
             <h4>Paris</h4>
             <Link to="/destination/paris">Explore Flights</Link>
           </div>
-          <div className="destination-item">
+          <div className="h-destination-item">
             <img src="destination2.jpg" alt="New York" />
             <h4>New York</h4>
             <Link to="/destination/new-york">Explore Flights</Link>
           </div>
-          <div className="destination-item">
+          <div className="h-destination-item">
             <img src="destination3.jpg" alt="Tokyo" />
             <h4>Tokyo</h4>
             <Link to="/destination/tokyo">Explore Flights</Link>

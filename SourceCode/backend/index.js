@@ -70,6 +70,11 @@ const guestRoute = require('./routes/guestRoute');
 app.use('/api/airlines', guestRoute);
 app.use('/api/flights', guestRoute);
 app.use('/api/users/', guestRoute);
+app.use('/api/travellers', guestRoute);
+
+//Emission Estimation per passenger
+const estimationRoute = require('./routes/estimationRoute');
+app.use('/api/estimation', estimationRoute);
 
 const paymentRoute = require('./routes/paymentRoute');
 app.use('/api/razor-payments/', paymentRoute);

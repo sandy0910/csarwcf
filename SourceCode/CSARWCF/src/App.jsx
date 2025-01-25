@@ -15,6 +15,9 @@ import TicketGeneration from './TicketGeneration';
 import Carpool from './Carpool';
 import UserProfile from './UserProfile';
 import CarpoolService from './CarpoolService';
+import SeatSelection from './SeatSelection';
+import PassengerWeight from './PassengerWeight';
+import AllocationPage from './AllocationPage';
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
         <Route path='/carpool' element={<Carpool />} />
         <Route path='/profile' element={<UserProfile />} />
         <Route path='/offer-service' element={<CarpoolService />} />
+        <Route path='/seat-select' element={<SeatSelection />} />
+        <Route path='/passenger-weight' element={<PassengerWeight />} />
+        <Route path='/allocation-page' element={<AllocationPage />} />
       </Routes>
     </Router>
   );
