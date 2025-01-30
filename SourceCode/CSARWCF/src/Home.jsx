@@ -113,10 +113,18 @@ function Home() {
           <div><img src="chi1.jpg" alt="Flight 3" /></div>
         </Carousel>
       </header>
-      <div className="header-overlay">
-        <h1>Find Your Next Adventure</h1>
-        <p>Book flights, discover destinations, and explore new places.</p>
+
+      <div className="relative p-5">
+        {/* <!-- Overlay --> */}
+        <div className="absolute inset-0 bg-[#212121fd] bg-opacity-70 z-0"></div>
+        
+        {/* <!-- Content --> */}
+        <div className="relative z-10 text-[#dedcdc]">
+          <h3 className="text-white mb-4 text-3xl font-semibold">Find Your Next Adventure</h3>
+          <p className="text-lg">Book flights, discover destinations, and explore new places.</p>
+        </div>
       </div>
+
 
       {/* Flight Search Section */}
       <div className="search-section">

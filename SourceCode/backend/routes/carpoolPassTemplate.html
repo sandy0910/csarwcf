@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carpool Pass</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .ticket-container {
+      width: 600px;
+      background-color: #fff;
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      font-size: 16px;
+    }
+
+    .ticket-header {
+      background-color: #007bff;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .ticket-header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    .ticket-body {
+      padding: 30px;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .value {
+      margin-left: 10px;
+      color: #555;
+    }
+
+    .ticket-footer {
+      background-color: #f9f9f9;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: #777;
+      border-top: 2px solid #007bff;
+    }
+
+    .footer-links a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .pass-id {
+      background-color: #007bff;
+      color: #fff;
+      font-size: 22px;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ticket-container">
+    <div class="ticket-header">
+      <h1>Carpool Pass</h1>
+      <p>Service ID: <span class="pass-id">{{serviceId}}</span></p>
+    </div>
+    <div class="ticket-body">
+      <div class="section">
+        <p><span class="label">Passenger Name:</span> <span class="value">{{passenger_name}}</span></p>
+        <p><span class="label">Passenger Email:</span> <span class="value">{{passenger_email}}</span></p>
+        <p><span class="label">Flight Number:</span> <span class="value">{{flight_number}}</span></p>
+      </div>
+
+      <div class="section">
+        <h3 class="bold">Driver Details</h3>
+        <p><span class="label">Driver Name:</span> <span class="value">{{driver_name}}</span></p>
+        <p><span class="label">Driver Contact:</span> <span class="value">{{driver_contact}}</span></p>
+        <p><span class="label">Vehicle Number:</span> <span class="value">{{vehicleNumber}}</span></p>
+        <p><span class="label">Vehicle Type:</span> <span class="value">{{vehicleType}}</span></p>
+      </div>
+
+      <div class="section">
+        <h3 class="bold">Trip Details</h3>
+        <p><span class="label">Pickup Location:</span> <span class="value">{{pickup_location}}</span></p>
+        <p><span class="label">Dropoff Location:</span> <span class="value">{{dropoff_location}}</span></p>
+        <p><span class="label">Pickup Time:</span> <span class="value">{{pickup_time}}</span></p>
+      </div>
+    </div>
+
+    <div class="ticket-footer">
+      <p>Thank you for choosing our carpool service! Have a safe journey.</p>
+      <div class="footer-links">
+        <p>For assistance, contact us at <a href="mailto:support@example.com">support@example.com</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

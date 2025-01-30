@@ -3,6 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql2');
 const nodemailer = require("nodemailer");
+const PDFDocument = require("pdfkit"); // For generating PDFs
+const handlebars = require("handlebars");
+const puppeteer = require('puppeteer');
 
 const router = express.Router();
 // MySQL Connection
@@ -15,51 +18,55 @@ const connection = mysql.createConnection({
 
 // API endpoint to fetch carpool services matching the user's address
 router.post('/request-service', (req, res) => {
-    const { reserve_id, reservationData } = req.body;
+  const { reserve_id, reservationData, userData } = req.body;
 
-    // Parse the UTC date from reservationData
-    const utcDate = new Date(reservationData.date_of_flight);
-
-    // Adjust the UTC date to the local timezone (Asia/Kolkata)
-    const options = { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' };
-    const formatter = new Intl.DateTimeFormat('en-GB', options);
-    const parts = formatter.formatToParts(utcDate);
-
-    // Extract parts and format as YYYY-MM-DD
-    const formattedLocalDate = `${parts.find(p => p.type === 'year').value}-${parts.find(p => p.type === 'month').value}-${parts.find(p => p.type === 'day').value}`;
-
-    
-    // SQL query to find carpool services that match the user's address (e.g., start or end location matches)
-    const sql = `SELECT * FROM carpool c
-        INNER JOIN reservation r ON c.reserve_id = r.reserve_id
-        INNER JOIN passenger p ON r.passenger_id = p.passenger_id
-        INNER JOIN flight_schedule fs ON fs.schedule_id = r.flight_schedule_id
-        INNER JOIN airport a1 ON fs.depart_airport_id = a1.airport_id
-        INNER JOIN airport a2 ON fs.depart_airport_id = a2.airport_id
-        WHERE p.street LIKE CONCAT('%', ?, '%')
-        AND p.city LIKE CONCAT('%', ?, '%')
-        AND p.pincode LIKE CONCAT('%', ?, '%')
-        AND c.status=1 and 
-        fs.depart_airport_id = ? and fs.arrival_airport_id = ?
-        and fs.scheduled_departure_time = ?
-        and r.date_of_flight = ?;`;
+  // Check if date_of_flight exists and is a valid date
+  const utcDate = new Date(reservationData.date_of_flight);
   
-    connection.query(sql, [reservationData.street, reservationData.city, reservationData.pincode,
-        reservationData.depart_airport_id, reservationData.arrival_airport_id, reservationData.scheduled_departure_time,
-        formattedLocalDate
-    ], (err, results) => {
+  if (isNaN(utcDate)) {
+      return res.status(400).json({ error: 'Invalid date of flight' });
+  }
+
+  // Adjust the UTC date to the local timezone (Asia/Kolkata)
+  const options = { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' };
+  const formatter = new Intl.DateTimeFormat('en-GB', options);
+  const parts = formatter.formatToParts(utcDate);
+
+  // Extract parts and format as YYYY-MM-DD
+  const formattedLocalDate = `${parts.find(p => p.type === 'year').value}-${parts.find(p => p.type === 'month').value}-${parts.find(p => p.type === 'day').value}`;
+
+  // SQL query to find carpool services that match the user's address (e.g., start or end location matches)
+  const sql = `SELECT * FROM carpool c
+      INNER JOIN reservation r ON c.reserve_id = r.reserve_id
+      INNER JOIN passenger p ON r.passenger_id = p.passenger_id
+      INNER JOIN flight_schedule fs ON fs.schedule_id = r.flight_schedule_id
+      INNER JOIN airport a1 ON fs.depart_airport_id = a1.airport_id
+      INNER JOIN airport a2 ON fs.depart_airport_id = a2.airport_id
+      WHERE p.street LIKE CONCAT('%', ?, '%')
+      AND p.city LIKE CONCAT('%', ?, '%')
+      AND p.pincode LIKE CONCAT('%', ?, '%')
+      AND c.status=1 and 
+      fs.depart_airport_id = ? and fs.arrival_airport_id = ? 
+      and fs.scheduled_departure_time = ?
+      and r.date_of_flight = ?;`;
+
+  connection.query(sql, [userData.street, userData.city, userData.pincode,
+      reservationData.depart_airport_id, reservationData.arrival_airport_id, reservationData.scheduled_departure_time,
+      formattedLocalDate
+  ], (err, results) => {
       if (err) {
-        console.error('Error fetching carpool details from the database:', err);
-        return res.status(500).json({ error: 'Failed to fetch carpool details.' });
+          console.error('Error fetching carpool details from the database:', err);
+          return res.status(500).json({ error: 'Failed to fetch carpool details.' });
       }
-  
+
       if (results.length === 0) {
-        return res.status(404).json({ message: 'No matching carpool services found.' });
+          return res.status(404).json({ message: 'No matching carpool services found.' });
       }
-  
+
       res.status(200).send(results);
-    });
+  });
 });
+
   
 
 // API endpoint to handle carpool service offering
@@ -98,7 +105,7 @@ router.post('/offer-service', (req, res) => {
 });
 
 router.post("/crequest", async (req, res) => {
-  const { reserve_id, reservationData, serviceDetails } = req.body;
+  const { reserve_id, reservationData, serviceDetails, userData } = req.body;
   const serviceId = serviceDetails.carpool_id;
   console.log(serviceDetails);
 
@@ -121,7 +128,7 @@ router.post("/crequest", async (req, res) => {
       },
     });
 
-    const verificationLink = `http://localhost:3001/api/carpool/verify-carpool?serviceId=${serviceId}&reserveId=${reserve_id}&email=${reservationData.passenger_email}`;
+    const verificationLink = `http://localhost:3001/api/carpool/verify-carpool?serviceId=${serviceId}&reserveId=${reserve_id}&email=${userData.passenger_email}`;
 
     const mailOptions = {
       from: "santhoshsantho024@gmail.com", // Replace with your email
@@ -173,8 +180,7 @@ router.get("/verify-carpool", (req, res) => {
       <h2>Your Carpool Service is Verified</h2>
       <p>Service ID: <strong>${serviceId}</strong></p>
       <p>Reservation ID: <strong>${reserveId}</strong></p>
-      <p>Thank you for choosing our service. You can now download your pass from the website.</p>
-      <p><a href="https://example.com/download-pass?serviceId=${serviceId}&reserveId=${reserveId}">Download Pass</a></p>
+      <p>Thank you for choosing our service. You can now download your pass from your profile.</p>
     `;
 
     // Send the email
@@ -238,5 +244,147 @@ router.post('/cancel-request', async (req, res) => {
 
 });
 
+const loadEmailTemplate = (templateName, data) => {
+    const templatePath = path.join(__dirname, `${templateName}.html`);
+    const templateContent = fs.readFileSync(templatePath, 'utf-8');
+    const template = handlebars.compile(templateContent); // Compile the template
+    return template(data); // Populate the template with dynamic data
+};
 
+const generateCarpoolPassPDF = async (carpoolData) => {
+  const {
+    passenger_name,
+    passenger_email,
+    driver_name,
+    vehicleNumber,
+    vehicleType,
+    pickup_location,
+    driver_contact,
+    dropoff_location, 
+    pickup_time,
+    flight_number
+  } = carpoolData;
+
+  // Render the HTML template for carpool pass
+  const htmlContent = loadEmailTemplate('carpoolPassTemplate', {
+    passenger_name,
+    passenger_email,
+    driver_name,
+    vehicleNumber,
+    vehicleType,
+    pickup_location,
+    driver_contact,
+    dropoff_location, 
+    pickup_time,
+    flight_number
+  });
+
+  // Generate the PDF
+  const browser = await puppeteer.launch({ headless: true });
+  const page = await browser.newPage();
+  await page.setContent(htmlContent, { waitUntil: 'domcontentloaded' });
+  const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
+  await browser.close();
+
+  return pdfBuffer;
+};
+
+const sendEmailWithCarpoolPass = async (carpoolData) => {
+  const {
+    passenger_name,
+    passenger_email,
+    driver_name,
+    vehicleNumber,
+    vehicleType,
+    pickup_location,
+    driver_contact,
+    dropoff_location, 
+    pickup_time,
+    flight_number
+  } = carpoolData;
+
+  // Generate the PDF with dynamic data
+  const pdfBuffer = await generateCarpoolPassPDF(carpoolData);
+
+  const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+          user: 'santhoshsantho024@gmail.com',
+          pass: 'zpqm gcjg iucn fmhd', // Use an app password here
+      },
+  });
+
+  const mailOptions = {
+      from: 'service@example.com',
+      to: passenger_email,
+      subject: 'Your Carpool Pass',
+      text: `Hello ${passenger_name},
+
+Attached is your carpool pass. Here are your reservation details:
+- Pickup Location: ${pickup_location}
+- Dropoff Location: ${dropoff_location}
+- Pickup Time: ${pickup_time}
+- Driver Contact: ${driver_contact}
+
+Thank you for choosing our carpool service!`,
+      attachments: [
+          {
+              filename: `carpool_pass_${passenger_name}.pdf`,
+              content: pdfBuffer,
+          },
+      ],
+  };
+
+  try {
+      await transporter.sendMail(mailOptions);
+      console.log(`Carpool pass email sent successfully to ${passenger_email}`);
+  } catch (error) {
+      console.error(`Failed to send carpool pass email to ${passenger_email}: ${error.message}`);
+  }
+};
+
+
+router.post('/download-pass', async(req, res) => {
+  const {      reservationData,
+    carpoolRequestData,
+    userData } = req.body;
+
+    console.log("Reseravtrion : ", reservationData);
+    console.log("cRD : ", carpoolRequestData);
+    console.log("user : ", userData);
+  const carpoolReservations = [
+    {
+        passenger_name: userData.passenger_name,  // Assuming userData contains name
+        passenger_email: userData.passenger_email,
+        driver_name : carpoolRequestData[0].passenger_name,
+        vehicleNumber: carpoolRequestData[0].vehicle_num,
+        vehicleType: carpoolRequestData[0].vehicle_type,
+        pickup_location: carpoolRequestData[0].pickup_loc,
+        driver_contact: carpoolRequestData[0].passenger_contact,
+        dropoff_location: reservationData[0].depart_airport_name,
+        pickup_time: carpoolRequestData[0].departure_time,
+        flight_number: reservationData[0].flight_number // If applicable
+    },
+];
+
+
+  if (!Array.isArray(carpoolReservations)) {
+      return res.status(400).json({
+          message: 'Invalid input. Ensure carpoolReservations is provided and is an array.',
+      });
+  }
+
+  try {
+      const emailPromises = carpoolReservations.map((carpoolData) =>
+          sendEmailWithCarpoolPass(carpoolData)
+      );
+
+      await Promise.all(emailPromises);
+
+      res.status(200).json({ message: 'Carpool passes sent via email for all reservations.' });
+  } catch (error) {
+      console.error('Error in /send-carpool-pass route:', error);
+      res.status(500).json({ message: 'Failed to send carpool passes via email.' });
+  }
+});
 module.exports = router;

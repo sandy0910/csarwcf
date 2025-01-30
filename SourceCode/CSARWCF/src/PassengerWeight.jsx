@@ -13,6 +13,7 @@ function PassengerWeight() {
       traveler_id: uuidv4(), // Generate unique ID for each traveler
       name: "",
       weight: "",
+      ageCategory: "", // Add ageCategory field
     }))
   );
   const [error, setError] = useState("");
@@ -20,7 +21,8 @@ function PassengerWeight() {
 
   const handleInputChange = (index, field, value) => {
     const updatedTravelers = [...travelers];
-    updatedTravelers[index][field] = field === "weight" ? parseInt(value, 10) : value; // Ensure weight is an integer
+    updatedTravelers[index][field] =
+      field === "weight" ? parseInt(value, 10) : value; // Ensure weight is an integer
     setTravelers(updatedTravelers);
   };
 
@@ -35,6 +37,7 @@ function PassengerWeight() {
       });
 
       if (response.status === 200) {
+        console.log("Travelers: ", travelers);
         navigate("/allocation-page", { state: { flight, travelers, cabinClass: searchParams.classID, searchParams } });
       }
     } catch (err) {
@@ -97,6 +100,29 @@ function PassengerWeight() {
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                   placeholder="Enter weight"
                 />
+              </div>
+              <div>
+                <label
+                  htmlFor={`ageCategory-${index}`}
+                  className="block text-gray-700 font-medium mb-1"
+                >
+                  Age Category
+                </label>
+                <select
+                  id={`ageCategory-${index}`}
+                  value={traveler.ageCategory}
+                  onChange={(e) =>
+                    handleInputChange(index, "ageCategory", e.target.value)
+                  }
+                  required
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                >
+                  <option value="">Select age category</option>
+                  <option value="Infant">Infant (Up to 2 years)</option>
+                  <option value="Child">Child (2 to 11 years)</option>
+                  <option value="Adult">Adult (12 years and older)</option>
+                  <option value="Senior">Senior Citizen (65 years and older)</option>
+                </select>
               </div>
             </div>
           ))}

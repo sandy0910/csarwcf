@@ -7,7 +7,7 @@ import './css/TicketGeneration.css'; // Include CSS for styling
 function TicketGeneration() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { reserve_id } = location.state; // Fetch reserve_id from state
+  const { reserve_id, searchParams, seatAllocation } = location.state; // Fetch reserve_id from state
 
   // State to hold reservation details
   const [reservationData, setReservationData] = useState(null);
@@ -38,12 +38,13 @@ function TicketGeneration() {
     try {
       const response = await axios.post("http://localhost:3001/api/ticket-generation/send-ticket",{
         reservationData,
-        reserve_id
+        reserve_id, 
+        searchParams,
+        seatAllocation
       });
 
       alert("Ticket sent successfully!");
-      console.log("Reservation: ", reservationData);
-      navigate('/carpool', { state: { reservationData } });
+      navigate('/');
     } catch (err) {
       console.error("Error sending ticket:", err);
       alert("Failed to send ticket.");

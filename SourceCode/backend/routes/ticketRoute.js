@@ -123,6 +123,8 @@ const generateTicketPDF = async (reservationData) => {
         arrival_airport_city,
         amount,
         transaction_id,
+        seatId,
+        contribution,
     } = reservationData;
 
     // Render the HTML template
@@ -135,7 +137,9 @@ const generateTicketPDF = async (reservationData) => {
         arrival_time: scheduled_arrival_time,
         amount: amount,
         transaction_id: transaction_id,
-        airline_name: airline_name
+        airline_name: airline_name,
+        seatId: seatId,  // Add seatId
+        contribution: contribution.toFixed(2),  // Add contribution with 2 decimal places
     });
 
     // Generate the PDF
@@ -149,11 +153,10 @@ const generateTicketPDF = async (reservationData) => {
 };
 
 
-// Function to send the PDF as email attachment
-const sendEmailWithPDF = async (reservationData, subject) => {
+const sendEmailWithPDF = async (travelerData, reservationData, subject) => {
+    const { traveler, traveler_id, seatId, contribution } = travelerData;
     const { 
-        passenger_name, 
-        passenger_email, 
+        passenger_email,
         flight_number, 
         scheduled_departure_time, 
         scheduled_arrival_time, 
@@ -161,11 +164,18 @@ const sendEmailWithPDF = async (reservationData, subject) => {
         arrival_airport_name, 
         amount, 
         transaction_id, 
-        reserve_date 
+        reserve_date, 
+        airline_name 
     } = reservationData;
+    
 
     // Generate the PDF with dynamic data
-    const pdfBuffer = await generateTicketPDF(reservationData);
+    const pdfBuffer = await generateTicketPDF({
+        ...reservationData,
+        passenger_name: traveler,
+        seatId,  // Include seatId for the traveler
+        contribution,  // Include contribution for the traveler
+    });
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -177,14 +187,16 @@ const sendEmailWithPDF = async (reservationData, subject) => {
 
     const mailOptions = {
         from: 'madeyours@example.com',
-        to: passenger_email,
+        to: passenger_email , // Assuming traveler_id is the email of the traveler
         subject: subject,
-        text: `Hello ${passenger_name},
+        text: `Hello ${traveler},
 
 Attached is your flight ticket. Here are your reservation details:
 - Flight Number: ${flight_number}
 - Departure: ${depart_airport_name} at ${scheduled_departure_time}
 - Arrival: ${arrival_airport_name} at ${scheduled_arrival_time}
+- Seat Number: ${seatId}
+- Contribution: ${contribution.toFixed(2)} kg CO₂
 - Transaction ID: ${transaction_id}
 - Amount Paid: ₹${amount}
 - Reservation Date: ${new Date(reserve_date).toLocaleString()}
@@ -192,7 +204,7 @@ Attached is your flight ticket. Here are your reservation details:
 Thank you for choosing our airline!`,
         attachments: [
             {
-                filename: 'flight_ticket.pdf',
+                filename: `flight_ticket_${seatId}.pdf`,
                 content: pdfBuffer,
             },
         ],
@@ -200,19 +212,34 @@ Thank you for choosing our airline!`,
 
     try {
         await transporter.sendMail(mailOptions);
-        console.log(`Email sent successfully to ${passenger_email}`);
+        console.log(`Email sent successfully to ${traveler_id}`);
     } catch (error) {
-        console.error(`Failed to send email: ${error.message}`);
+        console.error(`Failed to send email to ${traveler_id}: ${error.message}`);
     }
 };
 
+// Route to send ticket PDFs
+router.post('/send-ticket', async (req, res) => {
+    const { reservationData, seatAllocation } = req.body;
 
-// Route to send ticket PDF
-router.post('/send-ticket', (req, res) => {
-  const { reservationData, reserve_id } = req.body;
-  sendEmailWithPDF(reservationData, 'Your Flight Ticket');
+    if (!reservationData || !Array.isArray(seatAllocation)) {
+        return res.status(400).json({
+            message: 'Invalid input. Ensure reservationData and seatAllocation are provided and valid.',
+        });
+    }
 
-  res.json({ message: 'Ticket PDF sent via email.' });
+    try {
+        const emailPromises = seatAllocation.map((travelerData) => 
+            sendEmailWithPDF(travelerData, reservationData, 'Your Flight Ticket')
+        );
+
+        await Promise.all(emailPromises);
+
+        res.json({ message: 'Ticket PDFs sent via email for all travelers.' });
+    } catch (error) {
+        console.error('Error in /send-ticket route:', error);
+        res.status(500).json({ message: 'Failed to send tickets via email.' });
+    }
 });
 
 

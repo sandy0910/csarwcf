@@ -7,12 +7,11 @@ body {
 .home-container {
   width: 100%;
   color: #fff;
-  background-color: #f3f4f6;
+  background-image: linear-gradient(#E0F7FA, #FFFFFF);
 }
 
-.navbar {
-  background-image: linear-gradient(rgba(0, 41, 98, 0.864), rgb(0, 140, 255));
-  padding: 1em;
+.navbar {background-image: url("f2.png");
+  padding: 3em;
   display: flex;
   justify-content: space-between; /* Aligns items on the left and right */
   align-items: center; /* Centers items vertically */
@@ -24,16 +23,35 @@ body {
 }
 
 .navbar ul li a {
-  color: white;
+  color: rgb(0, 75, 67);
   text-decoration: none;
   font-weight: bold;
 }
 
 .navbar a {
-  color: white;
+  color: rgb(0, 53, 52);
   text-decoration: none;
   font-weight: bold;
 }
+
+.nav-links li {
+  border: 1px solid #e4e4e4; /* Light gray border */
+  border-radius: 8px;     /* Rounded corners for better design */
+  padding: 10px;          /* Add some spacing inside the border */
+  margin: 5px;            /* Add some spacing between list items */
+  background-color: #51c5ff; /* Optional: Light background for better visibility */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.118); /* Subtle shadow effect */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+  color: #003f2f;
+  font-weight: bold;
+}
+
+.nav-links li:hover {
+  background-color: #e0f7fa; /* Subtle highlight on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+  color: #333;
+}
+
 
 .header-banner {
   margin: 0;
@@ -50,7 +68,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.452); /* Adjust opacity here */
-  z-index: 1; /* Ensures the overlay sits above the image */
+  z-index: 0; /* Ensures the overlay sits above the image */
 }
 
 .header-banner img {
@@ -59,24 +77,13 @@ body {
   object-fit: cover;
 }
 
-.header-overlay {
-  position: absolute;
-  top: 30%;
-  left: 10%;
-  color: #dedcdc;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  h1{
-    color: white;
-  }
-}
-
 .form-container {
   background: rgba(255, 255, 255, 0.8); /* Light background with transparency */
   border-radius: 8px; /* Rounded corners */
   padding: 20px; /* Spacing inside the container */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-  max-width: 600px; /* Limit maximum width */
-  margin: auto; /* Center the container */  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+  max-width: 600px;
+  margin: auto; 
   margin-right: 0;
 }
 
@@ -84,7 +91,7 @@ body {
   display: flex;
   gap: 2em;
   padding: 2em;
-  background-color: #e3fdfff8;
+  background-image: linear-gradient(#8deefb, #dceff1);
   max-width: 100%;
   margin: auto;
 }
@@ -113,7 +120,7 @@ body {
 }
 
 .info-card {
-  background-color: #e0ecff9c;
+  background-color: #ffffffb3;
   border-left: 4px solid #004c99;
   padding: 1em;
   border-radius: 8px;
@@ -225,7 +232,7 @@ body {
 
 
 .footer {
-  background-color: #004c99;
+  background-image: url("f1.png");
   text-align: center;
   padding: 1em;
   color: white;
@@ -255,9 +262,8 @@ body {
 .home-logout-button{
   border: transparent;
   background-color: transparent;
-  color:white;
+  color:rgb(255, 0, 0);
   font-weight: bold;
-  font-size: medium;
 }
 
 /* Section: Popular Destinations */
@@ -309,7 +315,7 @@ body {
 /* Popular Destinations Section */
 .h-popular-destinations {
   padding: 3em 0;
-  background-color: #ffffff;
+  background-image: linear-gradient(#8deefb, #dceff1);
   text-align: center;
 }
 
@@ -411,9 +417,10 @@ body {
     margin: auto;
   }
 
-  .header-overlay h1 {
+  /* .header-overlay h3 {
     font-size: 1.8em;
-  }
+    font-weight: bold;
+  } */
 
   .search-button {
     font-size: 1em;

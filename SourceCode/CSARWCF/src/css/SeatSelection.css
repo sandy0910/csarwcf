@@ -54,7 +54,7 @@ h2 {
     width: 50px;
     font-size: 30px;
     text-align: center;
-    z-index: 10;
+    z-index: 0;
 }
 
 .seat-map::before {
@@ -204,6 +204,11 @@ h2 {
     text-align: center;
     line-height: 40px;
     cursor: pointer;
+}
+
+.seat.booked{
+    background-color: #414141;
+    color: rgb(72, 0, 63);
 }
 
 .seat.standard-seat {

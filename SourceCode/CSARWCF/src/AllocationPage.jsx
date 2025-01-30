@@ -71,7 +71,8 @@ function AllocationPage() {
       const sortedTravelers = [...emissionData.travelers].sort(
         (a, b) => b.emissionContribution - a.emissionContribution
       );
-
+  
+      // Extract all available seats from the seat layout
       const availableSeats = [];
       Object.keys(seatLayout).forEach((row) => {
         const rowSeats = seatLayout[row].seats.filter(
@@ -82,44 +83,197 @@ function AllocationPage() {
             id: seat.id,
             weightFactor: seatLayout[row].weightFactor,
             cabinClass: seatLayout[row].cabinClass,
+            facilities: seat.facilities || [], // Facilities for each seat
           });
         });
       });
-
+  
+      // Filter seats by cabin class
       const filteredSeats = availableSeats.filter(
         (seat) => seat.cabinClass === cabinClassName
       );
-
+  
+      // Sort seats by weight factor for efficiency
       const sortedSeats = filteredSeats.sort(
         (a, b) => a.weightFactor - b.weightFactor
       );
-
+  
       const allocations = [];
-      let leftPointer = 0;
-      let rightPointer = sortedSeats.length - 1;
-
-      sortedTravelers.forEach((traveler, index) => {
-        if (index % 2 === 0) {
+      const bassinetSeats = sortedSeats.filter((seat) =>
+        seat.facilities.includes("Bassinet")
+      ); // Seats near bassinets
+      const generalSeats = sortedSeats.filter(
+        (seat) => !seat.facilities.includes("Bassinet")
+      ); // Seats without bassinets
+      const facilitySeats = sortedSeats.filter((seat) => {
+        // If we want to match "all" facilities, use every()
+        const allFacilitiesMatch = ["Galley", "Crew", "Lavatory", "Closet"].every((facility) =>
+          seat.facilities.includes(facility)
+        );
+      
+        // If we want to match "some" facilities, use some()
+        const someFacilitiesMatch = ["Galley", "Crew", "Lavatory", "Closet"].some((facility) =>
+          seat.facilities.includes(facility)
+        );
+      
+        // Return seats that match either all or some of the facilities
+        return allFacilitiesMatch || someFacilitiesMatch;
+      }); // Seats near required facilities
+      console.log("Facility Seats: ", facilitySeats);
+  
+      let bassinetIndex = 0;
+      let generalIndex = 0;
+      let facilityIndex = 0;
+  
+      // Group by special categories
+      const hasInfant = sortedTravelers.some(
+        (traveler) => traveler.ageCategory === "Infant"
+      );
+      const hasChild = sortedTravelers.some(
+        (traveler) => traveler.ageCategory === "Child"
+      );
+      const hasSeniorCitizen = sortedTravelers.some(
+        (traveler) => traveler.ageCategory === "Senior"
+      );
+      const totalTravelers = sortedTravelers.length;
+  
+      // Handle senior citizen logic
+      if (hasSeniorCitizen) {
+        const seniorCitizenTraveler = sortedTravelers.find(
+          (traveler) => traveler.ageCategory === "Senior"
+        );
+  
+        if (seniorCitizenTraveler && facilitySeats[facilityIndex]) {
           allocations.push({
-            traveler_id: traveler.traveler_id,
-            traveler: traveler.name,
-            seatId: sortedSeats[leftPointer]?.id || "N/A",
-            contribution: traveler.emissionContribution,
+            traveler_id: seniorCitizenTraveler.traveler_id,
+            traveler: seniorCitizenTraveler.name,
+            seatId: facilitySeats[facilityIndex]?.id || "N/A",
+            contribution: seniorCitizenTraveler.emissionContribution,
           });
-          leftPointer++;
-        } else {
-          allocations.push({
-            traveler_id: traveler.traveler_id,
-            traveler: traveler.name,
-            seatId: sortedSeats[rightPointer]?.id || "N/A",
-            contribution: traveler.emissionContribution,
-          });
-          rightPointer--;
+          facilityIndex++;
         }
-      });
+  
+        // Remove the allocated senior citizen from further processing
+        sortedTravelers.splice(
+          sortedTravelers.findIndex(
+            (traveler) => traveler.traveler_id === seniorCitizenTraveler.traveler_id
+          ),
+          1
+        );
+      }
+  
+      // Handle infant logic
+      if (hasInfant && totalTravelers === 3) {
+        const travelersWithoutInfant = sortedTravelers.filter(
+          (traveler) => traveler.ageCategory !== "Infant"
+        );
+  
+        if (bassinetSeats.length >= 2) {
+          // Assign consecutive bassinet seats
+          allocations.push(
+            ...travelersWithoutInfant.map((traveler, idx) => ({
+              traveler_id: traveler.traveler_id,
+              traveler: traveler.name,
+              seatId: bassinetSeats[bassinetIndex + idx]?.id || "N/A",
+              contribution: traveler.emissionContribution,
+            }))
+          );
+          bassinetIndex += 2;
+        } else {
+          // Assign general consecutive seats if no bassinet is available
+          allocations.push(
+            ...travelersWithoutInfant.map((traveler, idx) => ({
+              traveler_id: traveler.traveler_id,
+              traveler: traveler.name,
+              seatId: generalSeats[generalIndex + idx]?.id || "N/A",
+              contribution: traveler.emissionContribution,
+            }))
+          );
+          generalIndex += 2;
+        }
+      } else if (hasInfant && totalTravelers > 3) {
+        // Handle normal allocation for groups larger than 3
+        sortedTravelers.forEach((traveler) => {
+          if (traveler.ageCategory !== "Infant") {
+            allocations.push({
+              traveler_id: traveler.traveler_id,
+              traveler: traveler.name,
+              seatId: generalSeats[generalIndex]?.id || "N/A",
+              contribution: traveler.emissionContribution,
+            });
+            generalIndex++;
+          }
+        });
+      }
+  
+      // Handle child logic
+      else if (hasChild) {
+        const childTraveler = sortedTravelers.find(
+          (traveler) => traveler.ageCategory === "Child"
+        );
+        const otherTravelers = sortedTravelers.filter(
+          (traveler) => traveler.ageCategory !== "Child"
+        );
+  
+        // Allocate the child to the first available general seat
+        if (childTraveler) {
+          allocations.push({
+            traveler_id: childTraveler.traveler_id,
+            traveler: childTraveler.name,
+            seatId: generalSeats[generalIndex]?.id || "N/A",
+            contribution: childTraveler.emissionContribution,
+          });
+          generalIndex++;
+        }
+  
+        // Allocate one traveler to the seat next to the child
+        if (otherTravelers.length > 0) {
+          allocations.push({
+            traveler_id: otherTravelers[0].traveler_id,
+            traveler: otherTravelers[0].name,
+            seatId: generalSeats[generalIndex]?.id || "N/A",
+            contribution: otherTravelers[0].emissionContribution,
+          });
+          generalIndex++;
+        }
+  
+        // Allocate remaining travelers as usual
+        otherTravelers.slice(1).forEach((traveler) => {
+          allocations.push({
+            traveler_id: traveler.traveler_id,
+            traveler: traveler.name,
+            seatId: generalSeats[generalIndex]?.id || "N/A",
+            contribution: traveler.emissionContribution,
+          });
+          generalIndex++;
+        });
+      } else {
+        // Normal allocation for groups without infants, children, or seniors
+        let leftPointer = 0;
+        let rightPointer = sortedSeats.length - 1;
+  
+        sortedTravelers.forEach((traveler, index) => {
+          if (index % 2 === 0) {
+            allocations.push({
+              traveler_id: traveler.traveler_id,
+              traveler: traveler.name,
+              seatId: sortedSeats[leftPointer]?.id || "N/A",
+              contribution: traveler.emissionContribution,
+            });
+            leftPointer++;
+          } else {
+            allocations.push({
+              traveler_id: traveler.traveler_id,
+              traveler: traveler.name,
+              seatId: sortedSeats[rightPointer]?.id || "N/A",
+              contribution: traveler.emissionContribution,
+            });
+            rightPointer--;
+          }
+        });
+      }
 
       setSeatAllocation(allocations);
-      console.log("Emission Data: ", emissionData);
 
       // Navigate to seat-select with parameters after allocation
       navigate("/seat-select", {

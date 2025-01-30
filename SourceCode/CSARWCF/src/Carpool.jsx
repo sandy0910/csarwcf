@@ -10,14 +10,11 @@ function Carpool() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [reserveStatus, setReserveStatus] = useState({});
-  const { reservationData } = location.state || {};
   const {reservation, userData } = location.state || {}
-
-  const finalReservation = reservationData || reservation? { ...reservation, ...userData } : reservation;
-
+  console.log("Reservation" , reservation);
   // Handle Offer Service button click
   const handleOfferService = () => {
-    navigate("/offer-service", { state: { reservationData:finalReservation } });
+    navigate("/offer-service", { state: { reservationData: reservation } });
   };
 
   // Handle Request Service button click
@@ -28,8 +25,9 @@ function Carpool() {
     try {
       const response = await axios.post(
         "http://localhost:3001/api/carpool/request-service",
-        { reserve_id: finalReservation.reserve_id, 
-          reservationData: finalReservation
+        { reserve_id: reservation.reserve_id, 
+          reservationData: reservation,
+          userData
         },
         {
           headers: { "Content-Type": "application/json" },
@@ -41,9 +39,7 @@ function Carpool() {
           setServiceDetails(response.data);
         }
 
-      // console.log(response.data);
-
-      const statusResponse = await axios.get(`http://localhost:3001/api/carpool/verify-status/${finalReservation.reserve_id}`);
+      const statusResponse = await axios.get(`http://localhost:3001/api/carpool/verify-status/${reservation.reserve_id}`);
       
       const updatedStatus = statusResponse.data.map((status) => ({
         ...status,
@@ -64,8 +60,6 @@ function Carpool() {
     setError(null);
 
     try {
-
-      
       const selectedService = serviceDetails.find(
         (service) => service.carpool_id === serviceId
       );
@@ -77,9 +71,10 @@ function Carpool() {
       const response = await axios.post(
         `http://localhost:3001/api/carpool/crequest`,
         {
-          reserve_id: finalReservation.reserve_id,
-          reservationData: finalReservation,
+          reserve_id: reservation.reserve_id,
+          reservationData: reservation,
           serviceDetails: selectedService,
+          userData
         },
         {
           headers: { "Content-Type": "application/json" },
@@ -107,11 +102,9 @@ function Carpool() {
     setError(null);
 
     try {
-
-      console.log(serviceId, finalReservation.reserve_id);
       const response = await axios.post(
         `http://localhost:3001/api/carpool/cancel-request`,
-        { reserve_id: finalReservation.reserve_id, serviceId },
+        { reserve_id: reservation.reserve_id, serviceId },
         {
           headers: { "Content-Type": "application/json" },
         }
@@ -137,6 +130,11 @@ function Carpool() {
     navigate("/profile");
   };
 
+  // Handle Go to Home button click
+  const handleGoToHome = () => {
+    navigate("/"); // Navigate to the home page (assuming root route)
+  };
+
   return (
     <div className="carpool-container">
       <aside className="carpool-sidebar">
@@ -145,6 +143,10 @@ function Carpool() {
         </button>
         <button className="request-btn" onClick={handleRequestService}>
           Request Service
+        </button>
+        {/* Button to navigate to the Home page */}
+        <button className="home-btn" onClick={handleGoToHome}>
+          Go to Home
         </button>
       </aside>
       <main className="carpool-main">

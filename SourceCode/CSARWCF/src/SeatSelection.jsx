@@ -5,6 +5,7 @@ import "./css/SeatSelection.css";
 
 function SeatSelection() {
     const [seatLayout, setSeatLayout] = useState({});
+    const navigate = useNavigate();
     const [error, setError] = useState("");
     const [selectedSeat, setSelectedSeat] = useState(null);
     const [showOverlay, setShowOverlay] = useState(false);
@@ -74,21 +75,45 @@ function SeatSelection() {
 
     const handleProceed = () => {
         // Store necessary state (like emissionData, seatAllocation) if needed
-        navigate('/nextPage', {
+        navigate('/booking', {
           state: {
+            flight,
             emissionData: emissionData,
             seatAllocation: seatAllocation,
+            totalFine,
+            searchParams,
+            cabinClassName,
           },
         });
       };
     
-    const handleSeatClick = (seat) => {
-        const isAllocatedSeat = seatAllocation.some((allocation) => allocation.seatId === seat.id);
-        if (!isAllocatedSeat) {
-            setSelectedSeat(seat);
-            setShowOverlay(true);
+      const handleSeatClick = (seat) => {
+        // Loop through all rows in seatLayout
+        for (const rowKey in seatLayout) {
+            const row = seatLayout[rowKey];  // Each row object
+            const seatInRow = row.seats.find((s) => s.id === seat.id);  // Find the clicked seat in the row
+    
+            if (seatInRow) {
+                const rowCabinClass = row.cabinClass; // Get the cabin class of the row
+    
+                // Check if the cabin class of the clicked seat matches the selected cabin class
+                if (rowCabinClass !== cabinClassName) {
+                    alert("This seat does not belong to the selected cabin class.");
+                    return; // Prevent seat selection if cabin class doesn't match
+                }
+    
+                // Check if the seat is already allocated
+                const isAllocatedSeat = seatAllocation.some((allocation) => allocation.seatId === seat.id);
+                if (!isAllocatedSeat) {
+                    setSelectedSeat(seat);
+                    setShowOverlay(true);
+                }
+    
+                break; // Break the loop once the seat is found
+            }
         }
     };
+    
 
     const handleTravelerSelection = async (traveler) => {
 
@@ -132,7 +157,6 @@ function SeatSelection() {
             
             if (response.status === 200) {
                 const { updatedData } = response.data;
-                console.log(updatedData);
         
                 setPreviousUpdatedData((prevData) => {
                     // Make a copy of the previous data
@@ -184,8 +208,6 @@ function SeatSelection() {
     if (!seatLayout || Object.keys(seatLayout).length === 0) {
         return <p>Loading seat layout...</p>;
     }
-
-    console.log(totalFine);
 
     return (
         <div className="seat-selection-container">
@@ -268,28 +290,33 @@ function SeatSelection() {
                                 </div>
                             )}
 
-                            {/* Render Columns (Seats and Facilities) */}
-                            <div className="columns">
-                                {columnSeats.map((column, columnIndex) => (
-                                    <div key={columnIndex} className="column">
-                                        {/* Render the seats in the column */}
-                                        {column.map((seat) => {
-                                            const isAllocatedSeat = seatAllocation.some(
-                                                (allocation) => allocation.seatId === seat.id
-                                            );
+                                {/* Render Columns (Seats and Facilities) */}
+                                <div className="columns">
+                                    {columnSeats.map((column, columnIndex) => (
+                                        <div key={columnIndex} className="column">
+                                            {/* Render the seats in the column */}
+                                            {column.map((seat) => {
+                                                const isAllocatedSeat = seatAllocation.some(
+                                                    (allocation) => allocation.seatId === seat.id
+                                                );
 
-                                            return (
-                                                <button
-                                                    key={seat.id}
-                                                    className={`seat ${seat.status} ${seat.seatType
-                                                        .replace(" ", "-")
-                                                        .toLowerCase()} ${isAllocatedSeat ? "allocated-seat" : ""}`}
-                                                    onClick={() => handleSeatClick(seat)}
-                                                >
-                                                    {seat.id}
-                                                </button>
-                                            );
-                                        })}
+                                                return (
+                                                    <button
+                                                        key={seat.id}
+                                                        className={`seat ${seat.status} ${seat.seatType
+                                                            .replace(" ", "-")
+                                                            .toLowerCase()} ${isAllocatedSeat ? "allocated-seat" : ""}`}
+                                                        onClick={() => handleSeatClick(seat)}
+                                                        disabled={seat.status.toLowerCase() === "booked"}
+                                                        style={{
+                                                            backgroundColor: seat.status.toLowerCase() === "booked" ? "#d3d3d3" : "", // Change to red for booked seats
+                                                            color: seat.status.toLowerCase() === "booked" ? "#666" : "" // White text for booked seats
+                                                        }}
+                                                    >
+                                                        {seat.id}
+                                                    </button>
+                                                );
+                                            })}
 
                                         {/* Place facility in the specified column at the same level */}
                                         {facilities &&
@@ -390,7 +417,7 @@ function SeatSelection() {
                             <span className="inline-block w-4 h-4" style={{ backgroundColor: '#b9f5ab' }}></span> MIXED REVIEW
                         </p>
                         <p className="font-medium text-sm mb-3">
-                            <span className="inline-block w-4 h-4" style={{ backgroundColor: '#ffff8e' }}></span> BE AWARE
+                            <span className="inline-block w-4 h-4" style={{ backgroundColor: '#ffff8e' }}></span> BE AWARE SEE COMMENTS
                         </p>
                         <p className="font-medium text-sm mb-3">
                             <span className="inline-block w-4 h-4" style={{ backgroundColor: '#ffe9f5' }}></span> STANDARD SEAT
@@ -442,7 +469,7 @@ function getFacilityImage(facilityKey) {
         Lavatory: "/facilities/lavatory.png",
         Galley: "/facilities/galley.png",
         Closet: "/facilities/closet.png",
-        bassinet: "/facilities/bassinet.png",
+        Bassinet: "/facilities/bassinet.png",
         crew: "/facilities/crew.png"
 
     };

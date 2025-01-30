@@ -154,7 +154,7 @@ router.post('/price-calculate', async (req, res) => {
         
             if (calculated) {
                 const difference = updated.emissionContribution - calculated.emissionContribution;
-                const finePerUnit = 100; // Fine rate per unit difference
+                const finePerUnit = 50; // Fine rate per unit difference
                 const seatFine = Math.abs(difference) * finePerUnit;
                 // Append the fine to the updatedData array
                 updated.fine = Math.round(seatFine);
@@ -179,6 +179,77 @@ router.post('/price-calculate', async (req, res) => {
         });
     }    
 });
+
+router.post('/updateStatus', async (req, res) => {
+    const { seatAllocation, reserve_id, userId } = req.body;  // Extract seatId and new status from the request body
+    const status = "Booked";  // The status we want to set for the selected seats
+    console.log(userId);
+
+    try {
+        // Establish a connection with the MySQL database
+        const db = await mysql.createConnection(dbConfig);
+
+        // Query to fetch the current seat layout from the database
+        const [results] = await db.execute(
+            'SELECT seat_layout FROM aircrafts WHERE aircraft_id = ?',
+            [1]  // Replace 1 with the actual ID of the record you want to fetch
+        );
+
+        if (results.length === 0) {
+            return res.status(404).json({ message: 'Aircraft not found' });
+        }
+
+        let seatLayout = results[0].seat_layout;  // Assuming you're using a column `seat_layout` in `aircrafts`
+        let updatedLayout = { ...seatLayout };  // Copy the seat layout for updating
+        let updatedSeats = [];  // To track which seats were updated
+
+        // Iterate over the seatAllocation array and find each seat by seatId
+        for (const allocation of seatAllocation) {
+            const seatId = allocation.seatId;
+
+            let seatUpdated = false;
+            // Iterate over the rows and find the seat by seatId
+            for (const rowKey in updatedLayout) {
+                const row = updatedLayout[rowKey];
+                const seatIndex = row.seats.findIndex(seat => seat.id === seatId);
+
+                if (seatIndex !== -1) {
+                    // Seat found, update its status
+                    updatedLayout[rowKey].seats[seatIndex].status = status;
+                    updatedSeats.push(seatId);  // Add to the updated seats list
+                    seatUpdated = true;
+                    break;  // Exit the loop once the seat is updated
+                }
+            }
+
+            // If the seat wasn't found, add it to the errors list
+            if (!seatUpdated) {
+                return res.status(404).json({ message: `Seat ${seatId} not found` });
+            }
+        }
+
+        // Query to update the seat layout in the database
+        await db.execute(
+            'UPDATE aircrafts SET seat_layout = ? WHERE aircraft_id = ?',
+            [JSON.stringify(updatedLayout), 1]  // Replace 1 with the actual aircraft ID
+        );
+
+        // Additional query to update reservation_id in travel_passenger table
+        await db.execute(
+            'UPDATE travel_passengers SET reservation_id = ? WHERE passenger_id = ?',
+            [reserve_id, userId] // Pass the reserve_id and updated seat IDs
+        );
+
+        res.status(200).json({ message: 'Seat status updated successfully', updatedSeats });
+
+        // Close the database connection
+        await db.end();
+    } catch (error) {
+        console.error('Error in updateStatus route:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 
 
 module.exports = router;

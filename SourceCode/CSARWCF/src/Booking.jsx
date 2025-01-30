@@ -6,7 +6,7 @@ import './css/Booking.css'; // Include CSS for styling
 function Booking() {
   const location = useLocation();
   const navigate = useNavigate(); // Make sure to add this for navigation
-  const { flight, searchParams } = location.state;
+  const { flight, searchParams, totalFine, seatAllocation } = location.state;
 
   const [userDetails, setUserDetails] = useState(null);
   const [reservationData, setReservationData] = useState(null); // Corrected useState
@@ -41,7 +41,7 @@ function Booking() {
   const handleProceedToPayment = async (e) => {
     e.preventDefault();
 
-    const totalAmount = flight.price_per_seat * searchParams.travellers + 1258;
+    const totalAmount = (flight.price_per_seat * searchParams.travellers) + 1258 + totalFine;
 
     const options = {
       key: "rzp_test_McwSUcwNGFPUuj",
@@ -64,8 +64,15 @@ function Booking() {
           const pay = await axios.post(`http://localhost:3001/api/razor-payments/payment-details?userId=${userId}&reserve_id=${reserve_id}`,paymentData);
 
           if(pay.status===200){
-            console.log("Navigating");
-            navigate('/ticket-generation', { state: { reserve_id } });
+            //Update the reservation status and the seat availability
+            const response = await axios.post(`http://localhost:3001/api/aircraft/updateStatus`,{
+             seatAllocation, 
+             reserve_id,
+             userId
+            });
+            if(response.status === 200){
+              navigate('/ticket-generation', { state: { reserve_id, searchParams, seatAllocation } });
+            }
           }
         } catch (error) {
           console.error('Error sending payment details:', error);
@@ -121,10 +128,14 @@ function Booking() {
           <span>Taxes & Surcharges:</span>
           <span>₹1258</span>
         </div>
+        <div className="fare-item">
+          <span>Preference Charges:</span>
+          <span>₹{totalFine}</span>
+        </div>
         <hr />
         <div className="fare-total">
           <span>Total Amount:</span>
-          <span>₹{flight.price_per_seat * searchParams.travellers + 1258}</span>
+          <span>₹{flight.price_per_seat * searchParams.travellers + 1258 + totalFine}</span>
         </div>
       </div>
 
