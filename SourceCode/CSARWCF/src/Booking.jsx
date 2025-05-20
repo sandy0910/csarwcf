@@ -44,8 +44,8 @@ function Booking() {
     const totalAmount = (flight.price_per_seat * searchParams.travellers) + 1258 + totalFine;
 
     const options = {
-      key: "rzp_test_McwSUcwNGFPUuj",
-      key_secret: "tMiEVgXMLywBs8e2EzN5cv0F",
+      key: "your_key_here",
+      key_secret: "your_secret_key",
       amount: totalAmount * 100,
       currency: "INR",
       name: "STARTUP PROJECTS",
