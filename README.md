@@ -1,4 +1,4 @@
-![homepage](https://github.com/user-attachments/assets/4c6a38ae-7e10-4434-a102-1fe90a21ca21)**The Airlines can have a chance to still reduce their emission impact on environment and if they fail continue generating revenue. This is achieved by following a standard for seat allocation of the passengers
+**The Airlines can have a chance to still reduce their emission impact on environment and if they fail continue generating revenue. This is achieved by following a standard for seat allocation of the passengers
 in a flight according to diverse factors and also to integrate the carpooling for easy access to airport and with less emissions😎**
 
 ![homepage](https://github.com/user-attachments/assets/0e9ba8a8-04ea-4d23-8991-27294fe30ba9)
